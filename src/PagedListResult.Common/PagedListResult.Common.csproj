@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Authors>RzR</Authors>
+    <Copyright>RzR</Copyright>
+    <Owners>RzR</Owners>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>PackageIcon.png</PackageIcon>
+    <NoWarn>$(NoWarn);CS8032</NoWarn>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageTags>Page;Pagination;Filter;Search;Order;List;Result;Enumerable;Entity;Model;DB;DataBase</PackageTags>
+    <RepositoryUrl>https://github.com/I-RzR-I/PagedListResult</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/I-RzR-I/PagedListResult</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageDescription>An extension based on `netstandard 2.0` with query properties filter and query source filter by text, order filter, and X top record. Property filters are based on `Expression` with multiple types of filters. This library is used in `PagedListResult` as core execution.</PackageDescription>
+    <Summary>An extension based on `netstandard 2.0` with query properties filter and query source filter by text, order filter, and X top record. Property filters are based on `Expression` with multiple types of filters. This library is used in `PagedListResult` as core execution.</Summary>
+    <PackageTitle>RzR.Shared.Entity (PagedListResult.Common)</PackageTitle>
+    <Title>RzR.Shared.Entity (PagedListResult.Common)</Title>
+    <LangVersion>9.0</LangVersion>
+    <Language>en-US</Language>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageIconUrl />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\assets\PackageIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AggregatedGenericResultMessage" Version="1.2.2.2040" />
+    <PackageReference Include="DomainCommonExtensions" Version="1.0.12.1447" />
+  </ItemGroup>
+
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_StartDate="2023/11/24" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

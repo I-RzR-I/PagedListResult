@@ -1,0 +1,6 @@
+﻿<ProjectConfiguration>
+  <Settings>
+    <FrameworkUtilisationTypeForGallio>UseDynamicAnalysis</FrameworkUtilisationTypeForGallio>
+    <FrameworkUtilisationTypeForMSTest>UseDynamicAnalysis</FrameworkUtilisationTypeForMSTest>
+  </Settings>
+</ProjectConfiguration>
