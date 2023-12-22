@@ -1,7 +1,10 @@
 > **Note** This repository is developed for .netstandard2.0 with support .net5, net6, and .net7.
 
-[![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult/)
-[![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult)
+| Name     | Details |
+|----------|----------|
+| PagedListResult.Common | [![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.Common/) [![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.Common.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.Common)|
+| PagedListResult | [![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.Common.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult/) [![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult) |
+
 
 This repository results from the necessity to implement pagination for grids/tables, a server-side pagination. the current solution is based on 2 projects, the first(`PagedListResult.Common`) represents the expressions builder for filters, search, and validation; the second(`PagedListResult`) uses extension methods to create the pagination requests and pagination results.
 
