@@ -15,15 +15,17 @@
 // ***********************************************************************
 
 using AggregatedGenericResultMessage.Models;
+using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PagedListResult;
 using PagedListResult.Common.Enums;
-using PagedListResult.Common.Models.Result;
+using PagedListResult.Extensions;
 using PagedListResult.Web;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiNet5.Application;
@@ -32,18 +34,18 @@ using WebApiNet5.Models;
 
 namespace WebApiNet5.Controllers
 {
-    [Produces("application/json")]
+    [Produces("application/xml")]
     [Route("api/[controller]/[action]")]
-    public class GetDataController : BaseApiPagedResultController
+    public class GetDataXmlController : BaseApiPagedResultController
     {
         private readonly AppDbContext _db;
 
-        public GetDataController(AppDbContext db) => _db = db;
+        public GetDataXmlController(AppDbContext db) => _db = db;
 
         [HttpPost]
-        [ProducesResponseType(typeof(PagedResult<PostDetail>), StatusCodes.Status200OK)]
+        [Produces("application/xml")]
         [ProducesResponseType(typeof(IEnumerable<MessageModel>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAllRecords(
+        public async Task<IActionResult> GetXmlAllRecords(
             [FromBody] GetAllRecordsRequest query, CancellationToken cancellationToken)
         {
             var data = _db.Posts
@@ -61,7 +63,14 @@ namespace WebApiNet5.Controllers
 
             var dataList = await data.GetPagedWithFiltersAsync(query, null, FilterConditionType.And, cancellationToken);
 
-            return JsonResult(dataList);
+            var xml = dataList.ToSoapXmlPagedResult();
+
+            return new ContentResult
+            {
+                Content = xml.SerializeToString(),
+                ContentType = "text/xml",
+                StatusCode = (int)HttpStatusCode.OK
+            };
         }
     }
 }

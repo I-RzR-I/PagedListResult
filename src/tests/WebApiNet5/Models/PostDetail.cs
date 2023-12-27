@@ -21,7 +21,7 @@ using System;
 
 #endregion
 
-namespace PagedListResultNet5Tests.Models
+namespace WebApiNet5.Models
 {
     public class PostDetail
     {

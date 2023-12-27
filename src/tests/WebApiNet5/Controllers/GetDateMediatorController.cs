@@ -20,11 +20,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PagedListResult.Common.Models.Result;
 using PagedListResult.Web;
-using PagedListResultNet5Tests.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using WebApiNet5.Application.GetRecords;
+using WebApiNet5.Models;
 
 namespace WebApiNet5.Controllers
 {

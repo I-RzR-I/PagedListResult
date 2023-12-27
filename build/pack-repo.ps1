@@ -1,7 +1,16 @@
+Param
+(
+	[Parameter(Mandatory = $false)]
+	[string]$ownVersion,
+	[Parameter(Mandatory = $false)]
+	[bool]$runTest
+);
+
 $assemblyPath = "..\src\shared\GeneralAssemblyInfo.cs";
 $defaultVersion = "1.0.0.0";
 $nugetPath = "../nuget";
 $data = ("..\src\PagedListResult.Common\PagedListResult.Common.csproj", "..\src\PagedListResult\PagedListResult.csproj");
+$testExec = $false;
 
 <#
 	.SYNOPSIS
@@ -75,8 +84,15 @@ function Set-BuildAndPack
 		}
 		
 		Write-Host "Pack in Release '$($_)'!" -ForegroundColor Green;
-		dotnet pack $($_) -p:PackageVersion=$packVersion --no-build -c Release --output $nugetPath;
-				
+		$packResult = dotnet pack $($_) -p:PackageVersion=$packVersion --no-build -c Release --output $nugetPath;
+		if ($LASTEXITCODE -ne 0)
+		{
+			Set-VersionAssembly -packVersion $currentVersion;
+			Write-Host $buildResult;
+			
+			return $false;
+		}
+		
 		return $true;
 	}
 	catch
@@ -187,13 +203,21 @@ function Exec-TestSolution
 	}
 }
 
-Write-Host "Init test solution...`n" -ForegroundColor Green;
-$testExec = Exec-TestSolution;
+If ($runTest -eq $true)
+{
+	Write-Host "Init test solution...`n" -ForegroundColor Green;
+	$testExec = Exec-TestSolution;
+}
+Else { $testExec = $true; }
+
 If ($testExec -eq $true)
 {
 	Write-Host "Path to pack: '$nugetPath'`n" -ForegroundColor Green;
 	
-	$currentVersion = Get-CurrentAssemblyVersion;
+	$currentVersion = "";
+	If ($ownVersion -eq $null -or $ownVersion -eq "") { $currentVersion = Get-CurrentAssemblyVersion; }
+	Else { $currentVersion = $ownVersion; }
+	
 	$directoryInfo = Get-ChildItem $nugetPath | Where-Object { $_.Name -match '[a-z]*.1.0.0.nupkg$' } | Measure-Object;
 	If ($defaultVersion -eq $currentVersion -and $directoryInfo.count -eq 0)
 	{
@@ -201,10 +225,12 @@ If ($testExec -eq $true)
 		
 		$data | ForEach-Object	{
 			$buildResult = Set-BuildAndPack -packVersion $currentVersion;
-			If ($buildResult -eq $false -or $buildResult -ccontains $false)
+			If ($buildResult -eq $false -or $buildResult -contains $false)
 			{
+				Write-Host "`nBuild/pack failed!!!" -ForegroundColor Red;
+				
 				exit;
-			}			
+			}
 		}
 		
 		Write-Host "`nPack executed with success with version: $currentVersion!" -ForegroundColor Green;
@@ -213,14 +239,22 @@ If ($testExec -eq $true)
 	}
 	Else
 	{
-		$versArray = $currentVersion.Split('.');
-		$finalVersion = $versArray[0].ToString() + "." + $versArray[1].ToString() + "." + (([int]$versArray[2]) + 1).ToString() + "." + (Get-TimeStamp).ToString();
+		$finalVersion = "";
+		If ($ownVersion -eq $null -or $ownVersion -eq "")
+		{
+			$versArray = $currentVersion.Split('.');
+			$finalVersion = $versArray[0].ToString() + "." + $versArray[1].ToString() + "." + (([int]$versArray[2]) + 1).ToString() + "." + (Get-TimeStamp).ToString();
+		}
+		Else { $finalVersion = $ownVersion; }
+		
 		Set-VersionAssembly -packVersion $finalVersion;
 		
 		$data | ForEach-Object	{
 			$buildResult = Set-BuildAndPack -packVersion $finalVersion -currentVersion $currentVersion;
-			If ($buildResult -eq $false -or $buildResult -ccontains $false)
+			If ($buildResult -eq $false -or $buildResult -contains $false)
 			{
+				Write-Host "`nBuild/pack failed!!!" -ForegroundColor Red;
+				
 				exit;
 			}
 		}
