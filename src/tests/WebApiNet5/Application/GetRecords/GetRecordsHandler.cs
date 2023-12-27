@@ -19,11 +19,11 @@ using Microsoft.EntityFrameworkCore;
 using PagedListResult;
 using PagedListResult.Common.Abstractions;
 using PagedListResult.Common.Models.Request;
-using PagedListResultNet5Tests.Models;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiNet5.Data;
+using WebApiNet5.Models;
 
 namespace WebApiNet5.Application.GetRecords
 {

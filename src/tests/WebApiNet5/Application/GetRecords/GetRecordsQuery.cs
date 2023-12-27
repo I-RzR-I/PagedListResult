@@ -17,7 +17,7 @@
 using MediatR;
 using PagedListResult.Common.Abstractions;
 using PagedListResult.Common.Models.Request.Page;
-using PagedListResultNet5Tests.Models;
+using WebApiNet5.Models;
 
 namespace WebApiNet5.Application.GetRecords
 {
