@@ -17,6 +17,7 @@
 #region U S A G E S
 
 using DomainCommonExtensions.CommonExtensions;
+using DomainCommonExtensions.CommonExtensions.TypeParam;
 using System.Collections.Generic;
 using System.Xml;
 
