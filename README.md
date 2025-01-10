@@ -1,12 +1,15 @@
-> **Note** This repository is developed for .netstandard2.0 with support .net5, net6, and .net7.
+> **Note** This repository is developed for .netstandard2.0 with support .net5, net6, .net7, .net8 and .net9.
 
 | Name     | Details |
 |----------|----------|
-| PagedListResult.Common | [![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.Common/) [![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.Common.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.Common)|
-| PagedListResult | [![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.Common.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult/) [![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult) |
+| PagedListResult.DataModels | [![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.DataModels.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.DataModels/) [![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.DataModels.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.DataModels)|
+| PagedListResult.Common | [![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.Common.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.Common/) [![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.Common.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult.Common)|
+| PagedListResult | [![NuGet Version](https://img.shields.io/nuget/v/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult/) [![Nuget Downloads](https://img.shields.io/nuget/dt/PagedListResult.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/PagedListResult) |
 
 
-This repository results from the necessity to implement pagination for grids/tables, a server-side pagination. the current solution is based on 2 projects, the first(`PagedListResult.Common`) represents the expressions builder for filters, search, and validation; the second(`PagedListResult`) uses extension methods to create the pagination requests and pagination results.
+This repository results from the necessity to implement pagination for grids/tables, a server-side pagination. The current solution is based on 3 projects, the first(`PagedListResult.DataModels`) represent the base data models, the second(`PagedListResult.Common`) represents the expressions builder for filters, search, and validation; the third(`PagedListResult`) uses extension methods to create the pagination requests and pagination results.
+
+The `PagedListResult.DataModels` is written using the framework `.netstandard2.0` and contains the base required models, with the possibility of creating a new implementation based on them.
 
 The `PagedListResult.Common` is written using framework `.netstandard2.0`, and based on `System.Linq.Expressions`. And the base available functionalities are:
 search in fields, order records, filter be specific conditions, set on top some records, etc.
