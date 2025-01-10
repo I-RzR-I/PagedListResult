@@ -18,8 +18,8 @@ using System.Linq;
 using FilterTests.Data;
 using FilterTests.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Filters;
+using PagedListResult.DataModels.Enums;
 
 namespace FilterTests.Filters
 {

@@ -18,7 +18,8 @@
 
 using AggregatedGenericResultMessage.Models;
 using DomainCommonExtensions.CommonExtensions;
-using PagedListResult.Common.Models.Result;
+using PagedListResult.DataModels.Abstractions;
+using PagedListResult.DataModels.Models.Result;
 using PagedListResult.Models;
 using System.Linq;
 
@@ -27,20 +28,21 @@ using System.Linq;
 namespace PagedListResult.Extensions
 {
     /// -------------------------------------------------------------------------------------------------
-    /// <summary>A SOAP/XML extensions.</summary>
-    /// <remarks></remarks>
+    /// <summary>
+    ///     A SOAP/XML extensions.
+    /// </summary>
     /// =================================================================================================
     public static class SoapXmlExtensions
     {
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
-        ///     A PagedResult&lt;TSource&gt; extension method that converts a source to a SOAP/XML
-        ///     result.
+        ///     A PagedResult&lt;TSource&gt; extension method that converts a source to a SOAP/XML result.
         /// </summary>
-        /// <remarks></remarks>
         /// <typeparam name="TSource">Type of the source.</typeparam>
         /// <param name="source">The source to act on.</param>
-        /// <returns>Source as a SoapXmlPagedResult.</returns>
+        /// <returns>
+        ///     Source as a SoapXmlPagedResult.
+        /// </returns>
         /// =================================================================================================
         public static SoapXmlPagedResult ToSoapXmlPagedResult<TSource>(this PagedResult<TSource> source) where TSource : class
             => new SoapXmlPagedResult()
@@ -50,6 +52,44 @@ namespace PagedListResult.Extensions
                 PageCount = source.PageCount,
                 PageSize = source.PageSize,
                 RowCount = source.RowCount,
+                HasNextPage = source.HasNextPage,
+                HasPreviousPage = source.HasPreviousPage,
+                
+                Messages = source.Messages.Select(x => new MessageModel
+                {
+                    Key = x.Key,
+                    Message = x.Message,
+                    MessageType = x.MessageType
+                }).ToList(),
+                Response = source.Response.IsNotNull() ? source.Response.CastToSoapXmlResponse() : null,
+                ExecutionDetails = new SoapXmlPagedExecDetailsResult()
+                {
+                    ExecutionDate = source.ExecutionDetails.ExecutionDate,
+                    ExecutionTimeMs = source.ExecutionDetails.ExecutionTimeMs
+                }
+            };
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     A PagedResult&lt;TSource&gt; extension method that converts a source to a SOAP/XML result.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source.</typeparam>
+        /// <param name="source">The source to act on.</param>
+        /// <returns>
+        ///     Source as a SoapXmlPagedResult.
+        /// </returns>
+        /// =================================================================================================
+        public static SoapXmlPagedResult ToSoapXmlPagedResult<TSource>(this IPagedResult<TSource> source) where TSource : class
+            => new SoapXmlPagedResult()
+            {
+                CurrentPage = source.CurrentPage,
+                IsSuccess = source.IsSuccess,
+                PageCount = source.PageCount,
+                PageSize = source.PageSize,
+                RowCount = source.RowCount,
+                HasNextPage = source.HasNextPage,
+                HasPreviousPage = source.HasPreviousPage,
+                
                 Messages = source.Messages.Select(x => new MessageModel
                 {
                     Key = x.Key,

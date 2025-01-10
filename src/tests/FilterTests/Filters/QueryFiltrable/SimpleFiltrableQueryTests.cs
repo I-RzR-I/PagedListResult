@@ -22,9 +22,9 @@ using FilterTests.Data;
 using FilterTests.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Filters;
-using PagedListResult.Common.Models.Request;
+using PagedListResult.DataModels.Enums;
+using PagedListResult.DataModels.Models.Request;
 
 #endregion
 

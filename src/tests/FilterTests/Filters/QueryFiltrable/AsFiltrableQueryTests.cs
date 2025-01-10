@@ -22,9 +22,9 @@ using FilterTests.Data;
 using FilterTests.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Filters;
-using PagedListResult.Common.Models.Request;
+using PagedListResult.DataModels.Enums;
+using PagedListResult.DataModels.Models.Request;
 
 #endregion
 
@@ -44,7 +44,15 @@ namespace FilterTests.Filters.QueryFiltrable
             //Act
             var filtered = _fakeItems.AsFilterable(new List<DataFilter>
             {
-                new DataFilter { FilterValue = new DataFilterValue { PropertyName = "price", Values = new List<string> { "3" }, Condition = FilterType.Equals } }
+                new DataFilter
+                {
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "price", 
+                        Values = new List<string> { "3" }, 
+                        Condition = FilterType.Equals
+                    }
+                }
             });
 
             //Assert
@@ -58,8 +66,24 @@ namespace FilterTests.Filters.QueryFiltrable
             var filtered = _fakeItems.AsFilterable(
                 new List<DataFilter>
                 {
-                    new DataFilter { FilterValue = new DataFilterValue { PropertyName = "price", Values = new List<string> { "3" }, Condition = FilterType.Equals } },
-                    new DataFilter { FilterValue = new DataFilterValue { PropertyName = "price", Values = new List<string> { "2" }, Condition = FilterType.Equals } }
+                    new DataFilter
+                    {
+                        FilterValue = new DataFilterValue
+                        {
+                            PropertyName = "price", 
+                            Values = new List<string> { "3" }, 
+                            Condition = FilterType.Equals
+                        }
+                    },
+                    new DataFilter
+                    {
+                        FilterValue = new DataFilterValue
+                        {
+                            PropertyName = "price", 
+                            Values = new List<string> { "2" }, 
+                            Condition = FilterType.Equals
+                        }
+                    }
                 }, FilterConditionType.Or);
 
             //Assert
@@ -75,13 +99,23 @@ namespace FilterTests.Filters.QueryFiltrable
                 new DataFilter
                 {
                     FilterApplyOrder = 1,
-                    FilterValue = new DataFilterValue { PropertyName = "price", Values = new List<string> { "3" }, Condition = FilterType.Equals },
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "price", 
+                        Values = new List<string> { "3" }, 
+                        Condition = FilterType.Equals
+                    },
                     Dependencies = new List<DataFilterDependence>
                     {
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.And,
-                            FilterValue = new DataFilterValue { PropertyName = "Count", Values = new List<string> { "101" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "Count", 
+                                Values = new List<string> { "101" }, 
+                                Condition = FilterType.Equals
+                            }
                         }
                     }
                 }
@@ -100,13 +134,23 @@ namespace FilterTests.Filters.QueryFiltrable
                 new DataFilter
                 {
                     FilterApplyOrder = 1,
-                    FilterValue = new DataFilterValue { PropertyName = "price", Values = new List<string> { "3" }, Condition = FilterType.Equals },
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "price", 
+                        Values = new List<string> { "3" }, 
+                        Condition = FilterType.Equals
+                    },
                     Dependencies = new List<DataFilterDependence>
                     {
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.Or,
-                            FilterValue = new DataFilterValue { PropertyName = "Count", Values = new List<string> { "101" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "Count",
+                                Values = new List<string> { "101" },
+                                Condition = FilterType.Equals
+                            }
                         }
                     }
                 }
@@ -125,18 +169,33 @@ namespace FilterTests.Filters.QueryFiltrable
                 new DataFilter
                 {
                     FilterApplyOrder = 1,
-                    FilterValue = new DataFilterValue { PropertyName = "name", Values = new List<string> { "test" }, Condition = FilterType.Contains },
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "name", 
+                        Values = new List<string> { "test" }, 
+                        Condition = FilterType.Contains
+                    },
                     Dependencies = new List<DataFilterDependence>
                     {
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.Or,
-                            FilterValue = new DataFilterValue { PropertyName = "Count", Values = new List<string> { "5" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "Count", 
+                                Values = new List<string> { "5" }, 
+                                Condition = FilterType.Equals
+                            }
                         },
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.Or,
-                            FilterValue = new DataFilterValue { PropertyName = "Count", Values = new List<string> { "10" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "Count", 
+                                Values = new List<string> { "10" },
+                                Condition = FilterType.Equals
+                            }
                         }
                     }
                 }
@@ -155,23 +214,43 @@ namespace FilterTests.Filters.QueryFiltrable
                 new DataFilter
                 {
                     FilterApplyOrder = 1,
-                    FilterValue = new DataFilterValue { PropertyName = "name", Values = new List<string> { "test" }, Condition = FilterType.Contains },
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "name", 
+                        Values = new List<string> { "test" }, 
+                        Condition = FilterType.Contains
+                    },
                     Dependencies = new List<DataFilterDependence>
                     {
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.Or,
-                            FilterValue = new DataFilterValue { PropertyName = "Count", Values = new List<string> { "5" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "Count",
+                                Values = new List<string> { "5" },
+                                Condition = FilterType.Equals
+                            }
                         },
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.Or,
-                            FilterValue = new DataFilterValue { PropertyName = "Count", Values = new List<string> { "10" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "Count",
+                                Values = new List<string> { "10" },
+                                Condition = FilterType.Equals
+                            }
                         },
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.And,
-                            FilterValue = new DataFilterValue { PropertyName = "isActive", Values = new List<string> { "true" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "isActive",
+                                Values = new List<string> { "true" }, 
+                                Condition = FilterType.Equals
+                            }
                         }
                     }
                 }
@@ -187,26 +266,53 @@ namespace FilterTests.Filters.QueryFiltrable
             //Act
             var filtered = _fakeItems.AsFilterable(new List<DataFilter>
             {
-                new DataFilter { FilterApplyOrder = 0, FilterValue = new DataFilterValue { PropertyName = "id", Values = new List<string> { "1", "3", "2" }, Condition = FilterType.IsIn } },
+                new DataFilter { 
+                    FilterApplyOrder = 0, 
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "id", 
+                        Values = new List<string> { "1", "3", "2" },
+                        Condition = FilterType.IsIn
+                    } },
                 new DataFilter
                 {
                     FilterApplyOrder = 1,
-                    FilterValue = new DataFilterValue { PropertyName = "count", Values = new List<string> { "2" }, CompareValue = "109", Condition = FilterType.Between },
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "count", 
+                        Values = new List<string> { "2" },
+                        CompareValue = "109", Condition = FilterType.Between
+                    },
                     Dependencies = new List<DataFilterDependence>
                     {
                         new DataFilterDependence
                         {
-                            ParentFilterLinkType = FilterConditionType.Or, FilterValue = new DataFilterValue { PropertyName = "isBlocked", Condition = FilterType.IsNull }
+                            ParentFilterLinkType = FilterConditionType.Or, 
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "isBlocked", 
+                                Condition = FilterType.IsNull
+                            }
                         },
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.Or,
-                            FilterValue = new DataFilterValue { PropertyName = "isActive", Values = new List<string> { "true" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "isActive", 
+                                Values = new List<string> { "true" }, 
+                                Condition = FilterType.Equals
+                            }
                         },
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.And,
-                            FilterValue = new DataFilterValue { PropertyName = "minQuantity", Values = new List<string> { "0" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "minQuantity",
+                                Values = new List<string> { "0" },
+                                Condition = FilterType.Equals
+                            }
                         }
                     }
                 }
@@ -222,26 +328,54 @@ namespace FilterTests.Filters.QueryFiltrable
             //Act
             var filtered = _fakeItems.AsFilterable(new List<DataFilter>
             {
-                new DataFilter { FilterApplyOrder = 0, FilterValue = new DataFilterValue { PropertyName = "id", Values = new List<string> { "1", "3", "2", "0" }, Condition = FilterType.IsIn } },
+                new DataFilter { 
+                    FilterApplyOrder = 0, 
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "id", 
+                        Values = new List<string> { "1", "3", "2", "0" }, 
+                        Condition = FilterType.IsIn
+                    } },
                 new DataFilter
                 {
                     FilterApplyOrder = 1,
-                    FilterValue = new DataFilterValue { PropertyName = "count", Values = new List<string> { "7" }, CompareValue = "109", Condition = FilterType.Between },
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "count", 
+                        Values = new List<string> { "7" }, 
+                        CompareValue = "109", 
+                        Condition = FilterType.Between
+                    },
                     Dependencies = new List<DataFilterDependence>
                     {
                         new DataFilterDependence
                         {
-                            ParentFilterLinkType = FilterConditionType.Or, FilterValue = new DataFilterValue { PropertyName = "isBlocked", Condition = FilterType.IsNull }
+                            ParentFilterLinkType = FilterConditionType.Or, 
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "isBlocked", 
+                                Condition = FilterType.IsNull
+                            }
                         },
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.Or,
-                            FilterValue = new DataFilterValue { PropertyName = "isActive", Values = new List<string> { "true" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "isActive", 
+                                Values = new List<string> { "true" }, 
+                                Condition = FilterType.Equals
+                            }
                         },
                         new DataFilterDependence
                         {
                             ParentFilterLinkType = FilterConditionType.And,
-                            FilterValue = new DataFilterValue { PropertyName = "minQuantity", Values = new List<string> { "0" }, Condition = FilterType.Equals }
+                            FilterValue = new DataFilterValue
+                            {
+                                PropertyName = "minQuantity",
+                                Values = new List<string> { "0" }, 
+                                Condition = FilterType.Equals
+                            }
                         }
                     }
                 }

@@ -17,8 +17,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PagedListResult;
-using PagedListResult.Common.Abstractions;
-using PagedListResult.Common.Models.Request;
+using PagedListResult.DataModels.Abstractions;
+using PagedListResult.DataModels.Models.Request;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,10 +49,7 @@ namespace WebApiNet5.Application.GetRecords
                     ModifiedOn = x.ModifiedOn
                 });
 
-            return await data
-                .GetPagedWithFiltersAsync(request, 
-                    new DefaultPrimaryKeyDefinition("Id"), 
-                    cancellationToken: cancellationToken);
+            return await data.GetPagedWithFiltersAsync(request, new DefaultPrimaryKeyDefinition("Id"), cancellationToken: cancellationToken);
         }
     }
 }

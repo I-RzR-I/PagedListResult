@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>RzR</Authors>
     <Copyright>RzR</Copyright>
@@ -68,10 +68,20 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="MockAsyncEnumerable" Version="1.0.3.6469" />
-    <PackageReference Include="AggregatedGenericResultMessage.Web" Version="1.0.5.5444" />
+    <PackageReference Include="MockAsyncEnumerable" Version="1.1.0.0" />
+    <PackageReference Include="AggregatedGenericResultMessage.Web" Version="1.1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,4 +97,5 @@
       <UserProperties BuildVersion_StartDate="2023/11/23" />
     </VisualStudio>
   </ProjectExtensions>
+
 </Project>

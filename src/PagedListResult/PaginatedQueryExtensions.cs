@@ -21,13 +21,13 @@ using DomainCommonExtensions.CommonExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.EntityFrameworkCore;
 using MockAsyncEnumerable;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Filters;
 using PagedListResult.Common.Helpers;
 using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.Common.Models.Request;
-using PagedListResult.Common.Models.Request.Page;
-using PagedListResult.Common.Models.Result;
+using PagedListResult.DataModels.Enums;
+using PagedListResult.DataModels.Models.Request;
+using PagedListResult.DataModels.Models.Request.Page;
+using PagedListResult.DataModels.Models.Result;
 using PagedListResult.Extensions;
 using PagedListResult.Helpers;
 using System;
@@ -304,7 +304,7 @@ namespace PagedListResult
 
             if (request.Order.IsNotNull())
             {
-                if (!request.Order.OrderByProperty.IsNullOrEmpty())
+                if (request.Order.OrderByProperty.IsNullOrEmpty().IsFalse())
                 {
                     query = query.OrderByWithDirection(request.Order.OrderByProperty, request.Order.OrderDirection, null, queryType, request.Order.OrderByDefaultProperty);
                 }
@@ -323,7 +323,7 @@ namespace PagedListResult
                 }
             }
 
-            var result = new PagedResult<TSource>
+            var result = new PagedResult<TSource>()
             {
                 CurrentPage = request.Page,
                 PageSize = request.PageSize,
@@ -340,11 +340,11 @@ namespace PagedListResult
              * specified record ids in the top of list
              * otherwise execute standard command for get paged result data
              */
-            if (skip <= 0)
+            if (skip.IsLessOrEqualZero())
             {
                 var defaultKeys = query.GetDefaultPrimaryKeyProp(defaultPrimaryKey);
 
-                var hasIds = request.PredefinedRecords != null
+                var hasIds = request.PredefinedRecords.IsNotNull()
                              && request.PredefinedRecords.Any()
                              && request.PredefinedRecords.All(x => !string.IsNullOrEmpty(x));
                 var idCount = hasIds.Equals(true) ? request.PredefinedRecords?.Count ?? 0 : 0;
@@ -381,7 +381,7 @@ namespace PagedListResult
                     .ToListAsync(cancellationToken);
             }
 
-            if (!request.Fields.IsNullOrEmptyEnumerable())
+            if (request.Fields.IsNullOrEmptyEnumerable().IsFalse())
             {
                 var fieldsCorrectNames = request.Fields.Select(field => field.FirstCharToUpper());
                 var parsedRecords = result.Response.ParseEnumerableOfTInDynamic(fieldsCorrectNames);

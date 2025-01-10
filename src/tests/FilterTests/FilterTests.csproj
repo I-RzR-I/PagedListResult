@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\PagedListResult.Common\PagedListResult.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PagedRequestResult\" />
+  </ItemGroup>
+
 </Project>
