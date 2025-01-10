@@ -19,6 +19,7 @@
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Extensions.Result;
+using DomainCommonExtensions.ArraysExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                 type ??= typeof(TSource);
                 var props = type.GetProperties().Where(x => x.PropertyType.IsStringPropType()).ToList();
 
-                if (!props.Any()) return Result<Expression<Func<TSource, bool>>>.Success();
+                if (props.Any().IsFalse()) return Result<Expression<Func<TSource, bool>>>.Success();
 
                 var searchPredicate = CreateSearchPredicateForSpecificProperties<TSource>(text, props, type);
                 if (searchPredicate.IsSuccess.IsFalse())
@@ -87,7 +88,7 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                 properties = properties.Select(x => x.FirstCharToUpper()).ToList();
                 var props = type.GetProperties().Where(x => properties.Contains(x.Name) && x.PropertyType.IsStringPropType()).ToList();
 
-                if (!props.Any())
+                if (props.IsNullOrEmptyEnumerable())
                     return Result<Expression<Func<TSource, bool>>>.Success();
 
                 var searchPredicate = CreateSearchPredicateForSpecificProperties<TSource>(text, props, type);

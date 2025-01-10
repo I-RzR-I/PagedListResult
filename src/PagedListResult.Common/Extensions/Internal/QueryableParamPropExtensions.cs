@@ -18,11 +18,11 @@
 
 using DomainCommonExtensions.CommonExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Internal.Common;
 using PagedListResult.Common.Helpers.Internal.Builder;
 using PagedListResult.Common.Helpers.Internal.Common;
 using PagedListResult.Common.Helpers.Internal.ConstNamesHelper;
+using PagedListResult.DataModels.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

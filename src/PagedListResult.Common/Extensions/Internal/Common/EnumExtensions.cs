@@ -16,9 +16,9 @@
 
 #region U S A G E S
 
-using PagedListResult.Common.Enums;
-
 #endregion
+
+using PagedListResult.DataModels.Enums;
 
 namespace PagedListResult.Common.Extensions.Internal.Common
 {

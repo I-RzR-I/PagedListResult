@@ -16,8 +16,8 @@
 
 #region U S A G E S
 
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Internal;
+using PagedListResult.DataModels.Enums;
 using System;
 using System.Linq;
 

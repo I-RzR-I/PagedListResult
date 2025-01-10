@@ -50,7 +50,7 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                 object compareObj = null;
                 if (property.Type.IsNullablePropType())
                 {
-                    if (!property.IsNull())
+                    if (property.IsNotNull())
                         compareObj = Convert.ChangeType(value, property.Type.GetNonNullableType());
                 }
                 else

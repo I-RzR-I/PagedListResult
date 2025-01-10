@@ -16,7 +16,7 @@
 
 #region U S A G E S
 
-using PagedListResult.Common.Enums;
+using PagedListResult.DataModels.Enums;
 using System;
 
 #endregion
@@ -27,14 +27,14 @@ namespace PagedListResult.Common.Helpers.Internal.Common
     /// <summary>Throw exception helper.</summary>
     /// <remarks>RzR, 14-Nov-23.</remarks>
     /// =================================================================================================
-    public static class ThrowHelper
+    internal static class ThrowHelper
     {
         /// -------------------------------------------------------------------------------------------------
         /// <summary>Throw simple exception.</summary>
         /// <remarks>RzR, 14-Nov-23.</remarks>
         /// <param name="message">Exception message.</param>
         /// =================================================================================================
-        public static void Exception(string message)
+        internal static void Exception(string message)
             => throw new Exception(message);
 
         /// -------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <remarks>RzR, 14-Nov-23.</remarks>
         /// <param name="message">Exception message.</param>
         /// =================================================================================================
-        public static void ArgumentException(string message)
+        internal static void ArgumentException(string message)
             => throw new ArgumentException(message);
 
         /// -------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <param name="message">Exception message.</param>
         /// <param name="innerException">Inner exception.</param>
         /// =================================================================================================
-        public static void ArgumentException(string message, Exception innerException)
+        internal static void ArgumentException(string message, Exception innerException)
             => throw new ArgumentException(message, innerException);
 
         /// -------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <remarks>RzR, 14-Nov-23.</remarks>
         /// <param name="message">Exception message.</param>
         /// =================================================================================================
-        public static void ArgumentNullException(string message)
+        internal static void ArgumentNullException(string message)
             => throw new ArgumentNullException(message);
 
         /// -------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <param name="message">Exception message.</param>
         /// <param name="innerException">Inner exception.</param>
         /// =================================================================================================
-        public static void ArgumentNullException(string message, Exception innerException)
+        internal static void ArgumentNullException(string message, Exception innerException)
             => throw new ArgumentNullException(message, innerException);
 
         /// -------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <remarks>RzR, 14-Nov-23.</remarks>
         /// <param name="message">Exception message.</param>
         /// =================================================================================================
-        public static void NotSupportedException(string message)
+        internal static void NotSupportedException(string message)
             => throw new NotSupportedException(message);
 
         /// -------------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <param name="message">Exception message.</param>
         /// <param name="innerException">Inner exception.</param>
         /// =================================================================================================
-        public static void NotSupportedException(string message, Exception innerException)
+        internal static void NotSupportedException(string message, Exception innerException)
             => throw new NotSupportedException(message, innerException);
 
         /// -------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <param name="value">Current property value.</param>
         /// <param name="message">Exception message.</param>
         /// =================================================================================================
-        public static void ArgumentOutOfRangeException(string propertyName, object value, string message)
+        internal static void ArgumentOutOfRangeException(string propertyName, object value, string message)
             => throw new ArgumentOutOfRangeException(propertyName, value, message);
 
         /// -------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ namespace PagedListResult.Common.Helpers.Internal.Common
         /// <param name="propertyName">current property.</param>
         /// <param name="customMessage">(Optional) Additional custom message.</param>
         /// =================================================================================================
-        public static void NotSupportedFilterException(FilterType filter, string propertyName, string customMessage = "")
+        internal static void NotSupportedFilterException(FilterType filter, string propertyName, string customMessage = "")
             => throw new NotSupportedException($"{filter} is not supported for type: '{propertyName}'. {customMessage}");
     }
 }

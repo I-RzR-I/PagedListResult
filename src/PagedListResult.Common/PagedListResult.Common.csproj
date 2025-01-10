@@ -49,8 +49,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AggregatedGenericResultMessage" Version="1.3.4.6865" />
-    <PackageReference Include="DomainCommonExtensions" Version="1.3.0" />
+    <PackageReference Include="DomainCommonExtensions" Version="2.0.1.8588" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PagedListResult.DataModels\PagedListResult.DataModels.csproj" />
   </ItemGroup>
 
   <ProjectExtensions>
@@ -58,4 +65,5 @@
       <UserProperties BuildVersion_StartDate="2023/11/24" />
     </VisualStudio>
   </ProjectExtensions>
+
 </Project>
