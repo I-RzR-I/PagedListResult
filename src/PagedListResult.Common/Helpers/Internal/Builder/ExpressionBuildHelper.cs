@@ -20,9 +20,9 @@ using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Extensions.Result;
 using DomainCommonExtensions.CommonExtensions;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Internal;
 using PagedListResult.Common.Extensions.Internal.Common;
+using PagedListResult.DataModels.Enums;
 using System;
 using System.Linq.Expressions;
 

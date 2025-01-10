@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PagedListResult;
-using PagedListResult.Common.Enums;
+using PagedListResult.DataModels.Enums;
 using PagedListResult.Extensions;
 using PagedListResult.Web;
 using System.Collections.Generic;
@@ -71,6 +71,30 @@ namespace WebApiNet5.Controllers
                 ContentType = "text/xml",
                 StatusCode = (int)HttpStatusCode.OK
             };
+        }
+
+        [HttpPost]
+        [Produces("application/xml")]
+        [ProducesResponseType(typeof(IEnumerable<MessageModel>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetXmlExtAllRecords(
+            [FromBody] GetAllRecordsRequest query, CancellationToken cancellationToken)
+        {
+            var data = _db.Posts
+                .Include(x => x.Author)
+                .Select(x => new PostDetail
+                {
+                    AuthorId = x.AuthorId,
+                    AuthorName = x.Author.Name,
+                    Contents = x.Contents,
+                    CreatedOn = x.CreatedOn,
+                    Id = x.Id,
+                    Title = x.Title,
+                    ModifiedOn = x.ModifiedOn
+                });
+
+            var dataList = await data.GetPagedWithFiltersAsync(query, null, FilterConditionType.And, cancellationToken);
+
+            return XmlResult(dataList);
         }
     }
 }

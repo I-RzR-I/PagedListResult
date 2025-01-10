@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.Entity.PagedListResult.Common
+//  Assembly         : RzR.Shared.Entity.PagedListResult.Common.DataModel
 //  Author           : RzR
-//  Created On       : 2023-11-10 21:59
+//  Created On       : 2024-12-22 13:30
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2023-11-13 16:30
+//  Last Modified On : 2024-12-22 19:46
 // ***********************************************************************
-//  <copyright file="DataSearchDefinition.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
+//  <copyright file="DataSearchDefinition.cs" company="RzR SOFT & TECH">
+//   Copyright © RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
@@ -19,11 +19,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable ClassWithVirtualMembersNeverInherited.Global
 
 #endregion
 
-namespace PagedListResult.Common.Models.Request
+namespace PagedListResult.DataModels.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>A data search definition.</summary>

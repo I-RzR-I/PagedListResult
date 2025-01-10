@@ -20,11 +20,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Internal;
 using PagedListResult.Common.Helpers;
 using PagedListResult.Common.Helpers.Internal.Common;
 using PagedListResult.Common.Helpers.Internal.ConstNamesHelper;
+using PagedListResult.DataModels.Enums;
 
 #endregion
 

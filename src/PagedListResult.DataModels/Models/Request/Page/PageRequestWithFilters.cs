@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.Entity.PagedListResult.Common
+//  Assembly         : RzR.Shared.Entity.PagedListResult.Common.DataModel
 //  Author           : RzR
-//  Created On       : 2023-11-14 00:46
+//  Created On       : 2024-12-22 13:30
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2023-11-14 00:47
+//  Last Modified On : 2024-12-22 19:46
 // ***********************************************************************
-//  <copyright file="PageRequestWithFilters.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
+//  <copyright file="PageRequestWithFilters.cs" company="RzR SOFT & TECH">
+//   Copyright © RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
@@ -16,15 +16,17 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
+using PagedListResult.DataModels.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
+// ReSharper disable CollectionNeverUpdated.Global
+// ReSharper disable MemberCanBePrivate.Global
+
 #endregion
 
-namespace PagedListResult.Common.Models.Request.Page
+namespace PagedListResult.DataModels.Models.Request.Page
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Filtered page request.</summary>
@@ -43,13 +45,15 @@ namespace PagedListResult.Common.Models.Request.Page
         /// <inheritdoc />
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Filters.IsNotNull() && Filters.Any())
-                foreach (var filter in Filters)
-                {
-                    var validationResult = filter.Validate(validationContext).ToList();
-                    if (!validationResult.IsNullOrEmptyEnumerable())
-                        yield return validationResult.First();
-                }
+            if (Filters.IsNullOrEmptyEnumerable())
+                yield break;
+
+            foreach (var filter in Filters)
+            {
+                var validationResult = filter.Validate(validationContext).ToList();
+                if (!validationResult.IsNullOrEmptyEnumerable())
+                    yield return validationResult.First();
+            }
         }
     }
 }

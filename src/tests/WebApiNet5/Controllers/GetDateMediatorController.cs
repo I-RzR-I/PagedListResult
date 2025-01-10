@@ -18,7 +18,7 @@ using AggregatedGenericResultMessage.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PagedListResult.Common.Models.Result;
+using PagedListResult.DataModels.Models.Result;
 using PagedListResult.Web;
 using System.Collections.Generic;
 using System.Threading.Tasks;

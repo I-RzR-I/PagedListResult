@@ -9,7 +9,9 @@ Param
 $assemblyPath = "..\src\shared\GeneralAssemblyInfo.cs";
 $defaultVersion = "1.0.0.0";
 $nugetPath = "../nuget";
-$data = ("..\src\PagedListResult.Common\PagedListResult.Common.csproj", "..\src\PagedListResult\PagedListResult.csproj");
+$data = ("..\src\PagedListResult.DataModels\PagedListResult.DataModels.csproj",
+"..\src\PagedListResult.Common\PagedListResult.Common.csproj",
+"..\src\PagedListResult\PagedListResult.csproj");
 $testExec = $false;
 
 <#

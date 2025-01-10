@@ -23,13 +23,15 @@ using System.Linq.Expressions;
 using DomainCommonExtensions.ArraysExtensions;
 using DomainCommonExtensions.CommonExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Internal.Common;
 using PagedListResult.Common.Helpers.Internal;
 using PagedListResult.Common.Helpers.Internal.Builder;
 using PagedListResult.Common.Helpers.Internal.Common;
 using PagedListResult.Common.Helpers.Internal.ConstNamesHelper;
+using PagedListResult.DataModels.Enums;
 using System.Reflection;
+
+// ReSharper disable RedundantCast
 
 #endregion
 
@@ -96,7 +98,6 @@ namespace PagedListResult.Common.Extensions.Internal
                 FilterType.EndsWith, FilterType.DoesNotEndsWith
             }.Contains(filter))
             {
-
                 compareObjValue = Convert.ChangeType(filterObjectValue, property.Type.IsNullablePropType()
                     ? property.Type.GetNonNullableType()
                     : property.Type);
@@ -402,7 +403,7 @@ namespace PagedListResult.Common.Extensions.Internal
                     break;
                 case FilterType.IsNotIn:
                     if (objectValues.IsNullOrEmptyEnumerable())
-                        ThrowHelper.ArgumentException($"{nameof(objectValues)}, IN values must have data!");
+                        ThrowHelper.ArgumentException($"{nameof(objectValues)}, NOT IN values must have data!");
 
                     foreach (var inValue in objectValues!)
                     {

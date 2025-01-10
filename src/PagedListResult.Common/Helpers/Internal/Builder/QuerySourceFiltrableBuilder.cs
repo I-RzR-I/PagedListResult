@@ -22,12 +22,12 @@ using AggregatedGenericResultMessage.Extensions.Result;
 using DomainCommonExtensions.ArraysExtensions;
 using DomainCommonExtensions.CommonExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Filters.PropertyFilterQuery;
 using PagedListResult.Common.Extensions.Internal;
 using PagedListResult.Common.Helpers.Internal.Common;
 using PagedListResult.Common.Models.Internal;
-using PagedListResult.Common.Models.Request;
+using PagedListResult.DataModels.Enums;
+using PagedListResult.DataModels.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -285,17 +285,17 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
             {
                 Expression<Func<TSource, bool>> expressionResult = null;
 
-                if (linkCriteriaOr.Count > 0 && linkCriteriaAnd.Count > 0)
+                if (linkCriteriaOr.Count.IsGreaterThanZero() && linkCriteriaAnd.Count.IsGreaterThanZero())
                 {
                     var orBinExpr = Expression.Or(linkCriteriaOr.Any().Body, linkCriteriaAnd.All().Body);
                     var binExpr = (BinaryExpression)new ParameterReplacer(parameter).Visit(orBinExpr);
                     expressionResult = Expression.Lambda<Func<TSource, bool>>(binExpr!, parameter);
                 }
-                else if (linkCriteriaOr.Count > 0)
+                else if (linkCriteriaOr.Count.IsGreaterThanZero())
                 {
                     expressionResult = linkCriteriaOr.Any();
                 }
-                else if (linkCriteriaAnd.Count > 0)
+                else if (linkCriteriaAnd.Count.IsGreaterThanZero())
                 {
                     expressionResult = linkCriteriaAnd.All();
                 }

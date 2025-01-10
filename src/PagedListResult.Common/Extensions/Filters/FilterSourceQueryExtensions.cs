@@ -18,11 +18,11 @@
 
 using DomainCommonExtensions.ArraysExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Enums;
 using PagedListResult.Common.Extensions.Internal.Common;
 using PagedListResult.Common.Helpers.Internal.Builder;
 using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.Common.Models.Request;
+using PagedListResult.DataModels.Enums;
+using PagedListResult.DataModels.Models.Request;
 using System.Collections.Generic;
 using System.Linq;
 

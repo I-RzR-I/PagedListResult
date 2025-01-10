@@ -26,8 +26,10 @@ using System.Xml.Serialization;
 namespace PagedListResult.Models
 {
     /// -------------------------------------------------------------------------------------------------
-    /// <summary>Encapsulates the result of a SOAP/XML paged.</summary>
-    /// <remarks></remarks>
+    /// <summary>
+    ///     Encapsulates the result of a SOAP/XML paged.
+    /// </summary>
+    /// <seealso cref="T:AggregatedGenericResultMessage.SoapResult"/>
     /// =================================================================================================
     [Serializable]
     [DataContract(Name = "SoapXmlPagedResult")]
@@ -35,44 +37,87 @@ namespace PagedListResult.Models
     public class SoapXmlPagedResult : SoapResult
     {
         /// -------------------------------------------------------------------------------------------------
-        /// <summary>Initializes a new instance of the <see cref="SoapXmlPagedResult" /> class.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SoapXmlPagedResult" /> class.
+        /// </summary>
         /// =================================================================================================
         public SoapXmlPagedResult()
         {
         }
 
         /// -------------------------------------------------------------------------------------------------
-        /// <summary>Current page.</summary>
-        /// <value>The current page.</value>
+        /// <summary>
+        ///     Current page.
+        /// </summary>
+        /// <value>
+        ///     The current page.
+        /// </value>
         /// =================================================================================================
         [DataMember(Name = "CurrentPage", IsRequired = true)]
         public int CurrentPage { get; set; }
 
         /// -------------------------------------------------------------------------------------------------
-        /// <summary>Total page number.</summary>
-        /// <value>The number of pages.</value>
+        /// <summary>
+        ///     Total page number.
+        /// </summary>
+        /// <value>
+        ///     The number of pages.
+        /// </value>
         /// =================================================================================================
         [DataMember(Name = "PageCount", IsRequired = true)]
         public int PageCount { get; set; }
 
         /// -------------------------------------------------------------------------------------------------
-        /// <summary>Items per page.</summary>
-        /// <value>The size of the page.</value>
+        /// <summary>
+        ///     Items per page.
+        /// </summary>
+        /// <value>
+        ///     The size of the page.
+        /// </value>
         /// =================================================================================================
         [DataMember(Name = "PageSize", IsRequired = true)]
         public int PageSize { get; set; }
 
         /// -------------------------------------------------------------------------------------------------
-        /// <summary>Total filtered items.</summary>
-        /// <value>The number of rows.</value>
+        /// <summary>
+        ///     Total filtered items.
+        /// </summary>
+        /// <value>
+        ///     The number of rows.
+        /// </value>
         /// =================================================================================================
         [DataMember(Name = "RowCount", IsRequired = true)]
         public int RowCount { get; set; }
 
         /// -------------------------------------------------------------------------------------------------
-        /// <summary>Gets or sets information describing the execution of current paged result.</summary>
-        /// <value>Information describing the execution of current paged result.</value>
+        /// <summary>
+        ///     Gets or sets the has next page.
+        /// </summary>
+        /// <value>
+        ///     The has next page.
+        /// </value>
+        /// =================================================================================================
+        [DataMember(Name = "HasNextPage", IsRequired = true)]
+        public bool HasNextPage { get; set; }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Gets or sets the has previous page.
+        /// </summary>
+        /// <value>
+        ///     The has previous page.
+        /// </value>
+        /// =================================================================================================
+        [DataMember(Name = "HasPreviousPage", IsRequired = true)]
+        public bool HasPreviousPage { get; set; }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Gets or sets information describing the execution of current paged result.
+        /// </summary>
+        /// <value>
+        ///     Information describing the execution of current paged result.
+        /// </value>
         /// =================================================================================================
         [DataMember(Name = "ExecutionDetails", IsRequired = false)]
         public SoapXmlPagedExecDetailsResult ExecutionDetails { get; set; }

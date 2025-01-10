@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.Entity.PagedListResult.Common
+//  Assembly         : RzR.Shared.Entity.PagedListResult.Common.DataModel
 //  Author           : RzR
-//  Created On       : 2023-11-10 01:04
+//  Created On       : 2024-12-22 13:30
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2023-11-10 01:16
+//  Last Modified On : 2024-12-22 19:46
 // ***********************************************************************
-//  <copyright file="PagedExecResult.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
+//  <copyright file="PagedExecDetailsResult.cs" company="RzR SOFT & TECH">
+//   Copyright © RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
@@ -16,14 +16,15 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.CommonExtensions;
+using PagedListResult.DataModels.Extensions;
 using System;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable ClassNeverInstantiated.Global
 
 #endregion
 
-namespace PagedListResult.Common.Models.Result
+namespace PagedListResult.DataModels.Models.Result
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Encapsulates the result of a paged execute.</summary>
@@ -31,28 +32,28 @@ namespace PagedListResult.Common.Models.Result
     /// =================================================================================================
     public class PagedExecDetailsResult
     {
-        ///-------------------------------------------------------------------------------------------------
+        /// -------------------------------------------------------------------------------------------------
         /// <summary>Default constructor.</summary>
         /// <remarks>RzR, 10-Nov-23.</remarks>
-        ///=================================================================================================
+        /// =================================================================================================
         public PagedExecDetailsResult() { }
 
-        ///-------------------------------------------------------------------------------------------------
+        /// -------------------------------------------------------------------------------------------------
         /// <summary>Constructor.</summary>
         /// <remarks>RzR, 10-Nov-23.</remarks>
         /// <param name="executionTimeMs">The execution filters time milliseconds.</param>
         /// <param name="executionDate">The execution date.</param>
-        ///=================================================================================================
+        /// =================================================================================================
         public PagedExecDetailsResult(long executionTimeMs, DateTime executionDate)
         {
-            ExecutionTimeMs = executionTimeMs;
+            ExecutionTimeMs = executionTimeMs.IsNull() ? -1 : executionTimeMs;
             ExecutionDate = executionDate.IsNull() ? DateTime.Now : executionDate;
         }
 
-        ///-------------------------------------------------------------------------------------------------
+        /// -------------------------------------------------------------------------------------------------
         /// <summary>Gets or sets the execution time milliseconds.</summary>
         /// <value>The execution filters time milliseconds.</value>
-        ///=================================================================================================
+        /// =================================================================================================
         public long ExecutionTimeMs { get; private set; } = -1;
 
         /// -------------------------------------------------------------------------------------------------
@@ -61,12 +62,12 @@ namespace PagedListResult.Common.Models.Result
         /// =================================================================================================
         public DateTime? ExecutionDate { get; private set; } = DateTime.Now;
 
-        ///-------------------------------------------------------------------------------------------------
+        /// -------------------------------------------------------------------------------------------------
         /// <summary>Sets execution time milliseconds.</summary>
         /// <remarks>RzR, 10-Nov-23.</remarks>
         /// <param name="execMs">The execute in milliseconds.</param>
         /// <param name="execDate">The execute date.</param>
-        ///=================================================================================================
+        /// =================================================================================================
         public void SetExecutionTimeMs(long execMs, DateTime execDate)
         {
             ExecutionDate = execDate;

@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.Entity.PagedListResult.Common
+//  Assembly         : RzR.Shared.Entity.PagedListResult.Common.DataModel
 //  Author           : RzR
-//  Created On       : 2023-11-14 00:46
+//  Created On       : 2024-12-22 13:30
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2023-11-14 00:47
+//  Last Modified On : 2024-12-22 19:46
 // ***********************************************************************
-//  <copyright file="PagedRequest.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
+//  <copyright file="PagedRequest.cs" company="RzR SOFT & TECH">
+//   Copyright © RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
@@ -22,7 +22,7 @@ using System.ComponentModel.DataAnnotations;
 
 #endregion
 
-namespace PagedListResult.Common.Models.Request.Page
+namespace PagedListResult.DataModels.Models.Request.Page
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Page request settings.</summary>
@@ -52,13 +52,13 @@ namespace PagedListResult.Common.Models.Request.Page
         /// <summary>Gets or sets the data search settings.</summary>
         /// <value>The search.</value>
         /// =================================================================================================
-        public DataSearchDefinition Search { get; set; } = new DataSearchDefinition();
+        public virtual DataSearchDefinition Search { get; set; } = new DataSearchDefinition();
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>Gets or sets the data/result order settings.</summary>
         /// <value>The order.</value>
         /// =================================================================================================
-        public DataOrderDefinition Order { get; set; } = new DataOrderDefinition();
+        public virtual DataOrderDefinition Order { get; set; } = new DataOrderDefinition();
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>

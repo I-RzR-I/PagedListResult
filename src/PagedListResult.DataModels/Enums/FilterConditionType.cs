@@ -1,35 +1,35 @@
 ﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.Entity.PagedListResult.Common
+//  Assembly         : RzR.Shared.Entity.PagedListResult.Common.DataModel
 //  Author           : RzR
-//  Created On       : 2023-10-24 14:56
+//  Created On       : 2024-12-22 13:30
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2023-11-14 00:41
+//  Last Modified On : 2024-12-22 19:46
 // ***********************************************************************
-//  <copyright file="OrderDirection.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
+//  <copyright file="FilterConditionType.cs" company="RzR SOFT & TECH">
+//   Copyright © RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
 //  </summary>
 // ***********************************************************************
 
-namespace PagedListResult.Common.Enums
+namespace PagedListResult.DataModels.Enums
 {
     /// -------------------------------------------------------------------------------------------------
-    /// <summary>Result order direction.</summary>
+    /// <summary>Conditions between filters.</summary>
     /// <remarks>RzR, 14-Nov-23.</remarks>
     /// =================================================================================================
-    public enum OrderDirection
+    public enum FilterConditionType
     {
         /// <summary>
-        ///     Ascendent data order direction
+        ///     AND condition
         /// </summary>
-        Asc,
+        And,
 
         /// <summary>
-        ///     Descendent data order direction
+        ///     OR condition
         /// </summary>
-        Desc
+        Or
     }
 }

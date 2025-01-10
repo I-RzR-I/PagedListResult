@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.Entity.PagedListResult.Common
+//  Assembly         : RzR.Shared.Entity.PagedListResult.Common.DataModel
 //  Author           : RzR
-//  Created On       : 2023-11-05 17:20
+//  Created On       : 2024-12-22 13:30
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2023-11-13 16:32
+//  Last Modified On : 2024-12-22 19:46
 // ***********************************************************************
-//  <copyright file="DataFilterValue.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
+//  <copyright file="DataFilterValue.cs" company="RzR SOFT & TECH">
+//   Copyright © RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
@@ -16,17 +16,17 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Enums;
+using PagedListResult.DataModels.Enums;
+using PagedListResult.DataModels.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
+// ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable ClassWithVirtualMembersNeverInherited.Global
 
 #endregion
 
-namespace PagedListResult.Common.Models.Request
+namespace PagedListResult.DataModels.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Data filter value.</summary>
@@ -35,10 +35,10 @@ namespace PagedListResult.Common.Models.Request
     /// =================================================================================================
     public class DataFilterValue : IValidatableObject
     {
-        ///-------------------------------------------------------------------------------------------------
+        /// -------------------------------------------------------------------------------------------------
         /// <summary>Gets or sets the condition.</summary>
         /// <value>The condition. Default value: Equals</value>
-        ///=================================================================================================
+        /// =================================================================================================
         [Required]
         public virtual FilterType Condition { get; set; } = FilterType.Equals;
 
@@ -75,8 +75,7 @@ namespace PagedListResult.Common.Models.Request
 
             if (Condition == FilterType.Between && CompareValue.IsNull())
                 yield return new ValidationResult(
-                    $"On filter type: {Condition}, {nameof(CompareValue)} must be not null",
-                    new[] { nameof(CompareValue) });
+                    $"On filter type: {Condition}, {nameof(CompareValue)} must be not null", new[] { nameof(CompareValue) });
 
             if (new List<FilterType> { FilterType.IsNull, FilterType.IsNotNull }.Contains(Condition).IsFalse() && Values.IsNullOrEmptyEnumerable())
                 yield return new ValidationResult("Filter value must have a value to initiate filter!");

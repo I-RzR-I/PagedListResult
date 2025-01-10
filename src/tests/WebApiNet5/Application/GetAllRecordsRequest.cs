@@ -14,7 +14,7 @@
 //  </summary>
 // ***********************************************************************
 
-using PagedListResult.Common.Models.Request.Page;
+using PagedListResult.DataModels.Models.Request.Page;
 
 namespace WebApiNet5.Application
 {
