@@ -72,6 +72,6 @@ namespace PagedListResult.DataModels.Models.Request.Page
         /// <summary>List of record/s id/s witch will be injected in top of grid result.</summary>
         /// <value>The predefined records.</value>
         /// =================================================================================================
-        public virtual ICollection<string> PredefinedRecords { get; set; } = new HashSet<string>();
+        public virtual DataPredefinedFilterDefinition PredefinedRecord { get; set; } = new DataPredefinedFilterDefinition();
     }
 }

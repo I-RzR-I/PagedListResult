@@ -296,7 +296,11 @@ namespace PagedListResultNet7Tests
                         FilterApplyOrder = 1
                     }
                 },
-                PredefinedRecords = new List<string> { "5" }
+                //PredefinedRecords = new List<string> { "5" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "5" }
+                }
             };
 
             var query = _dbContext.Posts
@@ -360,7 +364,11 @@ namespace PagedListResultNet7Tests
                         FilterApplyOrder = 1
                     }
                 },
-                PredefinedRecords = new List<string> { "5" }
+                //PredefinedRecords = new List<string> { "5" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "5" }
+                }
             };
 
             var query = _dbContext.Posts
@@ -379,6 +387,78 @@ namespace PagedListResultNet7Tests
             var records = await query.GetPagedWithFiltersAsync(
                 pageRequest,
                 new DefaultPrimaryKeyDefinition { DefaultPrimaryKey = "id" },
+                FilterConditionType.Or);
+
+            Assert.IsNotNull(records);
+            Assert.IsNotNull(records.Response);
+            Assert.IsNotNull(records.ExecutionDetails);
+            Assert.IsTrue(records.ExecutionDetails.ExecutionTimeMs > -1);
+            Assert.AreEqual(1, records.CurrentPage);
+            Assert.AreEqual(1, records.PageCount);
+            Assert.AreEqual(4, records.RowCount);
+            Assert.AreEqual(4, records.Response.Count);
+
+            Assert.AreEqual(5, records.Response.First().Id);
+        }
+
+        [TestMethod]
+        public async Task GetPagedWithFilters_Request_MainFilter_Or_WithDependencies_PredefinedRecord_AndPk_2_Test()
+        {
+            var pageRequest = new PageRequestWithFilters
+            {
+                Page = 1,
+                PageSize = 5,
+                Filters = new List<DataFilter>
+                {
+                    new DataFilter
+                    {
+                        FilterValue = new DataFilterValue { Values = new List<string> { "2" }, PropertyName = "authorId", Condition = FilterType.IsIn },
+                        FilterApplyOrder = 0,
+                        Dependencies = new List<DataFilterDependence>
+                        {
+                            new DataFilterDependence
+                            {
+                                FilterValue = new DataFilterValue { PropertyName = "authorId", Condition = FilterType.Equals, Values = new List<string> { "3" } },
+                                ParentFilterLinkType = FilterConditionType.Or
+                            }
+                        }
+                    },
+                    new DataFilter
+                    {
+                        FilterValue = new DataFilterValue
+                        {
+                            Values = new List<string> { DateTime.Now.StartOfDay().ToString() },
+                            CompareValue = DateTime.Now.EndOfDay().ToString(),
+                            PropertyName = "createdOn",
+                            Condition = FilterType.Between
+                        },
+                        FilterApplyOrder = 1
+                    }
+                },
+                //PredefinedRecords = new List<string> { "5" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "5" },
+                    PredefinedFieldName = "id"
+                }
+            };
+
+            var query = _dbContext.Posts
+                .Include(x => x.Author)
+                .Select(x => new PostDetail
+                {
+                    AuthorId = x.AuthorId,
+                    AuthorName = x.Author.Name,
+                    Contents = x.Contents,
+                    CreatedOn = x.CreatedOn,
+                    Id = x.Id,
+                    Title = x.Title,
+                    ModifiedOn = x.ModifiedOn
+                });
+
+            var records = await query.GetPagedWithFiltersAsync(
+                pageRequest,
+                new DefaultPrimaryKeyDefinition { DefaultPrimaryKey = "code" },
                 FilterConditionType.Or);
 
             Assert.IsNotNull(records);
