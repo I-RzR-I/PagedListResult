@@ -36,9 +36,12 @@ The `request` contains:
   "fields": [
     "string"
   ],
-  "predefinedRecords": [
-    "string"
-  ],
+  "predefinedRecord": {
+    "predefinedFieldName": "string",
+    "predefinedRecords": [
+        "string"
+    ]
+  },
   "filters": [
     {
       "filterValue": {
