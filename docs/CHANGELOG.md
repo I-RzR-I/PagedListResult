@@ -16,3 +16,40 @@
 -> Adjust XML/SOAP in paged result; <br />
 -> Generate new version and update changelog file;<br />
 -> Update readme file;<br />
+
+### **v3.0.0.0**
+#### Breaking changes
+-> Changed definition for `PredefinedRecords`!<br />
+-> Rename from `PredefinedRecords` -> `PredefinedRecord`;<br />
+-> Set `PredefinedRecord` as object with 2 properties: <br />
+    - `PredefinedFieldName` - name of the field/column to identify records <br />
+    - `PredefinedRecords` - identifiers of the predefined records<br />
+
+FROM
+```csharp
+public class PagedRequest
+{
+    // ...
+    public ICollection<string> PredefinedRecords { get; set; } = new     HashSet<string>();
+    // ...
+}
+```
+
+TO
+```csharp
+public class PagedRequest
+{
+    // ...
+    public DataPredefinedFilterDefinition PredefinedRecord { get; set; } = new DataPredefinedFilterDefinition();
+    // ...
+}
+```
+
+```csharp
+public class DataPredefinedFilterDefinition
+{
+    public string PredefinedFieldName { get; set; }
+    
+    public ICollection<string> PredefinedRecords { get; set; } = new     HashSet<string>();
+}
+```

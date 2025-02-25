@@ -296,7 +296,11 @@ namespace PagedListResultNet6Tests
                         FilterApplyOrder = 1
                     }
                 },
-                PredefinedRecords = new List<string> { "5" }
+                //PredefinedRecords = new List<string> { "5" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "5" }
+                }
             };
 
             var query = _dbContext.Posts
@@ -360,7 +364,11 @@ namespace PagedListResultNet6Tests
                         FilterApplyOrder = 1
                     }
                 },
-                PredefinedRecords = new List<string> { "5" }
+                //PredefinedRecords = new List<string> { "5" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "5" }
+                }
             };
 
             var query = _dbContext.Posts

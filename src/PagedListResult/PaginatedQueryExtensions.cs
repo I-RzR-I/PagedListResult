@@ -86,7 +86,7 @@ namespace PagedListResult
 
             if (request.Order.IsNotNull())
             {
-                if (!request.Order.OrderByProperty.IsNullOrEmpty())
+                if (request.Order.OrderByProperty.IsPresent())
                 {
                     query = query.OrderByWithDirection(request.Order.OrderByProperty, request.Order.OrderDirection,
                         null, queryType, request.Order.OrderByDefaultProperty);
@@ -97,7 +97,7 @@ namespace PagedListResult
                     if(defaultOrderProperty.IsSuccess.IsFalse())
                         ThrowHelper.Exception(defaultOrderProperty.GetFirstMessage());
 
-                    if (defaultOrderProperty.Response != null)
+                    if (defaultOrderProperty.Response.IsNotNull())
                         query = query.OrderByWithDirectionByDefaultProperty(request.Order.OrderDirection, null, queryType);
                 }
                 else
@@ -117,24 +117,21 @@ namespace PagedListResult
              */
             if (skip.IsLessOrEqualZero())
             {
-                if (defaultPrimaryKey.IsNotNull())
+                if (defaultPrimaryKey.IsNotNull() && request.PredefinedRecord.IsNotNull())
                 {
-                    var defaultKeys = query.GetDefaultPrimaryKeyProp(defaultPrimaryKey);
-                    var hasIds = request.PredefinedRecords.IsNotNull()
-                                 && request.PredefinedRecords.Any()
-                                 && request.PredefinedRecords.All(x => !string.IsNullOrEmpty(x));
-                    var idCount = hasIds.IsTrue() ? request.PredefinedRecords?.Count ?? 0 : 0;
+                    var prePredefinedInfo = PredefinedRecordsHelper.BuildPredefinedFilter(query, defaultPrimaryKey, request.PredefinedRecord);
+                    
                     var res = new List<TSource>();
-                    if (hasIds.IsTrue())
+                    if (prePredefinedInfo.HasIds.IsTrue())
                     {
-                        var topXRecords = query.GetInTopPredefinedRecords(request.PredefinedRecords, defaultKeys)
+                        var topXRecords = query.GetInTopPredefinedRecords(prePredefinedInfo.PredefinedFieldIds, prePredefinedInfo.PredefinedFieldNames)
                             .ToList();
                         res.AddRange(topXRecords);
 
                         var mainRecords = query
-                            .GetNotInTopPredefinedRecords(request.PredefinedRecords, defaultKeys)
+                            .GetNotInTopPredefinedRecords(prePredefinedInfo.PredefinedFieldIds, prePredefinedInfo.PredefinedFieldNames)
                             .Skip(skip)
-                            .Take(request.PageSize - idCount)
+                            .Take(request.PageSize - prePredefinedInfo.IdsCount)
                             .ToList();
 
                         res.AddRange(mainRecords);
@@ -304,7 +301,7 @@ namespace PagedListResult
 
             if (request.Order.IsNotNull())
             {
-                if (request.Order.OrderByProperty.IsNullOrEmpty().IsFalse())
+                if (request.Order.OrderByProperty.IsPresent())
                 {
                     query = query.OrderByWithDirection(request.Order.OrderByProperty, request.Order.OrderDirection, null, queryType, request.Order.OrderByDefaultProperty);
                 }
@@ -342,23 +339,19 @@ namespace PagedListResult
              */
             if (skip.IsLessOrEqualZero())
             {
-                var defaultKeys = query.GetDefaultPrimaryKeyProp(defaultPrimaryKey);
+                var prePredefinedInfo = PredefinedRecordsHelper.BuildPredefinedFilter(query, defaultPrimaryKey, request.PredefinedRecord);
 
-                var hasIds = request.PredefinedRecords.IsNotNull()
-                             && request.PredefinedRecords.Any()
-                             && request.PredefinedRecords.All(x => !string.IsNullOrEmpty(x));
-                var idCount = hasIds.Equals(true) ? request.PredefinedRecords?.Count ?? 0 : 0;
                 var res = new List<TSource>();
-                if (hasIds)
+                if (prePredefinedInfo.HasIds)
                 {
-                    var topXRecords = await EnumerableInvoker.Invoke(query.GetInTopPredefinedRecords(request.PredefinedRecords, defaultKeys))
+                    var topXRecords = await EnumerableInvoker.Invoke(query.GetInTopPredefinedRecords(prePredefinedInfo.PredefinedFieldIds, prePredefinedInfo.PredefinedFieldNames))
                         .ToListAsync(cancellationToken);
                     res.AddRange(topXRecords);
 
                     var mainRecords = await query
-                        .GetNotInTopPredefinedRecords(request.PredefinedRecords, defaultKeys)
+                        .GetNotInTopPredefinedRecords(prePredefinedInfo.PredefinedFieldIds, prePredefinedInfo.PredefinedFieldNames)
                         .Skip(skip)
-                        .Take(request.PageSize - idCount)
+                        .Take(request.PageSize - prePredefinedInfo.IdsCount)
                         .ToListAsync(cancellationToken);
 
                     res.AddRange(mainRecords);
@@ -479,35 +472,6 @@ namespace PagedListResult
             resultData.ExecutionDetails.SetExecutionTimeMs(watch.Stop(), DateTime.Now);
 
             return resultData;
-        }
-
-        ///-------------------------------------------------------------------------------------------------
-        /// <summary>
-        ///     An IQueryable&lt;TSource&gt; extension method that gets default primary key property.
-        /// </summary>
-        /// <remarks>RzR, 10-Nov-23.</remarks>
-        /// <typeparam name="TSource">Type of the source.</typeparam>
-        /// <param name="query">The query to act on.</param>
-        /// <param name="defaultPrimaryKey">(Optional) The default primary key.</param>
-        /// <returns>The default primary key property.</returns>
-        ///=================================================================================================
-        private static ICollection<string> GetDefaultPrimaryKeyProp<TSource>(
-            this IQueryable<TSource> query,
-            DefaultPrimaryKeyDefinition defaultPrimaryKey = null) where TSource : class
-        {
-            if (defaultPrimaryKey.IsNull())
-                return null;
-
-            if (!defaultPrimaryKey!.DefaultPrimaryKey.IsNullOrEmpty())
-                return new[] { defaultPrimaryKey.DefaultPrimaryKey };
-
-            if (defaultPrimaryKey.FindByEntity.IsTrue())
-                return query.GetPrimaryKeysNameList();
-
-            if (defaultPrimaryKey.FindByAttribute.IsTrue())
-                return null;
-
-            return null;
         }
 
         ///-------------------------------------------------------------------------------------------------

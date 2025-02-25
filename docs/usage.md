@@ -15,7 +15,14 @@ This class have method `JsonResult`, that accept result type of `IPagedResult` o
 |-------------|------------------------------------------|
 | PagedResult | Implementation of how data will be returned to the client, fields like `CurrentPage`, `PageCount`, `PageSize`, `RowCount`, `Response`, and execution time details `ExecutionDetails`. |
 |DefaultPrimaryKeyDefinition|This object represent information about the Model/DTO primary key field which will be used in on search for in top grid records (`PredefinedRecords`).|
-|TPageRequest -> `PagedRequest` | Represent information which is required to cread paged result (`Page`, `PageSize`, `Search`, `Order`, `Fields`, `PredefinedRecords`). |
+|TPageRequest -> `PagedRequest` | Represent information which is required to cread paged result (`Page`, `PageSize`, `Search`, `Order`, `Fields`, `PredefinedRecord`). |
+
+`PredefinedRecord` definition.
+
+| Param       | Description                              |
+|-------------|------------------------------------------|
+|`PredefinedFieldName` | Name of the predefined field which search for. |
+|`PredefinedRecords` | Id/s or key/s of the predefiend records. |
 
 The `GetPaged` have two different implementation:
 - the first is for simple paged result, with no filters: `PagedResult<TSource> GetPaged<TSource>(this IQueryable<TSource> query, int page, int pageSize)`. You must provide current query, current user page, and page size (how many records in grid page);

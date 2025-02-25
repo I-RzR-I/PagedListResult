@@ -429,7 +429,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public async Task GetPagedAsync_Page_1_PageSize_5_PredefinedRecords_Default_PkAttribute_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, PredefinedRecords = new List<string> { "5" } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1,
+                PageSize = 5, 
+                //PredefinedRecords = new List<string> { "5" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "5" }
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)
@@ -461,7 +470,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public async Task GetPagedAsync_Page_1_PageSize_5_PredefinedRecords_Default_PkEntity_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, PredefinedRecords = new List<string> { "4" } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1, 
+                PageSize = 5, 
+                //PredefinedRecords = new List<string> { "4" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "4" }
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)
@@ -493,7 +511,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public async Task GetPagedAsync_Page_1_PageSize_5_PredefinedRecords_Default_PkCustom_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, PredefinedRecords = new List<string> { "3" } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1, 
+                PageSize = 5, 
+                //PredefinedRecords = new List<string> { "3" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "3" }
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)

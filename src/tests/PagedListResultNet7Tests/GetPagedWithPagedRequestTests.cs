@@ -365,7 +365,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public void GetPaged_Page_1_PageSize_5_Order_Default_Desc_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, Order = new DataOrderDefinition { OrderByDefaultProperty = true, OrderDirection = OrderDirection.Desc } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1,
+                PageSize = 5, 
+                Order = new DataOrderDefinition
+                {
+                    OrderByDefaultProperty = true, 
+                    OrderDirection = OrderDirection.Desc
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)
@@ -396,7 +405,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public void GetPaged_Page_1_PageSize_5_Order_ByProp_Desc_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, Order = new DataOrderDefinition { OrderByProperty = "id", OrderDirection = OrderDirection.Desc } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1, 
+                PageSize = 5, 
+                Order = new DataOrderDefinition
+                {
+                    OrderByProperty = "id", 
+                    OrderDirection = OrderDirection.Desc
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)
@@ -428,7 +446,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public void GetPaged_Page_1_PageSize_5_PredefinedRecords_Default_PkAttribute_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, PredefinedRecords = new List<string> { "5" } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1, 
+                PageSize = 5,
+                //PredefinedRecords = new List<string> { "5" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "5" }
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)
@@ -460,7 +487,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public void GetPaged_Page_1_PageSize_5_PredefinedRecords_Default_PkEntity_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, PredefinedRecords = new List<string> { "4" } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1,
+                PageSize = 5, 
+                //PredefinedRecords = new List<string> { "4" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "4" }
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)
@@ -492,7 +528,16 @@ namespace PagedListResultNet7Tests
         [TestMethod]
         public void GetPaged_Page_1_PageSize_5_PredefinedRecords_Default_PkCustom_Test()
         {
-            var pageRequest = new PagedRequest { Page = 1, PageSize = 5, PredefinedRecords = new List<string> { "3" } };
+            var pageRequest = new PagedRequest
+            {
+                Page = 1,
+                PageSize = 5, 
+                //PredefinedRecords = new List<string> { "3" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "3" }
+                }
+            };
 
             var query = _dbContext.Posts
                 .Include(x => x.Author)
@@ -507,6 +552,48 @@ namespace PagedListResultNet7Tests
                 });
 
             var records = query.GetPaged(pageRequest, new DefaultPrimaryKeyDefinition { DefaultPrimaryKey = "id" });
+
+            Assert.IsNotNull(records);
+            Assert.IsNotNull(records.Response);
+            Assert.IsNotNull(records.ExecutionDetails);
+            Assert.IsTrue(records.ExecutionDetails.ExecutionTimeMs.IsGreaterThanOrEqualZero());
+            Assert.AreEqual(1, records.CurrentPage);
+            Assert.AreEqual(2, records.PageCount);
+            Assert.AreEqual(6, records.RowCount);
+            Assert.AreEqual(5, records.Response.Count);
+
+            Assert.AreEqual(3, records.Response.FirstOrDefault()!.Id);
+            Assert.AreEqual(1, records.Response[1].Id);
+        }
+
+        [TestMethod]
+        public void GetPaged_Page_1_PageSize_5_PredefinedRecords_Default_PkCustom_2_Test()
+        {
+            var pageRequest = new PagedRequest
+            {
+                Page = 1,
+                PageSize = 5, 
+                //PredefinedRecords = new List<string> { "3" }
+                PredefinedRecord = new DataPredefinedFilterDefinition()
+                {
+                    PredefinedRecords = new List<string> { "3" },
+                    PredefinedFieldName = "id"
+                }
+            };
+
+            var query = _dbContext.Posts
+                .Include(x => x.Author)
+                .Select(x => new PostDetail
+                {
+                    AuthorId = x.AuthorId,
+                    AuthorName = x.Author.Name,
+                    Contents = x.Contents,
+                    CreatedOn = x.CreatedOn,
+                    Id = x.Id,
+                    Title = x.Title
+                });
+
+            var records = query.GetPaged(pageRequest, new DefaultPrimaryKeyDefinition { DefaultPrimaryKey = "code" });
 
             Assert.IsNotNull(records);
             Assert.IsNotNull(records.Response);
