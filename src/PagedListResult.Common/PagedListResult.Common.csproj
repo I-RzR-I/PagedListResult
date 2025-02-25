@@ -23,6 +23,38 @@
     <Language>en-US</Language>
     <RepositoryType>GIT</RepositoryType>
     <PackageIconUrl />
+    <PackageReleaseNotes>
+      **v3.0.0.0**
+      #### Breaking changes
+      FROM
+      ```csharp
+      public class PagedRequest
+      {
+      // ...
+      public ICollection&lt;string&gt; PredefinedRecords { get; set; } = new     HashSet&lt;string&gt;();
+      // ...
+      }
+      ```
+
+      TO
+      ```csharp
+      public class PagedRequest
+      {
+      // ...
+      public DataPredefinedFilterDefinition PredefinedRecord { get; set; } = new DataPredefinedFilterDefinition();
+      // ...
+      }
+      ```
+
+      ```csharp
+      public class DataPredefinedFilterDefinition
+      {
+      public string PredefinedFieldName { get; set; }
+
+      public ICollection&lt;string&gt; PredefinedRecords { get; set; } = new     HashSet&lt;string&gt;();
+      }
+      ```
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
