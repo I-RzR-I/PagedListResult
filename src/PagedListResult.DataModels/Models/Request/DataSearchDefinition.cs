@@ -41,14 +41,27 @@ namespace PagedListResult.DataModels.Models.Request
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
-        ///     If Search contains a value and SearchInAllTextFields is specified with the value true
-        ///     then the search will be done in all text properties, otherwise it will be done in the
-        ///     specified properties.
+        ///     If `SearchInAllTextFields` is true, then the general `Search` value will be applied <br />
+        ///     to all text/string existing fields from the data model, <br />
+        ///     otherwise the  `Search` value will be to the specified fields from the `CustomSearchTextProperties`.
         /// </summary>
         /// <value>True if search in all text fields, false if not.</value>
         /// =================================================================================================
         [DefaultValue(true)]
         public virtual bool SearchInAllTextFields { get; set; } = true;
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     If `SearchInAllFields` is true, then the `Search` value will be applied <br />
+        ///     to all fields from the existing data model, otherwise the `Search` value will be to <br />
+        ///     the specified fields from the `CustomSearchTextProperties`.
+        /// </summary>
+        /// <value>
+        ///     True if search in all fields, false if not.
+        /// </value>
+        /// =================================================================================================
+        [DefaultValue(false)]
+        public virtual bool SearchInAllFields { get; set; } = false;
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>

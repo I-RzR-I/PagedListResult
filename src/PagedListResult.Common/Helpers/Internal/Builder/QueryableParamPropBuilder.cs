@@ -20,6 +20,7 @@ using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Extensions.Result;
 using DomainCommonExtensions.DataTypeExtensions;
+using DomainCommonExtensions.Utilities.Ensure;
 using PagedListResult.Common.Models.Internal;
 using System;
 using System.Linq.Expressions;

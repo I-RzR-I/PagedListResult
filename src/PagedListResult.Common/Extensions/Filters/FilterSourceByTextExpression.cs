@@ -18,8 +18,8 @@
 
 using DomainCommonExtensions.ArraysExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
+using DomainCommonExtensions.Utilities.Ensure;
 using PagedListResult.Common.Extensions.Internal;
-using PagedListResult.Common.Helpers.Internal.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +41,13 @@ namespace PagedListResult.Common.Extensions.Filters
         /// <param name="query">Required. Current query.</param>
         /// <param name="searchInAllTextFields">
         ///     Required. If set to <see langword="true" />, then search text will be applied in all
-        ///     searchProperties; otherwise, only in specified.
+        ///     properties(string/text) defined in the data model; otherwise, only in specified. <br />
+        ///     The text will be searched only in the string/text fields or only in specified fields.
+        /// </param>
+        /// <param name="searchInAllFields">
+        ///     Required. If set to <see langword="true" />, then search text will be applied in all
+        ///     properties defined in the data model; otherwise, only in specified. <br />
+        ///     The text will be searched in data model fields or only in specified fields.
         /// </param>
         /// <param name="searchText">Required. Search text.</param>
         /// <param name="searchProperties">(Optional) Required. Properties to search.</param>
@@ -50,22 +56,31 @@ namespace PagedListResult.Common.Extensions.Filters
         /// =================================================================================================
         public static IQueryable<TSource> FilterSourceByText<TSource>(
             this IQueryable<TSource> query,
-            bool searchInAllTextFields, string searchText,
-            ICollection<string> searchProperties = null, Type queryType = null) where TSource : class
+            bool searchInAllTextFields, 
+            bool searchInAllFields, 
+            string searchText,
+            ICollection<string> searchProperties = null, 
+            Type queryType = null) where TSource : class
         {
             query.ThrowIfNull("Current query can not be null!");
 
             if (searchText.IsNullOrEmpty())
                 return query;
-
-            if (searchInAllTextFields.IsFalse() && searchProperties.IsNullOrEmptyEnumerable())
-                ThrowHelper.Exception($"{nameof(searchInAllTextFields)} is set to false, {nameof(searchProperties)} must have a values!");
-
+            
             queryType ??= typeof(TSource);
 
-            query = searchInAllTextFields.IsTrue()
-                ? query.FilterByText(searchText, queryType)
-                : query.FilterByText(searchText, searchProperties, queryType);
+            if ((searchInAllFields.IsTrue() && searchInAllTextFields.IsTrue()) || searchInAllFields.IsTrue())
+            {
+                query = searchProperties.IsNullOrEmptyEnumerable()
+                    ? query.FilterByTextAllTypes(searchText, queryType)
+                    : query.FilterByTextAllTypes(searchText, searchProperties, queryType);
+            }
+            else
+            {
+                query = searchProperties.IsNullOrEmptyEnumerable()
+                    ? query.FilterByText(searchText, queryType)
+                    : query.FilterByText(searchText, searchProperties, queryType);
+            }
 
             return query;
         }
