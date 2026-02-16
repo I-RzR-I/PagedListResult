@@ -29,7 +29,7 @@ using System.Resources;
 
 [assembly: AssemblyCompany("RzR ®")]
 [assembly: AssemblyProduct("PagedListResult")]
-[assembly: AssemblyCopyright("Copyright © 2022-2025 RzR All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2022-2026 RzR All rights reserved.")]
 [assembly: AssemblyTrademark("® RzR™")]
 [assembly: AssemblyDescription("`PagedListResult` is a library designed to offer possibilities to get/return data from a dataset in small parts with multiple filter possibilities.")]
 
