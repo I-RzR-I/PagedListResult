@@ -56,17 +56,58 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                 type ??= typeof(TSource);
                 var props = type.GetProperties().Where(x => x.PropertyType.IsStringPropType()).ToList();
 
-                if (props.Any().IsFalse()) return Result<Expression<Func<TSource, bool>>>.Success();
+                if (props.Any().IsFalse()) 
+                    return Result<Expression<Func<TSource, bool>>>.Success();
 
                 var searchPredicate = CreateSearchPredicateForSpecificProperties<TSource>(text, props, type);
                 if (searchPredicate.IsSuccess.IsFalse())
                     ThrowHelper.Exception(searchPredicate.GetFirstMessage());
 
-                return Result<Expression<Func<TSource, bool>>>.Success(searchPredicate.Response);
+                return Result<Expression<Func<TSource, bool>>>
+                    .Success(searchPredicate.Response);
             }
             catch (Exception e)
             {
-                return Result<Expression<Func<TSource, bool>>>.Failure().WithError(e);
+                return Result<Expression<Func<TSource, bool>>>
+                    .Failure()
+                    .WithError(e);
+            }
+        }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Creates text filter expression all types.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source.</typeparam>
+        /// <param name="text">Search text.</param>
+        /// <param name="type">(Optional) Type.</param>
+        /// <returns>
+        ///     The new text filter expression all types.
+        /// </returns>
+        /// =================================================================================================
+        internal static IResult<Expression<Func<TSource, bool>>> CreateTextFilterExpressionAllTypes<TSource>(
+            string text, Type type = null)
+        {
+            try
+            {
+                type ??= typeof(TSource);
+                var props = type.GetProperties().ToList();
+
+                if (props.Any().IsFalse()) 
+                    return Result<Expression<Func<TSource, bool>>>.Success();
+
+                var searchPredicate = CreateSearchPredicateForSpecificAllTypeProperties<TSource>(text, props, type);
+                if (searchPredicate.IsSuccess.IsFalse())
+                    ThrowHelper.Exception(searchPredicate.GetFirstMessage());
+
+                return Result<Expression<Func<TSource, bool>>>
+                    .Success(searchPredicate.Response);
+            }
+            catch (Exception e)
+            {
+                return Result<Expression<Func<TSource, bool>>>
+                    .Failure()
+                    .WithError(e);
             }
         }
 
@@ -95,11 +136,53 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                 if (searchPredicate.IsSuccess.IsFalse())
                     ThrowHelper.Exception(searchPredicate.GetFirstMessage());
 
-                return Result<Expression<Func<TSource, bool>>>.Success(searchPredicate.Response);
+                return Result<Expression<Func<TSource, bool>>>
+                    .Success(searchPredicate.Response);
             }
             catch (Exception e)
             {
-                return Result<Expression<Func<TSource, bool>>>.Failure().WithError(e);
+                return Result<Expression<Func<TSource, bool>>>
+                    .Failure()
+                    .WithError(e);
+            }
+        }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Creates text filter expression all types.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source.</typeparam>
+        /// <param name="text">Search text.</param>
+        /// <param name="properties">Custom search properties list.</param>
+        /// <param name="type">(Optional) Type.</param>
+        /// <returns>
+        ///     The new text filter expression all types.
+        /// </returns>
+        /// =================================================================================================
+        internal static IResult<Expression<Func<TSource, bool>>> CreateTextFilterExpressionAllTypes<TSource>(
+            string text, ICollection<string> properties, Type type = null)
+        {
+            try
+            {
+                type ??= typeof(TSource);
+                properties = properties.Select(x => x.FirstCharToUpper()).ToList();
+                var props = type.GetProperties().Where(x => properties.Contains(x.Name)).ToList();
+
+                if (props.IsNullOrEmptyEnumerable())
+                    return Result<Expression<Func<TSource, bool>>>.Success();
+
+                var searchPredicate = CreateSearchPredicateForSpecificAllTypeProperties<TSource>(text, props, type);
+                if (searchPredicate.IsSuccess.IsFalse())
+                    ThrowHelper.Exception(searchPredicate.GetFirstMessage());
+
+                return Result<Expression<Func<TSource, bool>>>
+                    .Success(searchPredicate.Response);
+            }
+            catch (Exception e)
+            {
+                return Result<Expression<Func<TSource, bool>>>
+                    .Failure()
+                    .WithError(e);
             }
         }
 
@@ -149,11 +232,88 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                             parameter);
                 }
 
+                return Result<Expression<Func<TSource, bool>>>
+                    .Success(predicate);
+            }
+            catch (Exception e)
+            {
+                return Result<Expression<Func<TSource, bool>>>
+                    .Failure()
+                    .WithError(e);
+            }
+        }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Creates search predicate for specific all type properties.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source.</typeparam>
+        /// <param name="text">Search text.</param>
+        /// <param name="props">Custom search properties list.</param>
+        /// <param name="type">Type.</param>
+        /// <returns>
+        ///     The new search predicate for specific all type properties.
+        /// </returns>
+        /// =================================================================================================
+        private static IResult<Expression<Func<TSource, bool>>> CreateSearchPredicateForSpecificAllTypeProperties<TSource>(
+            string text, IEnumerable<PropertyInfo> props, Type type)
+        {
+            try
+            {
+                Expression<Func<TSource, bool>> predicate = null;
+                var parameter = Expression.Parameter(type, "x");
+
+                var toLowerMethod = ExpressionMethodHelper.GetStringToLowerMethod();
+                if (toLowerMethod.IsSuccess.IsFalse())
+                    ThrowHelper.Exception(toLowerMethod.GetFirstMessage());
+
+                var containsMethod = ExpressionMethodHelper.GetStringContainsMethod();
+                if (containsMethod.IsSuccess.IsFalse())
+                    ThrowHelper.Exception(containsMethod.GetFirstMessage());
+
+                var toStringMethod = ExpressionMethodHelper.GetToStringMethod();
+                if (toStringMethod.IsSuccess.IsFalse())
+                    ThrowHelper.Exception(toStringMethod.GetFirstMessage());
+
+                foreach (var prop in props)
+                {
+                    var property = Expression.Property(parameter, prop.Name);
+
+                    Expression condition;
+
+                    var canBeNull = !property.Type.IsValueType || Nullable.GetUnderlyingType(property.Type).IsNotNull();
+
+                    var leftContains = ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
+                    var rightContains = Expression.Call(
+                        Expression.Call(Expression.Constant(text), toStringMethod.Response), toLowerMethod.Response);
+                    var body = Expression.Call(leftContains, containsMethod.Response, rightContains);
+
+                    if (canBeNull)
+                    {
+                        var notNull = Expression.NotEqual(property, Expression.Constant(null, property.Type));
+                        condition = Expression.AndAlso(notNull, body);
+                    }
+                    else
+                    {
+                        condition = body;
+                    }
+
+                    if (predicate.IsNull())
+                        predicate = Expression.Lambda<Func<TSource, bool>>(condition, parameter);
+                    else
+                    {
+                        var combined = Expression.OrElse(predicate!.Body, condition);
+                        predicate = Expression.Lambda<Func<TSource, bool>>(combined, parameter);
+                    }
+                }
+
                 return Result<Expression<Func<TSource, bool>>>.Success(predicate);
             }
             catch (Exception e)
             {
-                return Result<Expression<Func<TSource, bool>>>.Failure().WithError(e);
+                return Result<Expression<Func<TSource, bool>>>
+                    .Failure()
+                    .WithError(e);
             }
         }
 
@@ -219,11 +379,14 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                     }
                 }
 
-                return Result<Expression<Func<TSource, bool>>>.Success(predicate);
+                return Result<Expression<Func<TSource, bool>>>
+                    .Success(predicate);
             }
             catch (Exception e)
             {
-                return Result<Expression<Func<TSource, bool>>>.Failure().WithError(e);
+                return Result<Expression<Func<TSource, bool>>>
+                    .Failure()
+                    .WithError(e);
             }
         }
     }

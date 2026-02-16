@@ -30,7 +30,7 @@ namespace PagedListResult.Common.Extensions.Internal.Common
     internal static class ObjectExtensions
     {
         ///-------------------------------------------------------------------------------------------------
-        /// <summary>Change object type to non nullable type.</summary>
+        /// <summary>Change object type to non-nullable type.</summary>
         /// <remarks>RzR, 13-Nov-23.</remarks>
         /// <typeparam name="T">.</typeparam>
         /// <param name="value">Object value.</param>
@@ -51,7 +51,7 @@ namespace PagedListResult.Common.Extensions.Internal.Common
         }
 
         ///-------------------------------------------------------------------------------------------------
-        /// <summary>Change object type to non nullable type.</summary>
+        /// <summary>Change object type to non-nullable type.</summary>
         /// <remarks>RzR, 13-Nov-23.</remarks>
         /// <param name="value">Object value.</param>
         /// <param name="conversion">Object type.</param>

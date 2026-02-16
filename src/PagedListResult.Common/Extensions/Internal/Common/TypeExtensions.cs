@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DomainCommonExtensions.DataTypeExtensions;
+using DomainCommonExtensions.Utilities.Ensure;
 
 namespace PagedListResult.Common.Extensions.Internal.Common
 {

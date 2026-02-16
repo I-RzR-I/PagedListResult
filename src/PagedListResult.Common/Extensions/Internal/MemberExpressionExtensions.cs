@@ -17,6 +17,7 @@
 #region U S A G E S
 
 using DomainCommonExtensions.CommonExtensions;
+using DomainCommonExtensions.CommonExtensions.Reflection;
 using System;
 using System.Linq.Expressions;
 

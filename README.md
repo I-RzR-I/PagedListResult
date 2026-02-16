@@ -24,6 +24,7 @@ The `request` contains:
   "search": {
     "search": "string",
     "searchInAllTextFields": true,
+    "searchInAllFields": false,
     "customSearchTextProperties": [
       "string"
     ]

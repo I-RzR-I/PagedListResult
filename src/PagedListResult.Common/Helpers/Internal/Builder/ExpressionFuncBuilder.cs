@@ -20,6 +20,7 @@ using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Extensions.Result;
 using DomainCommonExtensions.CommonExtensions;
+using DomainCommonExtensions.CommonExtensions.Reflection;
 using System;
 using System.Linq.Expressions;
 

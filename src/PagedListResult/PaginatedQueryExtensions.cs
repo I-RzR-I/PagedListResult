@@ -74,8 +74,14 @@ namespace PagedListResult
             watch.StartNew();
 
             var queryType = typeof(TSource);
-            query = query.FilterSourceByText(request.Search.SearchInAllTextFields, request.Search.Search,
-                request.Search.CustomSearchTextProperties, queryType);
+            if (request.Search.IsNotNull())
+            {
+                query = query.FilterSourceByText(
+                    request.Search.SearchInAllTextFields, 
+                    request.Search.SearchInAllFields, 
+                    request.Search.Search,
+                    request.Search.CustomSearchTextProperties, queryType);
+            }
 
             var result = new PagedResult<TSource>
             {
@@ -297,7 +303,14 @@ namespace PagedListResult
             watch.StartNew();
 
             var queryType = typeof(TSource);
-            query = query.FilterSourceByText(request.Search.SearchInAllTextFields, request.Search.Search, request.Search.CustomSearchTextProperties, queryType);
+            if (request.Search.IsNotNull())
+            {
+                query = query.FilterSourceByText(
+                    request.Search.SearchInAllTextFields, 
+                    request.Search.SearchInAllFields, 
+                    request.Search.Search, 
+                    request.Search.CustomSearchTextProperties, queryType);
+            }
 
             if (request.Order.IsNotNull())
             {

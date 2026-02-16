@@ -23,43 +23,13 @@
     <Language>en-US</Language>
     <RepositoryType>GIT</RepositoryType>
     <PackageReleaseNotes>
-      **v3.0.0.0**
-      #### Breaking changes
-      FROM
-      ```csharp
-      public class PagedRequest
-      {
-      // ...
-      public ICollection&lt;string&gt; PredefinedRecords { get; set; } = new     HashSet&lt;string&gt;();
-      // ...
-      }
-      ```
-
-      TO
-      ```csharp
-      public class PagedRequest
-      {
-      // ...
-      public DataPredefinedFilterDefinition PredefinedRecord { get; set; } = new DataPredefinedFilterDefinition();
-      // ...
-      }
-      ```
-
-      ```csharp
-      public class DataPredefinedFilterDefinition
-      {
-      public string PredefinedFieldName { get; set; }
-
-      public ICollection&lt;string&gt; PredefinedRecords { get; set; } = new     HashSet&lt;string&gt;();
-      }
-      ```
     </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="AggregatedGenericResultMessage" Version="1.3.5.4696" />
-    <PackageReference Include="CodeSource" Version="2.0.0" />
+    <PackageReference Include="AggregatedGenericResultMessage" Version="1.4.0.7788" />
+    <PackageReference Include="CodeSource" Version="4.0.2.4672" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
