@@ -83,7 +83,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="MockAsyncEnumerable" Version="1.1.0.0" />
-    <PackageReference Include="AggregatedGenericResultMessage.Web" Version="1.2.0.8001" />
+    <PackageReference Include="AggregatedGenericResultMessage.Web" Version="1.2.1.8615" />
   </ItemGroup>
 
   <ItemGroup>

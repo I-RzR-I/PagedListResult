@@ -1,3 +1,7 @@
+### **v3.1.1.481** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 25-02-2026
+* [897c27d] (RzR) -> Auto commit uncommited files
+* [3f44f36] (RzR) -> Upgrade reference packages version
+
 ### **v3.1.0.6767** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 16-02-2026
 * [a1d829c] (RzR) -> Add general search in all fields `SearchInAllFields`.
 * [ed3b656] (RzR) -> Add new script for version gen.
