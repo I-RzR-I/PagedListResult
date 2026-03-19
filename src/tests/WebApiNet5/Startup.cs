@@ -29,8 +29,19 @@ namespace WebApiNet5
 
             var db = services.BuildServiceProvider().GetRequiredService<AppDbContext>();
             db.AddInitInfo();
-            
+
             services.AddMediatR(typeof(Startup).Assembly);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "_AnyOriginHost",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -48,7 +59,7 @@ namespace WebApiNet5
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiNet5 v1"));
             }
-
+            app.UseCors("_AnyOriginHost");
             app.UseRouting();
 
             app.UseAuthorization();
