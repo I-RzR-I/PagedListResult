@@ -53,12 +53,19 @@ namespace PagedListResult.Helpers
             DataPredefinedFilterDefinition preSelectedFilter = null) where TSource : class
         {
             var keyFieldNames = GetDefaultPrimaryKeyProp(query, defaultPrimaryKey, preSelectedFilter?.PredefinedFieldName);
-            var hasIds = preSelectedFilter!.PredefinedRecords.IsNotNull()
+            var hasIds = preSelectedFilter.IsNotNull() 
+                         && preSelectedFilter!.PredefinedRecords.IsNotNull()
                          && preSelectedFilter.PredefinedRecords.Any()
                          && preSelectedFilter.PredefinedRecords.All(x => !string.IsNullOrEmpty(x));
-            var idCount = hasIds.Equals(true) ? preSelectedFilter.PredefinedRecords?.Count ?? 0 : 0;
+            var idCount = hasIds.Equals(true) ? preSelectedFilter!.PredefinedRecords?.Count ?? 0 : 0;
 
-            return new BuildPredefinedFilterDto { HasIds = hasIds, IdsCount = idCount, PredefinedFieldNames = keyFieldNames, PredefinedFieldIds = preSelectedFilter.PredefinedRecords };
+            return new BuildPredefinedFilterDto()
+            {
+                HasIds = hasIds, 
+                IdsCount = idCount, 
+                PredefinedFieldNames = keyFieldNames, 
+                PredefinedFieldIds = preSelectedFilter.IsNull() ? new List<string>() : preSelectedFilter!.PredefinedRecords
+            };
         }
 
         /// -------------------------------------------------------------------------------------------------
