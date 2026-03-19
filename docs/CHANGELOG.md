@@ -1,3 +1,6 @@
+### **v3.1.2.7586** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 19-03-2026
+* [646d29d] (RzR) -> Fix possible error on predefined record filter.
+
 ### **v3.1.1.481** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 25-02-2026
 * [897c27d] (RzR) -> Auto commit uncommited files
 * [3f44f36] (RzR) -> Upgrade reference packages version
