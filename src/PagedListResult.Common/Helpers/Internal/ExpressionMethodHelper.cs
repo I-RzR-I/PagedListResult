@@ -206,5 +206,37 @@ namespace PagedListResult.Common.Helpers.Internal
                 return Result<MethodCallExpression>.Failure().WithError(e);
             }
         }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Gets lower case property access.
+        /// </summary>
+        /// <param name="propertyAccess">Property/parameter.</param>
+        /// <returns>
+        ///     The lower case property access.
+        /// </returns>
+        /// =================================================================================================
+        internal static IResult<MethodCallExpression> GetLowerCasePropertyAccess(MemberExpression propertyAccess)
+        {
+            try
+            {
+                var toLowerMethod = typeof(string).GetMethod(MethodInfoNamesHelper.ToLowerMethodName, Type.EmptyTypes);
+
+                if (toLowerMethod.IsNotNull())
+                {
+                    return Result<MethodCallExpression>
+                        .Success(Expression.Call(Expression.Call(propertyAccess, toLowerMethod!), toLowerMethod!));
+                }
+
+                MethodInfos.TryGetValue(MethodInfoNamesHelper.ToLowerMethodName, out toLowerMethod);
+
+                return Result<MethodCallExpression>
+                    .Success(Expression.Call(propertyAccess, toLowerMethod!));
+            }
+            catch (Exception e)
+            {
+                return Result<MethodCallExpression>.Failure().WithError(e);
+            }
+        }
     }
 }
