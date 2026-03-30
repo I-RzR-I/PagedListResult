@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PagedListResult.DataModels"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PagedListResultCommonDataModelTests", "tests\PagedListResultCommonDataModelTests\PagedListResultCommonDataModelTests.csproj", "{42485875-0F11-436C-850C-0A447C837B61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiNet8Npgsql", "tests\WebApiNet8Npgsql\WebApiNet8Npgsql.csproj", "{C75E50EE-3924-405D-941D-FB725D943E19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{42485875-0F11-436C-850C-0A447C837B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42485875-0F11-436C-850C-0A447C837B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42485875-0F11-436C-850C-0A447C837B61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75E50EE-3924-405D-941D-FB725D943E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75E50EE-3924-405D-941D-FB725D943E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75E50EE-3924-405D-941D-FB725D943E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75E50EE-3924-405D-941D-FB725D943E19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,15 +92,16 @@ Global
 		{1CA533AD-4987-42B9-83E5-05E2F9FB0788} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
 		{04A38455-3E86-4D17-BC3E-7F399D965374} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
 		{42485875-0F11-436C-850C-0A447C837B61} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
+		{C75E50EE-3924-405D-941D-FB725D943E19} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4B5BD8B8-58AD-47B4-B85A-E7242D47B9FE}
-		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
-		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_UpdateFileVersion = True
-		BuildVersion_StartDate = 2023/4/30
-		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
-		BuildVersion_ConfigurationName = Release
 		BuildVersion_UseUniversalClock = True
+		BuildVersion_ConfigurationName = Release
+		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
+		BuildVersion_StartDate = 2023/4/30
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
+		SolutionGuid = {4B5BD8B8-58AD-47B4-B85A-E7242D47B9FE}
 	EndGlobalSection
 EndGlobal
