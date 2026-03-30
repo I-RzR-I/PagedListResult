@@ -1,3 +1,8 @@
+### **v3.1.3.4848** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 30-03-2026
+* [5ca0ecd] (RzR) -> Auto commit uncommited files
+* [97d65c9] (RzR) -> Add new .net8 api for test
+* [7a8c4c2] (RzR) -> Exclude the redundant `.ToString()` call on `Contains` and `DoesNotContains` filter.
+
 ### **v3.1.2.7586** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 19-03-2026
 * [646d29d] (RzR) -> Fix possible error on predefined record filter.
 

@@ -109,334 +109,371 @@ namespace PagedListResult.Common.Extensions.Internal
             switch (filter)
             {
                 case FilterType.GreaterThan:
-                    if (property.Type.IsNullablePropType())
                     {
-                        body = GetExpressionBody(property, filterObjectValue, filter);
-                        if (body.IsNotNull())
-                            return body;
+                        if (property.Type.IsNullablePropType())
+                        {
+                            body = GetExpressionBody(property, filterObjectValue, filter);
+                            if (body.IsNotNull())
+                                return body;
 
-                        body = Expression.GreaterThan(property, Expression.Constant(filterObjectValue));
-                    }
-                    else
-                    {
-                        body = Expression.GreaterThan(property, Expression.Constant(filterObjectValue));
-                    }
+                            body = Expression.GreaterThan(property, Expression.Constant(filterObjectValue));
+                        }
+                        else
+                        {
+                            body = Expression.GreaterThan(property, Expression.Constant(filterObjectValue));
+                        }
 
-                    if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.GreaterThanOrEquals:
-                    if (property.Type.IsNullablePropType())
                     {
-                        body = GetExpressionBody(property, filterObjectValue, filter);
-                        if (body.IsNotNull())
-                            return body;
+                        if (property.Type.IsNullablePropType())
+                        {
+                            body = GetExpressionBody(property, filterObjectValue, filter);
+                            if (body.IsNotNull())
+                                return body;
 
-                        body = Expression.GreaterThanOrEqual(property, Expression.Constant(filterObjectValue));
-                    }
-                    else
-                    {
-                        body = Expression.GreaterThanOrEqual(property, Expression.Constant(filterObjectValue));
-                    }
+                            body = Expression.GreaterThanOrEqual(property, Expression.Constant(filterObjectValue));
+                        }
+                        else
+                        {
+                            body = Expression.GreaterThanOrEqual(property, Expression.Constant(filterObjectValue));
+                        }
 
-                    if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.LessThan:
-                    if (property.Type.IsNullablePropType())
                     {
-                        body = GetExpressionBody(property, filterObjectValue, filter);
-                        if (body.IsNotNull())
-                            return body;
+                        if (property.Type.IsNullablePropType())
+                        {
+                            body = GetExpressionBody(property, filterObjectValue, filter);
+                            if (body.IsNotNull())
+                                return body;
 
-                        body = Expression.LessThan(property, Expression.Constant(filterObjectValue));
-                    }
-                    else
-                    {
-                        body = Expression.LessThan(property, Expression.Constant(filterObjectValue));
-                    }
+                            body = Expression.LessThan(property, Expression.Constant(filterObjectValue));
+                        }
+                        else
+                        {
+                            body = Expression.LessThan(property, Expression.Constant(filterObjectValue));
+                        }
 
-                    if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.LessThanOrEquals:
-                    if (property.Type.IsNullablePropType())
                     {
-                        body = GetExpressionBody(property, filterObjectValue, filter);
-                        if (body.IsNotNull())
-                            return body;
+                        if (property.Type.IsNullablePropType())
+                        {
+                            body = GetExpressionBody(property, filterObjectValue, filter);
+                            if (body.IsNotNull())
+                                return body;
 
-                        body = Expression.LessThanOrEqual(property, Expression.Constant(filterObjectValue));
-                    }
-                    else
-                    {
-                        body = Expression.LessThanOrEqual(property, Expression.Constant(filterObjectValue));
-                    }
+                            body = Expression.LessThanOrEqual(property, Expression.Constant(filterObjectValue));
+                        }
+                        else
+                        {
+                            body = Expression.LessThanOrEqual(property, Expression.Constant(filterObjectValue));
+                        }
 
-                    if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        if (!filter.AllowNullInResult() && (property.Type.IsNullablePropType() || property.Type.IsStringPropType()))
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
-
                 case FilterType.Between:
-                    parameterExpression.ThrowIfArgNull(nameof(parameterExpression));
-                    if (compareObjectValues.IsNullOrEmptyEnumerable())
-                        ThrowHelper.ArgumentException("Compare value must be not null!");
+                    {
+                        parameterExpression.ThrowIfArgNull(nameof(parameterExpression));
+                        if (compareObjectValues.IsNullOrEmptyEnumerable())
+                            ThrowHelper.ArgumentException("Compare value must be not null!");
 
-                    var filterCompareObjectValue = compareObjectValues?[0];
+                        var filterCompareObjectValue = compareObjectValues?[0];
 
-                    var leftCompareObj = property.Type.IsNullablePropType()
-                        ? filterObjectValue.ChangeToNotNullType(property.Type)
-                        : Convert.ChangeType(filterObjectValue, property.Type);
-                    var rightCompareObj = property.Type.IsNullablePropType()
-                        ? filterCompareObjectValue.ChangeToNotNullType(property.Type)
-                        : Convert.ChangeType(filterCompareObjectValue, property.Type);
+                        var leftCompareObj = property.Type.IsNullablePropType()
+                            ? filterObjectValue.ChangeToNotNullType(property.Type)
+                            : Convert.ChangeType(filterObjectValue, property.Type);
+                        var rightCompareObj = property.Type.IsNullablePropType()
+                            ? filterCompareObjectValue.ChangeToNotNullType(property.Type)
+                            : Convert.ChangeType(filterCompareObjectValue, property.Type);
 
-                    var lBody = GetExpressionBody(property, leftCompareObj, FilterType.GreaterThanOrEquals);
-                    var rBody = GetExpressionBody(property, rightCompareObj, FilterType.LessThanOrEquals);
+                        var lBody = GetExpressionBody(property, leftCompareObj, FilterType.GreaterThanOrEquals);
+                        var rBody = GetExpressionBody(property, rightCompareObj, FilterType.LessThanOrEquals);
 
-                    body = Expression.And(Expression.Lambda<Func<TSource, bool>>(lBody, parameterExpression).Body,
-                        Expression.Lambda<Func<TSource, bool>>(rBody, parameterExpression).Body);
-                    break;
+                        body = Expression.And(Expression.Lambda<Func<TSource, bool>>(lBody, parameterExpression).Body,
+                            Expression.Lambda<Func<TSource, bool>>(rBody, parameterExpression).Body);
+                        break;
+                    }
                 case FilterType.Equals:
-                    if (property.Type.IsNullablePropType() && property.IsNotNull())
                     {
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), expressionFilterValue?.Body);
-                    }
-                    else
-                    {
-                        var constantExp = Expression.Constant(compareObjValue);
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), constantExp);
-                    }
+                        if (property.Type.IsNullablePropType() && property.IsNotNull())
+                        {
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), expressionFilterValue?.Body);
+                        }
+                        else
+                        {
+                            var constantExp = Expression.Constant(compareObjValue);
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), constantExp);
+                        }
 
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.NotEquals:
-                    if (property.Type.IsNullablePropType() && property.IsNotNull())
                     {
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), expressionFilterValue?.Body);
-                    }
-                    else
-                    {
-                        var constantExp = Expression.Constant(compareObjValue);
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), constantExp);
-                    }
+                        if (property.Type.IsNullablePropType() && property.IsNotNull())
+                        {
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), expressionFilterValue?.Body);
+                        }
+                        else
+                        {
+                            var constantExp = Expression.Constant(compareObjValue);
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), constantExp);
+                        }
 
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
-                    }
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
 
-                    body = Expression.Not(body);
-                    break;
+                        body = Expression.Not(body);
+                        break;
+                    }
                 case FilterType.StartsWith:
-                    if (property.Type.IsNullablePropType() && property.IsNotNull())
                     {
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), expressionFilterValue?.Body);
-                    }
-                    else
-                    {
-                        var constantExp = Expression.Constant(compareObjValue);
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), constantExp);
-                    }
+                        if (property.Type.IsNullablePropType() && property.IsNotNull())
+                        {
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), expressionFilterValue?.Body);
+                        }
+                        else
+                        {
+                            var constantExp = Expression.Constant(compareObjValue);
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), constantExp);
+                        }
 
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.DoesNotStartWith:
-                    if (property.Type.IsNullablePropType() && property.IsNotNull())
                     {
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), expressionFilterValue?.Body);
-                    }
-                    else
-                    {
-                        var constantExp = Expression.Constant(compareObjValue);
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), constantExp);
-                    }
+                        if (property.Type.IsNullablePropType() && property.IsNotNull())
+                        {
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), expressionFilterValue?.Body);
+                        }
+                        else
+                        {
+                            var constantExp = Expression.Constant(compareObjValue);
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), constantExp);
+                        }
 
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
-                    }
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
 
-                    body = Expression.Not(body);
-                    break;
+                        body = Expression.Not(body);
+                        break;
+                    }
                 case FilterType.EndsWith:
-                    if (property.Type.IsNullablePropType() && property.IsNotNull())
                     {
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), expressionFilterValue?.Body);
-                    }
-                    else
-                    {
-                        var constantExp = Expression.Constant(compareObjValue);
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), constantExp);
-                    }
+                        if (property.Type.IsNullablePropType() && property.IsNotNull())
+                        {
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), expressionFilterValue?.Body);
+                        }
+                        else
+                        {
+                            var constantExp = Expression.Constant(compareObjValue);
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), constantExp);
+                        }
 
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.DoesNotEndsWith:
-                    if (property.Type.IsNullablePropType() && property.IsNotNull())
                     {
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), expressionFilterValue?.Body);
-                    }
-                    else
-                    {
-                        var constantExp = Expression.Constant(compareObjValue);
-                        body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), constantExp);
-                    }
+                        if (property.Type.IsNullablePropType() && property.IsNotNull())
+                        {
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), expressionFilterValue?.Body);
+                        }
+                        else
+                        {
+                            var constantExp = Expression.Constant(compareObjValue);
+                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), constantExp);
+                        }
 
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
-                    {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
-                    }
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
 
-                    body = Expression.Not(body);
-                    break;
+                        body = Expression.Not(body);
+                        break;
+                    }
                 case FilterType.Contains:
-                    var leftContains = property.Type.IsStringPropType()
-                        ? Expression.Call(property, ExpressionMethodHelper.GetToStringMethod().Response)
-                        : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
-                    var rightContains = Expression.Call(Expression.Constant(filterObjectValue),
-                        ExpressionMethodHelper.GetToStringMethod().Response);
-
-                    body = Expression.Call(leftContains, ExpressionMethodHelper.GetStringContainsMethod().Response, rightContains);
-
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
                     {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        var leftContains = property.Type.IsStringPropType()
+                            ? (Expression)property //Expression.Call(property, ExpressionMethodHelper.GetToStringMethod().Response)
+                            : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
+                        var rightContains = Expression.Call(Expression.Constant(filterObjectValue),
+                            ExpressionMethodHelper.GetToStringMethod().Response);
+
+                        body = Expression.Call(leftContains, ExpressionMethodHelper.GetStringContainsMethod().Response, rightContains);
+
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.DoesNotContains:
-                    var leftDoesNotContains = property.Type.IsStringPropType()
-                        ? Expression.Call(property, ExpressionMethodHelper.GetToStringMethod().Response)
-                        : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
-                    var rightDoesNotContains = Expression.Call(Expression.Constant(filterObjectValue),
-                        ExpressionMethodHelper.GetToStringMethod().Response);
-
-                    body = Expression.Call(leftDoesNotContains, ExpressionMethodHelper.GetStringContainsMethod().Response, rightDoesNotContains);
-
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
                     {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
-                    }
+                        var leftDoesNotContains = property.Type.IsStringPropType()
+                            ? (Expression)property //Expression.Call(property, ExpressionMethodHelper.GetToStringMethod().Response)
+                            : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
+                        var rightDoesNotContains = Expression.Call(Expression.Constant(filterObjectValue),
+                            ExpressionMethodHelper.GetToStringMethod().Response);
 
-                    body = Expression.Not(body);
-                    break;
+                        body = Expression.Call(leftDoesNotContains, ExpressionMethodHelper.GetStringContainsMethod().Response, rightDoesNotContains);
+
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+
+                        body = Expression.Not(body);
+                        break;
+                    }
                 case FilterType.SensitiveContains:
-                    var leftSensitiveContains = property.Type.IsStringPropType()
-                        ? Expression.Call(property, ExpressionMethodHelper.GetStringToLowerMethod().Response)
-                        : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
-                    var rightSensitiveContains = Expression.Call(Expression.Constant(filterObjectValue),
-                        ExpressionMethodHelper.GetStringToLowerMethod().Response);
-
-                    body = Expression.Call(leftSensitiveContains,
-                        ExpressionMethodHelper.GetStringContainsMethod().Response,
-                        rightSensitiveContains);
-
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
                     {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        var leftSensitiveContains = property.Type.IsStringPropType()
+                            ? Expression.Call(property, ExpressionMethodHelper.GetStringToLowerMethod().Response)
+                            : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
+                        var rightSensitiveContains = Expression.Call(Expression.Constant(filterObjectValue),
+                            ExpressionMethodHelper.GetStringToLowerMethod().Response);
+
+                        body = Expression.Call(leftSensitiveContains,
+                            ExpressionMethodHelper.GetStringContainsMethod().Response,
+                            rightSensitiveContains);
+
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.SensitiveDoesNotContains:
-                    var leftSensitiveDoesNotContains = property.Type.IsStringPropType()
-                        ? Expression.Call(property, ExpressionMethodHelper.GetStringToLowerMethod().Response)
-                        : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
-                    var rightSensitiveDoesNotContains = Expression.Call(Expression.Constant(filterObjectValue),
-                        ExpressionMethodHelper.GetStringToLowerMethod().Response);
-
-                    body = Expression.Call(leftSensitiveDoesNotContains,
-                        ExpressionMethodHelper.GetStringContainsMethod().Response,
-                        rightSensitiveDoesNotContains);
-
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
                     {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
-                    }
+                        var leftSensitiveDoesNotContains = property.Type.IsStringPropType()
+                            ? Expression.Call(property, ExpressionMethodHelper.GetStringToLowerMethod().Response)
+                            : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
+                        var rightSensitiveDoesNotContains = Expression.Call(Expression.Constant(filterObjectValue),
+                            ExpressionMethodHelper.GetStringToLowerMethod().Response);
 
-                    body = Expression.Not(body);
-                    break;
+                        body = Expression.Call(leftSensitiveDoesNotContains,
+                            ExpressionMethodHelper.GetStringContainsMethod().Response,
+                            rightSensitiveDoesNotContains);
+
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+
+                        body = Expression.Not(body);
+                        break;
+                    }
                 case FilterType.IsIn:
-                    if (objectValues.IsNullOrEmptyEnumerable())
-                        ThrowHelper.ArgumentException($"{nameof(objectValues)}, IN values must have data!");
-
-                    foreach (var inValue in objectValues!)
                     {
-                        var objValue = property.Type.IsNullablePropType()
-                            ? inValue.ChangeToNotNullType(property.Type)
-                            : Convert.ChangeType(inValue, property.Type);
+                        if (objectValues.IsNullOrEmptyEnumerable())
+                            ThrowHelper.ArgumentException($"{nameof(objectValues)}, IN values must have data!");
 
-                        var objExpr = Expression.Constant(objValue, property.Type);
-                        var eqObj = Expression.Equal(property, objExpr);
+                        foreach (var inValue in objectValues!)
+                        {
+                            var objValue = property.Type.IsNullablePropType()
+                                ? inValue.ChangeToNotNullType(property.Type)
+                                : Convert.ChangeType(inValue, property.Type);
 
-                        body = body.IsNull()
-                            ? eqObj
-                            : Expression.Or(body!, eqObj);
+                            var objExpr = Expression.Constant(objValue, property.Type);
+                            var eqObj = Expression.Equal(property, objExpr);
+
+                            body = body.IsNull()
+                                ? eqObj
+                                : Expression.Or(body!, eqObj);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.IsNotIn:
-                    if (objectValues.IsNullOrEmptyEnumerable())
-                        ThrowHelper.ArgumentException($"{nameof(objectValues)}, NOT IN values must have data!");
-
-                    foreach (var inValue in objectValues!)
                     {
-                        var objValue = property.Type.IsNullablePropType()
-                            ? inValue.ChangeToNotNullType(property.Type)
-                            : Convert.ChangeType(inValue, property.Type);
+                        if (objectValues.IsNullOrEmptyEnumerable())
+                            ThrowHelper.ArgumentException($"{nameof(objectValues)}, NOT IN values must have data!");
 
-                        var objExpr = Expression.Constant(objValue, property.Type);
-                        var eqObj = Expression.NotEqual(property, objExpr);
+                        foreach (var inValue in objectValues!)
+                        {
+                            var objValue = property.Type.IsNullablePropType()
+                                ? inValue.ChangeToNotNullType(property.Type)
+                                : Convert.ChangeType(inValue, property.Type);
 
-                        body = body.IsNull()
-                            ? eqObj
-                            : Expression.AndAlso(body!, eqObj);
+                            var objExpr = Expression.Constant(objValue, property.Type);
+                            var eqObj = Expression.NotEqual(property, objExpr);
+
+                            body = body.IsNull()
+                                ? eqObj
+                                : Expression.AndAlso(body!, eqObj);
+                        }
+                        break;
                     }
-                    break;
                 case FilterType.IsNull:
-                    body = property.Type.IsNullablePropType()
-                        ? (Expression)Expression.Equal(property, nullConst)
-                        : Expression.Call(property, ExpressionMethodHelper.GetEqualsMethod().Response, nullConst);
-                    break;
-                case FilterType.IsNotNull:
-                    body = property.Type.IsNullablePropType()
-                        ? (Expression)Expression.NotEqual(property, nullConst)
-                        : Expression.Not(Expression.Call(property, ExpressionMethodHelper.GetEqualsMethod().Response, nullConst));
-
-                    if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
                     {
-                        var notNullProp = Expression.NotEqual(property, nullConst);
-                        body = Expression.AndAlso(notNullProp, body);
+                        body = property.Type.IsNullablePropType()
+                            ? (Expression)Expression.Equal(property, nullConst)
+                            : Expression.Call(property, ExpressionMethodHelper.GetEqualsMethod().Response, nullConst);
+                        break;
                     }
-                    break;
+                case FilterType.IsNotNull:
+                    {
+                        body = property.Type.IsNullablePropType()
+                            ? (Expression)Expression.NotEqual(property, nullConst)
+                            : Expression.Not(Expression.Call(property, ExpressionMethodHelper.GetEqualsMethod().Response, nullConst));
+
+                        if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
+                        {
+                            var notNullProp = Expression.NotEqual(property, nullConst);
+                            body = Expression.AndAlso(notNullProp, body);
+                        }
+                        break;
+                    }
                 default:
                     ThrowHelper.ArgumentOutOfRangeException(nameof(filter), filter, "Specified filter is not in range!");
                     break;

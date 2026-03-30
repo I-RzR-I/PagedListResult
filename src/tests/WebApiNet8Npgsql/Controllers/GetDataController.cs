@@ -15,23 +15,17 @@
 // ***********************************************************************
 
 using AggregatedGenericResultMessage.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PagedListResult;
 using PagedListResult.DataModels.Enums;
 using PagedListResult.DataModels.Models.Result;
 using PagedListResult.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using WebApiNet5.Application;
-using WebApiNet5.Data;
-using WebApiNet5.Models;
+using WebApiNet8Npgsql.Data;
+using WebApiNet8Npgsql.Data.Models;
+using WebApiNet8Npgsql.Models;
+using WebApiNet8Npgsql.Operations;
 
-namespace WebApiNet5.Controllers
+namespace WebApiNet8Npgsql.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]
@@ -42,27 +36,27 @@ namespace WebApiNet5.Controllers
         public GetDataController(AppDbContext db) => _db = db;
 
         [HttpPost]
-        [ProducesResponseType(typeof(PagedResult<PostDetail>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedResult<PagedDocumentResult>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<MessageModel>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllRecords(
-            [FromBody] GetAllRecordsRequest query, CancellationToken cancellationToken)
+            [FromBody] PagedDocumentQuery query, CancellationToken cancellationToken)
         {
             try
             {
-                var data = _db.Posts
-                .Include(x => x.Author)
-                .Select(x => new PostDetail
-                {
-                    AuthorId = x.AuthorId,
-                    AuthorName = x.Author.Name,
-                    Contents = x.Contents,
-                    CreatedOn = x.CreatedOn,
-                    Id = x.Id,
-                    Title = x.Title,
-                    ModifiedOn = x.ModifiedOn
-                });
+                var result = _db.Set<DocumentDataModel>()
+                    .Join(_db.Set<UserDataModel>(),
+                        doc => doc.UserId,
+                        user => user.Id,
+                        (doc, user) => new PagedDocumentResult()
+                        {
+                            Id = doc.Id,
+                            Title = doc.Title,
+                            AuthorName = user.UserName,
+                            AuthorEmail = user.Email,
+                            CreatedAt = doc.CreatedAt
+                        });
 
-                var dataList = await data.GetPagedWithFiltersAsync(query, null, FilterConditionType.And, cancellationToken);
+                var dataList = await result.GetPagedWithFiltersAsync(query, null, FilterConditionType.And, cancellationToken);
 
                 return JsonResult(dataList);
             }
