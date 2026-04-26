@@ -19,7 +19,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RzR.Extensions.Domain.Primitives;
 using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
 using RzR.ResultMessage.Pagination.Extensions;
 using RzR.ResultMessage.Web;
 using System.Net;
@@ -64,29 +63,6 @@ namespace RzR.ResultMessage.Pagination.Web
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
-        ///     Return api response on json format. Status code 200 with data if IsSuccess is true.
-        ///     Status code 400 with errors collection if IsSuccess is false.
-        /// </summary>
-        /// <remarks>
-        ///     RzR, 15-Nov-23.
-        /// </remarks>
-        /// <typeparam name="TType">.</typeparam>
-        /// <param name="response">.</param>
-        /// <returns>
-        ///     A response to return to the caller.
-        /// </returns>
-        /// =================================================================================================
-        protected virtual IActionResult JsonResult<TType>(PagedResult<TType> response)
-            where TType : class
-        {
-            if (response.IsSuccess.IsTrue())
-                return Json(response);
-
-            return BadRequest(response.Messages);
-        }
-
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>
         ///     XML result.
         /// </summary>
         /// <typeparam name="TType">Type of the type.</typeparam>
@@ -96,34 +72,6 @@ namespace RzR.ResultMessage.Pagination.Web
         /// </returns>
         /// =================================================================================================
         protected virtual IActionResult XmlResult<TType>(IPagedResult<TType> response)
-            where TType : class
-        {
-            if (response.IsSuccess.IsTrue())
-            {
-                var xml = response.ToSoapXmlPagedResult();
-
-                return new ContentResult
-                {
-                    Content = xml.SerializeToString(), 
-                    ContentType = "text/xml", 
-                    StatusCode = (int)HttpStatusCode.OK
-                };
-            }
-
-            return BadRequest(response.Messages);
-        }
-
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>
-        ///     XML result.
-        /// </summary>
-        /// <typeparam name="TType">Type of the type.</typeparam>
-        /// <param name="response">.</param>
-        /// <returns>
-        ///     A response to return to the caller.
-        /// </returns>
-        /// =================================================================================================
-        protected virtual IActionResult XmlResult<TType>(PagedResult<TType> response)
             where TType : class
         {
             if (response.IsSuccess.IsTrue())
