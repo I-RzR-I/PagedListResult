@@ -21,6 +21,7 @@ using RzR.Extensions.Domain.Primitives;
 using RzR.ResultMessage.Pagination.DataModels.Abstractions;
 using RzR.ResultMessage.Pagination.Extensions;
 using RzR.ResultMessage.Web;
+using RzR.ResultMessage.Web.Extensions.ProblemDetail;
 using System;
 using System.Net;
 
@@ -42,7 +43,11 @@ namespace RzR.ResultMessage.Pagination.Web
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Return api response on json format. Status code 200 with data if IsSuccess is true.
-        ///     Status code 400 with errors collection if IsSuccess is false.
+        ///     On failure returns an RFC 9457 <c>application/problem+json</c> response built by the
+        ///     ambient <see cref="RzR.ResultMessage.Web.Abstractions.IProblemDetailsResultFactory"/>
+        ///     (defaults to 400; customize via
+        ///     <c>services.AddProblemDetailsResultFactory&lt;TFactory&gt;()</c> from
+        ///     <c>AggregatedGenericResultMessage.Web</c>).
         /// </summary>
         /// <remarks>
         ///     RzR, 15-Nov-23.
@@ -59,7 +64,7 @@ namespace RzR.ResultMessage.Pagination.Web
             if (response.IsSuccess.IsTrue())
                 return Json(response);
 
-            return BadRequest(response.Messages);
+            return response.AsProblemDetails(HttpStatusCode.BadRequest);
         }
 
         /// -------------------------------------------------------------------------------------------------
@@ -75,7 +80,12 @@ namespace RzR.ResultMessage.Pagination.Web
         [Obsolete("Use PagedOk<TType> instead. JsonResult will be removed in the next major version because may cause collides with Microsoft.AspNetCore.Mvc.JsonResult.")]
         protected virtual IActionResult JsonResult<TType>(IPagedResult<TType> response)
             where TType : class
-            => PagedOkResult(response);
+        {
+            if (response.IsSuccess.IsTrue())
+                return Json(response);
+
+            return BadRequest(response.Messages);
+        }
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
@@ -102,7 +112,7 @@ namespace RzR.ResultMessage.Pagination.Web
                 };
             }
 
-            return BadRequest(response.Messages);
+            return response.AsProblemDetails(HttpStatusCode.BadRequest);
         }
 
         /// -------------------------------------------------------------------------------------------------
@@ -117,6 +127,21 @@ namespace RzR.ResultMessage.Pagination.Web
         [Obsolete("Use PagedXmlResult<TType> instead. XmlResult will be removed in the next major version.")]
         protected virtual IActionResult XmlResult<TType>(IPagedResult<TType> response)
             where TType : class
-            => PagedXmlResult(response);
+        {
+
+            if (response.IsSuccess.IsTrue())
+            {
+                var xml = response.ToSoapXmlPagedResult();
+
+                return new ContentResult
+                {
+                    Content = xml.SerializeToString(),
+                    ContentType = "text/xml",
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+
+            return BadRequest(response.Messages);
+        }
     }
 }
