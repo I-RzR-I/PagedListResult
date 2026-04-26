@@ -14,7 +14,7 @@
 //  </summary>
 // ***********************************************************************
 
-using PagedListResult.DataModels.Models.Request.Page;
+using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
 
 namespace WebApiNet5.Application
 {

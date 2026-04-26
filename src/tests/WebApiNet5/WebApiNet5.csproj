@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PagedListResult\PagedListResult.csproj" />
+    <Folder Include="Application\GetRecords\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\GetRecords\" />
+    <ProjectReference Include="..\..\PagedListResult.Web\PagedListResult.Web.csproj" />
   </ItemGroup>
 
 </Project>

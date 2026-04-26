@@ -18,7 +18,7 @@ using FilterTests.Data;
 using FilterTests.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult.Common.Extensions.Filters;
+using RzR.ResultMessage.Pagination.Common.Extensions.Filters;
 using System.Linq;
 
 namespace FilterTests.Filters

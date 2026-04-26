@@ -17,7 +17,7 @@
 #region U S A G E S
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult.DataModels.Models.Result;
+using RzR.ResultMessage.Pagination.DataModels.Models.Result;
 using System;
 
 #endregion

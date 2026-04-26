@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<Authors>RzR</Authors>
 		<Copyright>RzR</Copyright>
@@ -15,25 +15,20 @@
 		<RepositoryUrl>https://github.com/I-RzR-I/PagedListResult</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/I-RzR-I/PagedListResult</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PackageDescription>An extension based on `netstandard 2.0` with query properties filter and query source filter by text, order filter, and X top record. Property filters are based on `Expression` with multiple types of filters. This library is used in `PagedListResult` as core execution.</PackageDescription>
-		<Summary>An extension based on `netstandard 2.0` with query properties filter and query source filter by text, order filter, and X top record. Property filters are based on `Expression` with multiple types of filters. This library is used in `PagedListResult` as core execution.</Summary>
-		<PackageTitle>RzR.Shared.Entity (PagedListResult.DataModels)</PackageTitle>
-		<Title>RzR.Shared.Entity (PagedListResult.DataModels)</Title>
+		<PackageDescription>An extension that offers the possibility to get/return data set as a list with pagination with filter, order, and search availability, loading the list with page size. Available methods: GetPaged/Async, GetPagedWithMainFiltersAsync, GetPagedWithFiltersAsync.</PackageDescription>
+		<Summary>An extension that offers the possibility to get/return data set as a list with pagination with filter, order, and search availability, loading the list with page size. Available methods: GetPaged/Async, GetPagedWithMainFiltersAsync, GetPagedWithFiltersAsync.</Summary>
+		<PackageTitle>RzR.Shared.Entity (PagedListResult)</PackageTitle>
+		<Title>RzR.Shared.Entity (PagedListResult)</Title>
 		<LangVersion>9.0</LangVersion>
 		<Language>en-US</Language>
 		<RepositoryType>GIT</RepositoryType>
+		<PackageIconUrl />
+
+		<RootNamespace>RzR.ResultMessage.Pagination.Web</RootNamespace>
+
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>
-
-		<RootNamespace>RzR.ResultMessage.Pagination.DataModels</RootNamespace>
-
 	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="AggregatedGenericResultMessage" Version="2.0.0.4127" />
-		<PackageReference Include="CodeSource" Version="5.0.0.7373" />
-	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
@@ -58,10 +53,12 @@
 		</None>
 	</ItemGroup>
 
-	<ProjectExtensions>
-		<VisualStudio>
-			<UserProperties BuildVersion_StartDate="2023/11/24" />
-		</VisualStudio>
-	</ProjectExtensions>
+	<ItemGroup>
+		<PackageReference Include="AggregatedGenericResultMessage.Web" Version="2.0.0.7588" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PagedListResult\PagedListResult.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -16,18 +16,17 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result;
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Extensions.Filters.PropertyFilterQuery;
-using PagedListResult.Common.Extensions.Internal;
-using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.Common.Models.Internal;
-using PagedListResult.DataModels.Enums;
-using PagedListResult.DataModels.Models.Request;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Linq;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Pagination.Common.Extensions.Filters.PropertyFilterQuery;
+using RzR.ResultMessage.Pagination.Common.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Common.Models.Internal;
+using RzR.ResultMessage.Pagination.DataModels.Enums;
+using RzR.ResultMessage.Pagination.DataModels.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +34,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Filtrable source query builder.</summary>

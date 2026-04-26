@@ -16,18 +16,18 @@
 
 #region U S A G E S
 
-using CodeSource;
+using RzR.Core.CodeSource;
 
 #endregion
 
-namespace PagedListResult.DataModels.Extensions
+namespace RzR.ResultMessage.Pagination.DataModels.Extensions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     An object extensions.
     /// </summary>
     /// =================================================================================================
-    [CodeSource(SourceUrl = "https://github.com/I-RzR-I/DomainCommonExtensions", AuthorName = "RzR", Copyright = "RzR", Version = 1.0D)]
+    [CodeSource(SourceUrl = "https://github.com/I-RzR-I/DomainCommonExtensions", AuthorName = "RzR", Copyright = "RzR", Version = "1.0")]
     internal static class ObjectExtensions
     {
         /// -------------------------------------------------------------------------------------------------

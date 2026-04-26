@@ -16,23 +16,21 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Validation;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Pagination.Common.Helpers.Attributes;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using DomainCommonExtensions.Utilities.Ensure;
-using PagedListResult.Common.Helpers.Attributes;
-using PagedListResult.Common.Helpers.Internal.Common;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers
+namespace RzR.ResultMessage.Pagination.Common.Helpers
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Reflection storage type.</summary>

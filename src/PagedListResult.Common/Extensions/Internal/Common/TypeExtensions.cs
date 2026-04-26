@@ -14,12 +14,12 @@
 //  </summary>
 // ***********************************************************************
 
+using RzR.Extensions.Domain.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DomainCommonExtensions.Utilities.Ensure;
 
-namespace PagedListResult.Common.Extensions.Internal.Common
+namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>A type extensions.</summary>

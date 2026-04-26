@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace PagedListResult.Models.Internal
+namespace RzR.ResultMessage.Pagination.Models.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

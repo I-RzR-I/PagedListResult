@@ -16,19 +16,17 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.CommonExtensions.Reflection;
-using DomainCommonExtensions.DataTypeExtensions;
-using DomainCommonExtensions.Utilities.Ensure;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Reflection;
+using RzR.Extensions.Domain.Validation;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
 using System;
 using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Expression object comparer helper.</summary>

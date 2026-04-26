@@ -16,9 +16,9 @@
 
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PagedListResult;
-using PagedListResult.DataModels.Abstractions;
-using PagedListResult.DataModels.Models.Request;
+using RzR.ResultMessage.Pagination;
+using RzR.ResultMessage.Pagination.DataModels.Abstractions;
+using RzR.ResultMessage.Pagination.DataModels.Models.Request;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

@@ -16,17 +16,17 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Web;
-using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.AspNetCore.Mvc;
-using PagedListResult.DataModels.Abstractions;
-using PagedListResult.DataModels.Models.Result;
-using PagedListResult.Extensions;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Pagination.DataModels.Abstractions;
+using RzR.ResultMessage.Pagination.DataModels.Models.Result;
+using RzR.ResultMessage.Pagination.Extensions;
+using RzR.ResultMessage.Web;
 using System.Net;
 
 #endregion
 
-namespace PagedListResult.Web
+namespace RzR.ResultMessage.Pagination.Web
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
@@ -35,7 +35,7 @@ namespace PagedListResult.Web
     /// <remarks>
     ///     RzR, 15-Nov-23.
     /// </remarks>
-    /// <seealso cref="AggregatedGenericResultMessage.Web.ResultBaseApiController" />
+    /// <seealso cref="ResultBaseApiController" />
     /// =================================================================================================
     public abstract class BaseApiPagedResultController : ResultBaseApiController
     {
@@ -102,7 +102,12 @@ namespace PagedListResult.Web
             {
                 var xml = response.ToSoapXmlPagedResult();
 
-                return new ContentResult { Content = xml.SerializeToString(), ContentType = "text/xml", StatusCode = (int)HttpStatusCode.OK };
+                return new ContentResult
+                {
+                    Content = xml.SerializeToString(), 
+                    ContentType = "text/xml", 
+                    StatusCode = (int)HttpStatusCode.OK
+                };
             }
 
             return BadRequest(response.Messages);
@@ -125,7 +130,12 @@ namespace PagedListResult.Web
             {
                 var xml = response.ToSoapXmlPagedResult();
 
-                return new ContentResult { Content = xml.SerializeToString(), ContentType = "text/xml", StatusCode = (int)HttpStatusCode.OK };
+                return new ContentResult
+                {
+                    Content = xml.SerializeToString(), 
+                    ContentType = "text/xml", 
+                    StatusCode = (int)HttpStatusCode.OK
+                };
             }
 
             return BadRequest(response.Messages);

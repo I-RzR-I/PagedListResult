@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions;
-using PagedListResult.DataModels.Models.Result;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Pagination.DataModels.Models.Result;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 #endregion
 
-namespace PagedListResult.DataModels.Abstractions
+namespace RzR.ResultMessage.Pagination.DataModels.Abstractions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

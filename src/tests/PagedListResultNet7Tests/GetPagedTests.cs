@@ -18,9 +18,9 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult;
 using PagedListResultNet7Tests.Data;
 using PagedListResultNet7Tests.Models;
+using RzR.ResultMessage.Pagination;
 using System;
 using System.Linq;
 

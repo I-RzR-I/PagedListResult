@@ -20,7 +20,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace PagedListResult.Helpers
+namespace RzR.ResultMessage.Pagination.Helpers
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>A time watch helper.</summary>

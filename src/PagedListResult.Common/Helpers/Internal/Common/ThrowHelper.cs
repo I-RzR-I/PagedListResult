@@ -16,12 +16,12 @@
 
 #region U S A G E S
 
-using PagedListResult.DataModels.Enums;
+using RzR.ResultMessage.Pagination.DataModels.Enums;
 using System;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Internal.Common
+namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Throw exception helper.</summary>

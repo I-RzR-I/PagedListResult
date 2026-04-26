@@ -16,8 +16,8 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Pagination.Common.Attributes;
 using System;
-using PagedListResult.Common.Attributes;
 
 #endregion
 

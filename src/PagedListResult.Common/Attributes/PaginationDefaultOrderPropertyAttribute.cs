@@ -20,7 +20,7 @@ using System;
 
 #endregion
 
-namespace PagedListResult.Common.Attributes
+namespace RzR.ResultMessage.Pagination.Common.Attributes
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Default pagination order property attribute.</summary>

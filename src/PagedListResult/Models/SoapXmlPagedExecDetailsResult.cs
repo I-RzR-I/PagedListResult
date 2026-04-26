@@ -22,7 +22,7 @@ using System.Xml.Serialization;
 
 #endregion
 
-namespace PagedListResult.Models
+namespace RzR.ResultMessage.Pagination.Models
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

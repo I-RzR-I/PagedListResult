@@ -17,7 +17,7 @@
 // ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace PagedListResult.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.DataModels.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Default primary key definition DTO.</summary>

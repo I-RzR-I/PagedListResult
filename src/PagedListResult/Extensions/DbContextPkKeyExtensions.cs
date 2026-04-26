@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
-namespace PagedListResult.Extensions
+namespace RzR.ResultMessage.Pagination.Extensions
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Database context primary key extensions.</summary>

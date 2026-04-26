@@ -16,12 +16,12 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.CommonExtensions;
+using RzR.Extensions.Domain.Primitives;
 using System;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Internal.Common
+namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Object extensions.</summary>

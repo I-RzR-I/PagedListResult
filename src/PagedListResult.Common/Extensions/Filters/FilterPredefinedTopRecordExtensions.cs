@@ -16,18 +16,17 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Extensions.Internal;
-using PagedListResult.Common.Helpers;
-using PagedListResult.Common.Helpers.Internal.Common;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Pagination.Common.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Common.Helpers;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Filters
+namespace RzR.ResultMessage.Pagination.Common.Extensions.Filters
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Predefined record extensions.</summary>
@@ -58,7 +57,7 @@ namespace PagedListResult.Common.Extensions.Filters
             var propertyName = defaultProperty.Response.Name;
 
             defaultPrimaryKeys = (defaultPrimaryKeys ?? new List<string>()).Where(x => x.IsNotNull()).ToList();
-            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new[] { propertyName } : defaultPrimaryKeys;
+            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new string[] { propertyName } : defaultPrimaryKeys;
 
             if (defaultPrimaryKeys.IsNullOrEmptyEnumerable())
                 ThrowHelper.Exception(
@@ -90,7 +89,7 @@ namespace PagedListResult.Common.Extensions.Filters
             var propertyName = defaultProperty.Response.Name;
 
             defaultPrimaryKeys = (defaultPrimaryKeys ?? new List<string>()).Where(x => x.IsNotNull()).ToList();
-            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new[] { propertyName } : defaultPrimaryKeys;
+            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new string[] { propertyName } : defaultPrimaryKeys;
 
             if (defaultPrimaryKeys.IsNullOrEmptyEnumerable())
                 ThrowHelper.Exception(

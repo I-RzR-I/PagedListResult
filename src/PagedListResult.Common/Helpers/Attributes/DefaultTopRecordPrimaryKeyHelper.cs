@@ -16,20 +16,18 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Pagination.Common.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Attributes;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Extensions.Result;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Attributes
+namespace RzR.ResultMessage.Pagination.Common.Helpers.Attributes
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Default primary key property helper.</summary>

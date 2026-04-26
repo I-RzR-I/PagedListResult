@@ -16,28 +16,27 @@
 
 #region U S A G E S
 
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Reflection;
+using RzR.Extensions.Domain.Validation;
+using RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal.ConstNamesHelper;
+using RzR.ResultMessage.Pagination.DataModels.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.CommonExtensions.Reflection;
-using DomainCommonExtensions.DataTypeExtensions;
-using DomainCommonExtensions.Utilities.Ensure;
-using PagedListResult.Common.Extensions.Internal.Common;
-using PagedListResult.Common.Helpers.Internal;
-using PagedListResult.Common.Helpers.Internal.Builder;
-using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.Common.Helpers.Internal.ConstNamesHelper;
-using PagedListResult.DataModels.Enums;
 using System.Reflection;
 
 // ReSharper disable RedundantCast
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Internal
+namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Binary expression helper.</summary>

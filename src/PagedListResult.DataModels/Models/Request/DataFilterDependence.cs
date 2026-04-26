@@ -16,13 +16,13 @@
 
 #region U S A G E S
 
-using PagedListResult.DataModels.Enums;
+using RzR.ResultMessage.Pagination.DataModels.Enums;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
 #endregion
 
-namespace PagedListResult.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.DataModels.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Data filter dependence.</summary>

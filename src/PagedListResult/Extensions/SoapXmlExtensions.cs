@@ -16,16 +16,16 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Models;
-using DomainCommonExtensions.CommonExtensions;
-using PagedListResult.DataModels.Abstractions;
-using PagedListResult.DataModels.Models.Result;
-using PagedListResult.Models;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Models;
+using RzR.ResultMessage.Pagination.DataModels.Abstractions;
+using RzR.ResultMessage.Pagination.DataModels.Models.Result;
+using RzR.ResultMessage.Pagination.Models;
 using System.Linq;
 
 #endregion
 
-namespace PagedListResult.Extensions
+namespace RzR.ResultMessage.Pagination.Extensions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

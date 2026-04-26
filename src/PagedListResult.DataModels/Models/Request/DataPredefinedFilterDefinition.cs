@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace PagedListResult.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.DataModels.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

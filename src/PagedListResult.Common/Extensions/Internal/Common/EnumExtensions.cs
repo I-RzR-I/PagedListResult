@@ -18,9 +18,9 @@
 
 #endregion
 
-using PagedListResult.DataModels.Enums;
+using RzR.ResultMessage.Pagination.DataModels.Enums;
 
-namespace PagedListResult.Common.Extensions.Internal.Common
+namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Enum extensions.</summary>

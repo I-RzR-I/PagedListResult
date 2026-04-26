@@ -16,23 +16,22 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result;
-using DomainCommonExtensions.ArraysExtensions;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Text;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common;
+using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Extensions.Internal.Common;
-using PagedListResult.Common.Helpers.Internal.Common;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Search predicate builder.</summary>

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PagedListResult\PagedListResult.csproj" />
+    <ProjectReference Include="..\..\PagedListResult.Web\PagedListResult.Web.csproj" />
   </ItemGroup>
 
 </Project>
