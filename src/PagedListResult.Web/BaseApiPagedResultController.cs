@@ -21,6 +21,7 @@ using RzR.Extensions.Domain.Primitives;
 using RzR.ResultMessage.Pagination.DataModels.Abstractions;
 using RzR.ResultMessage.Pagination.Extensions;
 using RzR.ResultMessage.Web;
+using System;
 using System.Net;
 
 #endregion
@@ -52,7 +53,7 @@ namespace RzR.ResultMessage.Pagination.Web
         ///     A response to return to the caller.
         /// </returns>
         /// =================================================================================================
-        protected virtual IActionResult JsonResult<TType>(IPagedResult<TType> response)
+        protected virtual IActionResult PagedOkResult<TType>(IPagedResult<TType> response)
             where TType : class
         {
             if (response.IsSuccess.IsTrue())
@@ -60,6 +61,21 @@ namespace RzR.ResultMessage.Pagination.Web
 
             return BadRequest(response.Messages);
         }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Obsolete. Use <see cref="PagedOkResult{TType}(IPagedResult{TType})"/> instead. Kept to
+        ///     preserve binary/source compatibility for one release; collides with
+        ///     <see cref="Microsoft.AspNetCore.Mvc.JsonResult"/>.
+        /// </summary>
+        /// <typeparam name="TType">.</typeparam>
+        /// <param name="response">.</param>
+        /// <returns>A response to return to the caller.</returns>
+        /// =================================================================================================
+        [Obsolete("Use PagedOk<TType> instead. JsonResult will be removed in the next major version because may cause collides with Microsoft.AspNetCore.Mvc.JsonResult.")]
+        protected virtual IActionResult JsonResult<TType>(IPagedResult<TType> response)
+            where TType : class
+            => PagedOkResult(response);
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
@@ -71,7 +87,7 @@ namespace RzR.ResultMessage.Pagination.Web
         ///     A response to return to the caller.
         /// </returns>
         /// =================================================================================================
-        protected virtual IActionResult XmlResult<TType>(IPagedResult<TType> response)
+        protected virtual IActionResult PagedXmlResult<TType>(IPagedResult<TType> response)
             where TType : class
         {
             if (response.IsSuccess.IsTrue())
@@ -88,5 +104,19 @@ namespace RzR.ResultMessage.Pagination.Web
 
             return BadRequest(response.Messages);
         }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Obsolete. Use <see cref="PagedXmlResult{TType}(IPagedResult{TType})"/> instead. Kept for one
+        ///     release; will be removed in the next major version.
+        /// </summary>
+        /// <typeparam name="TType">Type of the type.</typeparam>
+        /// <param name="response">.</param>
+        /// <returns>A response to return to the caller.</returns>
+        /// =================================================================================================
+        [Obsolete("Use PagedXmlResult<TType> instead. XmlResult will be removed in the next major version.")]
+        protected virtual IActionResult XmlResult<TType>(IPagedResult<TType> response)
+            where TType : class
+            => PagedXmlResult(response);
     }
 }
