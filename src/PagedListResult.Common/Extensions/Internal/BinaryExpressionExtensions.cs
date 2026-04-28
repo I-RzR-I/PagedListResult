@@ -105,6 +105,20 @@ namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal
 
                 expressionFilterValue = () => compareObjValue;
             }
+
+            if (filterObjectValue.IsNotNull() && new List<FilterType>
+                {
+                    FilterType.GreaterThan, FilterType.GreaterThanOrEquals,
+                    FilterType.LessThan, FilterType.LessThanOrEquals
+                }.Contains(filter))
+            {
+                var targetType = property.Type.IsNullablePropType()
+                    ? property.Type.GetNonNullableType()
+                    : property.Type;
+                if (filterObjectValue!.GetType() != targetType)
+                    filterObjectValue = Convert.ChangeType(filterObjectValue, targetType);
+            }
+
             switch (filter)
             {
                 case FilterType.GreaterThan:

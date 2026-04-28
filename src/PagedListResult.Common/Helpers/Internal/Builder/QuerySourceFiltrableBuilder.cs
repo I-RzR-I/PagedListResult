@@ -65,6 +65,12 @@ namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
                 foreach (var filter in queryFilters.OrderBy(x => x.FilterApplyOrder))
                 {
                     var propParamData = QueryableParamPropBuilder.GetQueryableParamProp<TSource>(filter.FilterValue.PropertyName, typeof(TSource));
+                    if (propParamData.IsSuccess.IsFalse())
+                    {
+                        ThrowHelper.Exception(propParamData.GetFirstMessage()
+                                              ?? $"Property '{filter.FilterValue.PropertyName}' was not found on '{typeof(TSource).Name}'.");
+                    }
+
                     var parameter = propParamData.Response.ParameterExpression;
 
                     var propFilter = BuildExpressionPropFilterQuery<TSource>(
