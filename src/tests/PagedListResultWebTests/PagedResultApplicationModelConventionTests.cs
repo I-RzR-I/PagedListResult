@@ -54,7 +54,7 @@ namespace PagedListResultWebTests
             return (application, actionModel);
         }
 
-        private static PagedResultApplicationModelConvention NewConvention() => new();
+        private static PagedResultApplicationModelConvention NewConvention() => new PagedResultApplicationModelConvention();
 
         [TestMethod]
         [DataRow(nameof(SampleController.ReturnsConcretePagedResult))]

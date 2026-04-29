@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PagedListResult.Web", "Page
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PagedListResultWebTests", "tests\PagedListResultWebTests\PagedListResultWebTests.csproj", "{60E6C8DD-6827-4446-87BC-3241CF5F0A32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiPagedResultDemo", "tests\WebApiPagedResultDemo\WebApiPagedResultDemo.csproj", "{70A53184-7ACA-536D-B7DC-5846EB47329F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -193,6 +195,18 @@ Global
 		{60E6C8DD-6827-4446-87BC-3241CF5F0A32}.Release|x64.Build.0 = Release|Any CPU
 		{60E6C8DD-6827-4446-87BC-3241CF5F0A32}.Release|x86.ActiveCfg = Release|Any CPU
 		{60E6C8DD-6827-4446-87BC-3241CF5F0A32}.Release|x86.Build.0 = Release|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Debug|x64.Build.0 = Debug|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Debug|x86.Build.0 = Debug|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Release|x64.ActiveCfg = Release|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Release|x64.Build.0 = Release|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Release|x86.ActiveCfg = Release|Any CPU
+		{70A53184-7ACA-536D-B7DC-5846EB47329F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -206,15 +220,16 @@ Global
 		{42485875-0F11-436C-850C-0A447C837B61} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
 		{C75E50EE-3924-405D-941D-FB725D943E19} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
 		{60E6C8DD-6827-4446-87BC-3241CF5F0A32} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
+		{70A53184-7ACA-536D-B7DC-5846EB47329F} = {E737BE4D-6DFF-4A67-A3D9-2AC58BFBBC07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4B5BD8B8-58AD-47B4-B85A-E7242D47B9FE}
-		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
-		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_UpdateFileVersion = True
-		BuildVersion_StartDate = 2023/4/30
-		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
-		BuildVersion_ConfigurationName = Release
 		BuildVersion_UseUniversalClock = True
+		BuildVersion_ConfigurationName = Release
+		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
+		BuildVersion_StartDate = 2023/4/30
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
+		SolutionGuid = {4B5BD8B8-58AD-47B4-B85A-E7242D47B9FE}
 	EndGlobalSection
 EndGlobal

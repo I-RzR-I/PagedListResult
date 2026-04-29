@@ -25,6 +25,7 @@
 		<PackageIconUrl />
 
 		<RootNamespace>RzR.ResultMessage.Pagination.Common</RootNamespace>
+		<AssemblyName>RzR.ResultMessage.Pagination.Common</AssemblyName>
 
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>

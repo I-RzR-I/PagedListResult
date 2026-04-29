@@ -25,6 +25,7 @@
 		<PackageIconUrl />
 
 		<RootNamespace>RzR.ResultMessage.Pagination.Web</RootNamespace>
+		<AssemblyName>RzR.ResultMessage.Pagination.Web</AssemblyName>
 
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>
@@ -59,6 +60,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\PagedListResult\PagedListResult.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Abstractions\" />
 	</ItemGroup>
 
 </Project>

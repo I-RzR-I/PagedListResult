@@ -26,6 +26,7 @@
 		</PackageReleaseNotes>
 
 		<RootNamespace>RzR.ResultMessage.Pagination.DataModels</RootNamespace>
+		<AssemblyName>RzR.ResultMessage.Pagination.DataModels</AssemblyName>
 
 	</PropertyGroup>
 

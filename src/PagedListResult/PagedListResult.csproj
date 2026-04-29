@@ -25,6 +25,7 @@
 		<PackageIconUrl />
 		
 		<RootNamespace>RzR.ResultMessage.Pagination</RootNamespace>
+		<AssemblyName>RzR.ResultMessage.Pagination</AssemblyName>
 
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>
