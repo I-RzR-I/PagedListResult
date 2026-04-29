@@ -20,9 +20,9 @@ using Microsoft.AspNetCore.Http;
 using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Filters;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Filters;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ using System.Text;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Helpers
+namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

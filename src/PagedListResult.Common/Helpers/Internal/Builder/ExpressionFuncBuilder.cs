@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Expression function builder.</summary>

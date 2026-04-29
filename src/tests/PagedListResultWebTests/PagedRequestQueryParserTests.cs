@@ -20,11 +20,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PagedListResultWebTests.Stubs;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web.Builders;
-using RzR.ResultMessage.Pagination.Web.Helpers;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore.Builders;
+using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System.Collections.Generic;
 using System.Linq;
 

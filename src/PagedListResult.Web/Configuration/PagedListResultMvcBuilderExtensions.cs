@@ -24,7 +24,7 @@ using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Configuration
+namespace RzR.ResultMessage.Pagination.AspNetCore.Configuration
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

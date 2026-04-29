@@ -1,8 +1,9 @@
 ﻿using RzR.Extensions.EntityMock.Extensions;
 using RzR.ResultMessage.Pagination;
-using RzR.ResultMessage.Pagination.Web.Configuration;
-using RzR.ResultMessage.Pagination.Web.Extensions;
-using RzR.ResultMessage.Pagination.Web.MinimalApi;
+using RzR.ResultMessage.Pagination.AspNetCore.Configuration;
+using RzR.ResultMessage.Pagination.AspNetCore.Extensions;
+using RzR.ResultMessage.Pagination.AspNetCore.MinimalApi;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore;
 using WebApiPagedResultDemo.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,7 +82,7 @@ minimal.MapGet("/typed", async (PagedQuery<Product> query, SampleDataStore store
 
     var result = await store.All().ToMockAsyncEnumerable().GetPagedAsync(query);
 
-    return result.ToPagedHttpResult(ctx);
+    return PagedResultsHttpExtensions.ToPagedHttpResult<Product>(result, ctx);
 })
 .WithName("MinimalProducts_PagedQuery");
 
@@ -99,7 +100,7 @@ minimal.MapGet("/filtered", async (PagedQueryWithFilters<Product> query, SampleD
 
     var result = await store.All().ToMockAsyncEnumerable().GetPagedWithFiltersAsync(query);
 
-    return result.ToPagedHttpResult(ctx);
+    return PagedResultsHttpExtensions.ToPagedHttpResult<Product>(result, ctx);
 })
 .WithName("MinimalProducts_PagedQueryWithFilters");
 

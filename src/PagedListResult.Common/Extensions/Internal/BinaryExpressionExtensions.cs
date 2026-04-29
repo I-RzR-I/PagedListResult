@@ -20,12 +20,12 @@ using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Reflection;
 using RzR.Extensions.Domain.Validation;
-using RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.ConstNamesHelper;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.ConstNamesHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +36,7 @@ using System.Reflection;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Binary expression helper.</summary>

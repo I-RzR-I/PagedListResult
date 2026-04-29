@@ -21,21 +21,21 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Helpers;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Filters
+namespace RzR.ResultMessage.Pagination.AspNetCore.Filters
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     Minimal-API counterpart of <see cref="PagedResultActionFilter"/>. When the awaited result of
     ///     the endpoint is — directly or wrapped in a typed result such as <c>Ok&lt;T&gt;</c> /
-    ///     <c>JsonHttpResult&lt;T&gt;</c> — an <see cref="IPagedResult{T}"/>, emits the standard
+    ///     <c>JsonHttpResult&lt;T&gt;</c> — an <see cref="IPagedResult{TSource}"/>, emits the standard
     ///     pagination headers (<c>X-Total-Count</c>, <c>X-Page-Count</c>, <c>X-Page-Size</c>,
     ///     <c>X-Current-Page</c>), RFC 5988 <c>Link</c> (first/prev/next/last), and optionally
     ///     <c>Server-Timing</c>. All header emission is gated by

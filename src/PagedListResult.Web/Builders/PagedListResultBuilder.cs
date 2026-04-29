@@ -18,13 +18,13 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.Web.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Configuration;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Configuration;
 using System;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Builders
+namespace RzR.ResultMessage.Pagination.AspNetCore.Builders
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

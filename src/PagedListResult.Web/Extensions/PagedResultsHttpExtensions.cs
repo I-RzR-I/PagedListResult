@@ -20,15 +20,14 @@
 
 using Microsoft.AspNetCore.Http;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
 using RzR.ResultMessage.Web.Extensions.MinimalApi;
 using System.Net;
-
 using LibResult = RzR.ResultMessage.Abstractions.IResult;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Extensions
+namespace RzR.ResultMessage.Pagination.AspNetCore.Extensions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

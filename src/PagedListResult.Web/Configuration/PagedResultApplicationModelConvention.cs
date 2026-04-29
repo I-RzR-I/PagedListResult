@@ -21,8 +21,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Configuration
+namespace RzR.ResultMessage.Pagination.AspNetCore.Configuration
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

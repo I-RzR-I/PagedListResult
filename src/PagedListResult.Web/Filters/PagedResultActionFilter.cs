@@ -20,20 +20,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Helpers;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Filters
+namespace RzR.ResultMessage.Pagination.AspNetCore.Filters
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     <see cref="IAsyncResultFilter" /> that, when the action result body is an
-    ///     <see cref="IPagedResult{T}" />, emits standard pagination headers
+    ///     <see cref="IPagedResult{TSource}" />, emits standard pagination headers
     ///     (<c>X-Total-Count</c>, <c>X-Page-Count</c>, <c>X-Page-Size</c>, <c>X-Current-Page</c>),
     ///     RFC 5988 <c>Link</c> (first/prev/next/last), and optionally <c>Server-Timing</c>.
     ///     <para>All header emission is gated by <see cref="PagedListResultWebOptions" />.</para>

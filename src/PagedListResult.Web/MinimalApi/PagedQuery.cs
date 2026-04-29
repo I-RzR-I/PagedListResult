@@ -19,16 +19,16 @@
 #region U S A G E S
 
 using Microsoft.AspNetCore.Http;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Helpers;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.MinimalApi
+namespace RzR.ResultMessage.Pagination.AspNetCore.MinimalApi
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

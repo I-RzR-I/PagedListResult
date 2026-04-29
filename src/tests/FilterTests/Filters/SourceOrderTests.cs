@@ -18,8 +18,8 @@ using System.Linq;
 using FilterTests.Data;
 using FilterTests.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RzR.ResultMessage.Pagination.Common.Extensions.Filters;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Core.Extensions.Filters;
 
 namespace FilterTests.Filters
 {

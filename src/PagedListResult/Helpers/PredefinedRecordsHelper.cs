@@ -18,15 +18,15 @@
 
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request;
-using RzR.ResultMessage.Pagination.Extensions;
-using RzR.ResultMessage.Pagination.Models.Internal;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore.Models.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Helpers
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Helpers
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

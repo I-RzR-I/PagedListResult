@@ -21,13 +21,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.Web.Filters;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.AspNetCore.Filters;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Configuration
+namespace RzR.ResultMessage.Pagination.AspNetCore.Configuration
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

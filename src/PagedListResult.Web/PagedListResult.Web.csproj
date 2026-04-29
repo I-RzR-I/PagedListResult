@@ -24,8 +24,8 @@
 		<RepositoryType>GIT</RepositoryType>
 		<PackageIconUrl />
 
-		<RootNamespace>RzR.ResultMessage.Pagination.Web</RootNamespace>
-		<AssemblyName>RzR.ResultMessage.Pagination.Web</AssemblyName>
+		<RootNamespace>RzR.ResultMessage.Pagination.AspNetCore</RootNamespace>
+		<AssemblyName>RzR.ResultMessage.Pagination.AspNetCore</AssemblyName>
 
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>

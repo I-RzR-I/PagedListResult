@@ -22,7 +22,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>MemberExpression extensions.</summary>

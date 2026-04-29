@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
-using RzR.ResultMessage.Pagination.Common.Extensions.Internal;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
 using System;
 using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Extensions.Filters.PropertyFilterQuery
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters.PropertyFilterQuery
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Null filter expressions.</summary>

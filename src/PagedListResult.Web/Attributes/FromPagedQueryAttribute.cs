@@ -21,7 +21,7 @@ using System;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Attributes
+namespace RzR.ResultMessage.Pagination.AspNetCore.Attributes
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

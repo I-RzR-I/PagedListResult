@@ -15,8 +15,8 @@
 // ***********************************************************************
 
 using MediatR;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
 using WebApiNet5.Models;
 
 namespace WebApiNet5.Application.GetRecords

@@ -17,8 +17,8 @@
 #region U S A G E S
 
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.Web.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -26,13 +26,13 @@ using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Registries
+namespace RzR.ResultMessage.Pagination.AspNetCore.Registries
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     Default thread-safe implementation of <see cref="IPageableMetadataRegistry" />.
     /// </summary>
-    /// <seealso cref="T:RzR.ResultMessage.Pagination.Web.Abstractions.IPageableMetadataRegistry"/>
+    /// <seealso cref="T:RzR.ResultMessage.Pagination.AspNetCore.Abstractions.IPageableMetadataRegistry"/>
     /// =================================================================================================
     internal sealed class PageableMetadataRegistry : IPageableMetadataRegistry
     {

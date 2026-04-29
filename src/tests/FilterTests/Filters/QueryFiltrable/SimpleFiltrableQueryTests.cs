@@ -22,9 +22,9 @@ using FilterTests.Data;
 using FilterTests.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RzR.ResultMessage.Pagination.Common.Extensions.Filters;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Core.Extensions.Filters;
 
 #endregion
 

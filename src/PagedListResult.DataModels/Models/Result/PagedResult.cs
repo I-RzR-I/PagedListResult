@@ -16,8 +16,8 @@
 
 #region U S A G E S
 
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.DataModels.Extensions;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
@@ -28,7 +28,7 @@ using System.Xml.Serialization;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.DataModels.Models.Result
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Result
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

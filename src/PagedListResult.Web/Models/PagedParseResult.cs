@@ -16,19 +16,17 @@
 
 #region U S A G E S
 
-using Microsoft.AspNetCore.Http;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web.Helpers;
+using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
 using System;
 using System.Collections.Generic;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Models
+namespace RzR.ResultMessage.Pagination.AspNetCore.Models
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
-    ///     Aggregated outcome of <see cref="PagedRequestQueryParser.Populate(PagedRequest, IQueryCollection, PagedListResultWebOptions, PageableMetadata)" />
+    ///     Aggregated outcome of <see cref="PagedRequestQueryParser.Populate(RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page.PagedRequest,Microsoft.AspNetCore.Http.IQueryCollection,RzR.ResultMessage.Pagination.AspNetCore.Models.PagedListResultWebOptions,RzR.ResultMessage.Pagination.AspNetCore.Models.PageableMetadata)" />
     ///     .
     /// </summary>
     /// =================================================================================================

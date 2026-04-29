@@ -23,7 +23,7 @@ using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Extensions
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Database context primary key extensions.</summary>

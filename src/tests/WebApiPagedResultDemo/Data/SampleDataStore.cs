@@ -1,4 +1,4 @@
-﻿using RzR.ResultMessage.Pagination.DataModels.Models.Result;
+﻿using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 
 namespace WebApiPagedResultDemo.Data
 {

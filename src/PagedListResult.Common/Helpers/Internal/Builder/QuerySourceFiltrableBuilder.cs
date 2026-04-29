@@ -21,12 +21,12 @@ using RzR.Extensions.Domain.Linq;
 using RzR.Extensions.Domain.Primitives;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
-using RzR.ResultMessage.Pagination.Common.Extensions.Filters.PropertyFilterQuery;
-using RzR.ResultMessage.Pagination.Common.Extensions.Internal;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
-using RzR.ResultMessage.Pagination.Common.Models.Internal;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Core.Extensions.Filters.PropertyFilterQuery;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Models.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +34,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Filtrable source query builder.</summary>

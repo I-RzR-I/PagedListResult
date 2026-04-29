@@ -14,7 +14,7 @@
 //  </summary>
 // ***********************************************************************
 
-namespace RzR.ResultMessage.Pagination.Web.Helpers
+namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

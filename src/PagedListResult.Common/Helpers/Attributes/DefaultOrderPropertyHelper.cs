@@ -19,7 +19,7 @@
 using RzR.Extensions.Domain.Primitives;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
-using RzR.ResultMessage.Pagination.Common.Attributes;
+using RzR.ResultMessage.Pagination.Core.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ using System.Reflection;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Attributes
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Attributes
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Default order property helper.</summary>

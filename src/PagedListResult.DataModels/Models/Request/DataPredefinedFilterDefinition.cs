@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

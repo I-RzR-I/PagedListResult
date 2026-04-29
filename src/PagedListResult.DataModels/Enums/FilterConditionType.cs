@@ -14,7 +14,7 @@
 //  </summary>
 // ***********************************************************************
 
-namespace RzR.ResultMessage.Pagination.DataModels.Enums
+namespace RzR.ResultMessage.Pagination.Abstractions.Enums
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Conditions between filters.</summary>

@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Models.Internal
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Models.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

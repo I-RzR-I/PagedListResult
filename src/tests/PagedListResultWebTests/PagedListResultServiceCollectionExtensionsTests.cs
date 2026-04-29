@@ -21,11 +21,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PagedListResultWebTests.Stubs;
-using RzR.ResultMessage.Pagination.Web.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Builders;
-using RzR.ResultMessage.Pagination.Web.Configuration;
-using RzR.ResultMessage.Pagination.Web.Models;
-using RzR.ResultMessage.Pagination.Web.Registries;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Builders;
+using RzR.ResultMessage.Pagination.AspNetCore.Configuration;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
+using RzR.ResultMessage.Pagination.AspNetCore.Registries;
 using System;
 using System.Linq;
 

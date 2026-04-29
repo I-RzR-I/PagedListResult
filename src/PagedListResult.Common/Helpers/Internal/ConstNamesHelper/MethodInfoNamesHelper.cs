@@ -14,7 +14,7 @@
 //  </summary>
 // ***********************************************************************
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.ConstNamesHelper
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.ConstNamesHelper
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Method info name.</summary>

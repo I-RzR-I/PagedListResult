@@ -16,13 +16,13 @@
 
 #region U S A G E S
 
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Collections.Generic;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Abstractions
+namespace RzR.ResultMessage.Pagination.AspNetCore.Abstractions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

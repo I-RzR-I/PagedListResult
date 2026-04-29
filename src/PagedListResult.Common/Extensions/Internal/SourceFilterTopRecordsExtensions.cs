@@ -19,8 +19,8 @@
 using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Source query filter top predefined records.</summary>

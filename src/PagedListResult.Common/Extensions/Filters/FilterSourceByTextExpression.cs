@@ -20,14 +20,14 @@ using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
 using RzR.Extensions.Domain.Validation;
-using RzR.ResultMessage.Pagination.Common.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Extensions.Filters
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Filter source query by provider search text and/or searchProperties.</summary>

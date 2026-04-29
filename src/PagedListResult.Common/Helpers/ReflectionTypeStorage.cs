@@ -20,8 +20,8 @@ using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Validation;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
-using RzR.ResultMessage.Pagination.Common.Helpers.Attributes;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Attributes;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ using System.Reflection;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers
+namespace RzR.ResultMessage.Pagination.Core.Helpers
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Reflection storage type.</summary>

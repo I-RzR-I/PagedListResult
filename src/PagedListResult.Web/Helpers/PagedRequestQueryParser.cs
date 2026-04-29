@@ -21,18 +21,18 @@ using Microsoft.Extensions.Primitives;
 using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web.ModelBinding;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore.ModelBinding;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Helpers
+namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

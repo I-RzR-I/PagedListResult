@@ -21,9 +21,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PagedListResultWebTests.Stubs;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
-using RzR.ResultMessage.Pagination.Web;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
+using RzR.ResultMessage.Pagination.AspNetCore;
 using System.Collections.Generic;
 using System.Net;
 

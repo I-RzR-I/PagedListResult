@@ -20,15 +20,15 @@ using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Reflection;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
-using RzR.ResultMessage.Pagination.Common.Extensions.Internal;
-using RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common;
 using System;
 using System.Linq.Expressions;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Expression builder search in properties.</summary>

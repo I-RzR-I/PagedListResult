@@ -19,18 +19,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.Web.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Builders;
-using RzR.ResultMessage.Pagination.Web.Filters;
-using RzR.ResultMessage.Pagination.Web.ModelBinding;
-using RzR.ResultMessage.Pagination.Web.Models;
-using RzR.ResultMessage.Pagination.Web.Registries;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Builders;
+using RzR.ResultMessage.Pagination.AspNetCore.Filters;
+using RzR.ResultMessage.Pagination.AspNetCore.ModelBinding;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
+using RzR.ResultMessage.Pagination.AspNetCore.Registries;
 using System;
 using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Configuration
+namespace RzR.ResultMessage.Pagination.AspNetCore.Configuration
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

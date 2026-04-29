@@ -17,13 +17,13 @@
 #region U S A G E S
 
 using RzR.ResultMessage.Abstractions;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.DataModels.Abstractions
+namespace RzR.ResultMessage.Pagination.Abstractions.Abstractions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

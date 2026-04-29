@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>A type extensions.</summary>

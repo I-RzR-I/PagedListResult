@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RzR.ResultMessage.Pagination.Web.Configuration;
+using RzR.ResultMessage.Pagination.AspNetCore.Configuration;
 using System;
 using System.Linq;
 

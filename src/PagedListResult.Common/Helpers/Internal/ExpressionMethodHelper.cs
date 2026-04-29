@@ -19,7 +19,7 @@
 using RzR.Extensions.Domain.Primitives;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.ConstNamesHelper;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.ConstNamesHelper;
 using System;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
@@ -27,7 +27,7 @@ using System.Reflection;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Expression method helper.</summary>

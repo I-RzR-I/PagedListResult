@@ -21,15 +21,15 @@ using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
 using RzR.Extensions.EntityMock.Extensions;
-using RzR.ResultMessage.Pagination.Common.Extensions.Filters;
-using RzR.ResultMessage.Pagination.Common.Helpers;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
-using RzR.ResultMessage.Pagination.Extensions;
-using RzR.ResultMessage.Pagination.Helpers;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
+using RzR.ResultMessage.Pagination.Core.Extensions.Filters;
+using RzR.ResultMessage.Pagination.Core.Helpers;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,7 +40,7 @@ using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Paginated query extensions.</summary>

@@ -17,13 +17,13 @@
 #region U S A G E S
 
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
 using System;
 using System.Reflection;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Models
+namespace RzR.ResultMessage.Pagination.AspNetCore.Models
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

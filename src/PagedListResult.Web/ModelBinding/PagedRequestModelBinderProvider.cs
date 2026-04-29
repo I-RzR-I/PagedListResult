@@ -19,14 +19,14 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web.Attributes;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore.Attributes;
 using System;
 using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.ModelBinding
+namespace RzR.ResultMessage.Pagination.AspNetCore.ModelBinding
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

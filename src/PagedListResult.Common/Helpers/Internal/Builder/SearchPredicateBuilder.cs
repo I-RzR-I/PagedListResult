@@ -21,8 +21,8 @@ using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
-using RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common;
-using RzR.ResultMessage.Pagination.Common.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +31,7 @@ using System.Reflection;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Search predicate builder.</summary>

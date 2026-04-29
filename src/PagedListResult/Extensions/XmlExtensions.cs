@@ -23,7 +23,7 @@ using System.Xml;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Extensions
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>An XML extensions.</summary>

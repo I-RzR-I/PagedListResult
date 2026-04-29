@@ -18,8 +18,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.Extensions;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions;
 using RzR.ResultMessage.Web;
 using RzR.ResultMessage.Web.Extensions.ProblemDetail;
 using System;
@@ -27,7 +27,7 @@ using System.Net;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web
+namespace RzR.ResultMessage.Pagination.AspNetCore
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
@@ -106,7 +106,7 @@ namespace RzR.ResultMessage.Pagination.Web
 
                 return new ContentResult
                 {
-                    Content = xml.SerializeToString(), 
+                    Content = ObjectExtensions.SerializeToString(xml), 
                     ContentType = "text/xml", 
                     StatusCode = (int)HttpStatusCode.OK
                 };
@@ -135,7 +135,7 @@ namespace RzR.ResultMessage.Pagination.Web
 
                 return new ContentResult
                 {
-                    Content = xml.SerializeToString(),
+                    Content = ObjectExtensions.SerializeToString(xml),
                     ContentType = "text/xml",
                     StatusCode = (int)HttpStatusCode.OK
                 };

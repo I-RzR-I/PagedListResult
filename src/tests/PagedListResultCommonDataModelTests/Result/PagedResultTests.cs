@@ -17,7 +17,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PagedListResultCommonDataModelTests.Data;
 using PagedListResultCommonDataModelTests.Models;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 using System;
 using System.Collections.Generic;
 

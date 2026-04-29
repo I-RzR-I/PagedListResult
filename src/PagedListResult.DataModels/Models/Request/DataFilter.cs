@@ -16,7 +16,7 @@
 
 #region U S A G E S
 
-using RzR.ResultMessage.Pagination.DataModels.Extensions;
+using RzR.ResultMessage.Pagination.Abstractions.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,7 +26,7 @@ using System.Linq;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Data filter.</summary>

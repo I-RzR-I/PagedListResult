@@ -21,14 +21,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System.Collections.Generic;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Helpers
+namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

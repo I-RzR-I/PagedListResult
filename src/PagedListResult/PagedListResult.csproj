@@ -24,8 +24,8 @@
 		<RepositoryType>GIT</RepositoryType>
 		<PackageIconUrl />
 		
-		<RootNamespace>RzR.ResultMessage.Pagination</RootNamespace>
-		<AssemblyName>RzR.ResultMessage.Pagination</AssemblyName>
+		<RootNamespace>RzR.ResultMessage.Pagination.EntityFrameworkCore</RootNamespace>
+		<AssemblyName>RzR.ResultMessage.Pagination.EntityFrameworkCore</AssemblyName>
 
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>

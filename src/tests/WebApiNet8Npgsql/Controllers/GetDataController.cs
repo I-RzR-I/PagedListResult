@@ -17,9 +17,10 @@
 using Microsoft.AspNetCore.Mvc;
 using RzR.ResultMessage.Models;
 using RzR.ResultMessage.Pagination;
-using RzR.ResultMessage.Pagination.DataModels.Enums;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
-using RzR.ResultMessage.Pagination.Web;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
+using RzR.ResultMessage.Pagination.AspNetCore;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore;
 using WebApiNet8Npgsql.Data;
 using WebApiNet8Npgsql.Data.Models;
 using WebApiNet8Npgsql.Models;

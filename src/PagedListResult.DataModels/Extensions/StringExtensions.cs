@@ -20,7 +20,7 @@ using RzR.Core.CodeSource;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.DataModels.Extensions
+namespace RzR.ResultMessage.Pagination.Abstractions.Extensions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

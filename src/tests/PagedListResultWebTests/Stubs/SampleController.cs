@@ -17,8 +17,8 @@
 #region U S A G E S
 
 using Microsoft.AspNetCore.Mvc;
-using RzR.ResultMessage.Pagination.DataModels.Abstractions;
-using RzR.ResultMessage.Pagination.DataModels.Models.Result;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 using System.Threading.Tasks;
 
 #endregion

@@ -19,13 +19,13 @@
 using RzR.Extensions.Domain.Validation;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
-using RzR.ResultMessage.Pagination.Common.Models.Internal;
+using RzR.ResultMessage.Pagination.Core.Models.Internal;
 using System;
 using System.Linq.Expressions;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Queryable parameter and property builder.</summary>

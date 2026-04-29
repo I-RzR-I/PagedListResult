@@ -21,16 +21,16 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using RzR.Extensions.Domain.Primitives;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web.Abstractions;
-using RzR.ResultMessage.Pagination.Web.Helpers;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
+using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.ModelBinding
+namespace RzR.ResultMessage.Pagination.AspNetCore.ModelBinding
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

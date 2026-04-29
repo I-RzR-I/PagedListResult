@@ -22,7 +22,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Models
+namespace RzR.ResultMessage.Pagination.AspNetCore.Models
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

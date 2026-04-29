@@ -30,7 +30,7 @@ using System.Reflection;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Extensions
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions
 {
     internal static class QueryableExtensions
     {

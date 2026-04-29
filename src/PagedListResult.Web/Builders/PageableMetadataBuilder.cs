@@ -18,13 +18,13 @@
 
 using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Text;
-using RzR.ResultMessage.Pagination.Web.Models;
+using RzR.ResultMessage.Pagination.AspNetCore.Models;
 using System;
 using System.Collections.Generic;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Builders
+namespace RzR.ResultMessage.Pagination.AspNetCore.Builders
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>

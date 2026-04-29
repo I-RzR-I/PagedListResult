@@ -21,7 +21,7 @@ using System;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Common.Extensions.Internal.Common
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Object extensions.</summary>

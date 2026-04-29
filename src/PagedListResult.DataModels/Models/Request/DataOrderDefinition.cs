@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
-using RzR.ResultMessage.Pagination.DataModels.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
 using System.ComponentModel;
 
 // ReSharper disable ClassWithVirtualMembersNeverInherited.Global
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>A data order definition.</summary>

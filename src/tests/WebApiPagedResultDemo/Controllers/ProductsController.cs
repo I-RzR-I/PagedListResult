@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RzR.ResultMessage.Pagination.DataModels.Models.Request.Page;
-using RzR.ResultMessage.Pagination.Web;
-using RzR.ResultMessage.Pagination.Web.Attributes;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore;
+using RzR.ResultMessage.Pagination.AspNetCore.Attributes;
 using WebApiPagedResultDemo.Data;
 
 namespace WebApiPagedResultDemo.Controllers;

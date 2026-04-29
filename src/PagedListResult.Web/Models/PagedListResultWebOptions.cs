@@ -22,7 +22,7 @@ using System.Text.Json;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.Web.Models
+namespace RzR.ResultMessage.Pagination.AspNetCore.Models
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
