@@ -28,8 +28,8 @@ set destinationBranch=%userDefinedDestinationBranch%
 set customVersion=$null
 set solutionPath=$('..\src\RzR.Shared.Entity.sln')
 set packResultPath=$('..\nuget\')
-set packProjectsPath=$('..\src\PagedListResult.DataModels\PagedListResult.DataModels.csproj','..\src\PagedListResult.Common\PagedListResult.Common.csproj','..\src\PagedListResult\PagedListResult.csproj')
-set testProjectsPath=$('..\src\tests\FilterTests\FilterTests.csproj')
+set packProjectsPath=$('..\src\PagedListResult.DataModels\PagedListResult.DataModels.csproj','..\src\PagedListResult.Common\PagedListResult.Common.csproj','..\src\PagedListResult\PagedListResult.csproj','..\src\PagedListResult.Web\PagedListResult.Web.csproj')
+set testProjectsPath=$('..\src\tests\FilterTests\FilterTests.csproj','..\src\tests\PagedListResultWebTests\PagedListResultWebTests.csproj','..\src\tests\PagedListResultCommonDataModelTests\PagedListResultCommonDataModelTests.csproj','..\src\tests\PagedListResultNet5Tests\PagedListResultNet5Tests.csproj','..\src\tests\PagedListResultNet6Tests\PagedListResultNet6Tests.csproj','..\src\tests\PagedListResultNet7Tests\PagedListResultNet7Tests.csproj')
 
 
 echo :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
