@@ -54,10 +54,12 @@ namespace RzR.ResultMessage.Pagination.Common.Extensions.Filters
             if (defaultProperty.IsSuccess.IsFalse())
                 ThrowHelper.Exception(defaultProperty.GetFirstMessage());
 
-            var propertyName = defaultProperty.Response.Name;
+            var propertyName = defaultProperty.Response?.Name;
 
             defaultPrimaryKeys = (defaultPrimaryKeys ?? new List<string>()).Where(x => x.IsNotNull()).ToList();
-            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new string[] { propertyName } : defaultPrimaryKeys;
+            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() && propertyName.IsNotNull()
+                ? new string[] { propertyName }
+                : defaultPrimaryKeys;
 
             if (defaultPrimaryKeys.IsNullOrEmptyEnumerable())
                 ThrowHelper.Exception(
@@ -86,10 +88,12 @@ namespace RzR.ResultMessage.Pagination.Common.Extensions.Filters
             if (defaultProperty.IsSuccess.IsFalse())
                 ThrowHelper.Exception(defaultProperty.GetFirstMessage());
 
-            var propertyName = defaultProperty.Response.Name;
+            var propertyName = defaultProperty.Response?.Name;
 
             defaultPrimaryKeys = (defaultPrimaryKeys ?? new List<string>()).Where(x => x.IsNotNull()).ToList();
-            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new string[] { propertyName } : defaultPrimaryKeys;
+            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() && propertyName.IsNotNull()
+                ? new string[] { propertyName }
+                : defaultPrimaryKeys;
 
             if (defaultPrimaryKeys.IsNullOrEmptyEnumerable())
                 ThrowHelper.Exception(
