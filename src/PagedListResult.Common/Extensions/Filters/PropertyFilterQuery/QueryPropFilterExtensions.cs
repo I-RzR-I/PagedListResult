@@ -16,15 +16,15 @@
 
 #region U S A G E S
 
-using PagedListResult.Common.Extensions.Internal;
-using PagedListResult.Common.Helpers.Internal.ConstNamesHelper;
-using PagedListResult.DataModels.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.ConstNamesHelper;
 using System;
 using System.Linq;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Filters.PropertyFilterQuery
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters.PropertyFilterQuery
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Expression filter text extensions.</summary>

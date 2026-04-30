@@ -16,17 +16,15 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.CommonExtensions.Reflection;
+using RzR.Extensions.Domain.Reflection;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
 using System;
 using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Expression function builder.</summary>

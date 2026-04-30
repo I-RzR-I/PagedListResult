@@ -25,7 +25,7 @@ using System.Linq;
 
 #endregion
 
-namespace PagedListResult.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>A data search definition.</summary>

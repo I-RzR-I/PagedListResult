@@ -20,7 +20,7 @@ using System;
 
 #endregion
 
-namespace PagedListResult.Common.Attributes
+namespace RzR.ResultMessage.Pagination.Core.Attributes
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Default pagination primary key for top predefined records show.</summary>

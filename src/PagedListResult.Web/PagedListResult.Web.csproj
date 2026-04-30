@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1;net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<Authors>RzR</Authors>
+		<Copyright>RzR</Copyright>
+		<Owners>RzR</Owners>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageIcon>PackageIcon.png</PackageIcon>
+		<NoWarn>$(NoWarn);CS8032</NoWarn>
+		<EnableNETAnalyzers>false</EnableNETAnalyzers>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<PackageTags>Page;Pagination;Filter;Search;Order;List;Result;Enumerable;Entity;Model;DB;DataBase</PackageTags>
+		<RepositoryUrl>https://github.com/I-RzR-I/PagedListResult</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/I-RzR-I/PagedListResult</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageDescription>An extension that offers the possibility to get/return data set as a list with pagination with filter, order, and search availability, loading the list with page size. Available methods: GetPaged/Async, GetPagedWithMainFiltersAsync, GetPagedWithFiltersAsync.</PackageDescription>
+		<Summary>An extension that offers the possibility to get/return data set as a list with pagination with filter, order, and search availability, loading the list with page size. Available methods: GetPaged/Async, GetPagedWithMainFiltersAsync, GetPagedWithFiltersAsync.</Summary>
+		<PackageTitle>RzR.Shared.Entity (PagedListResult)</PackageTitle>
+		<Title>RzR.Shared.Entity (PagedListResult)</Title>
+		<LangVersion>9.0</LangVersion>
+		<Language>en-US</Language>
+		<RepositoryType>GIT</RepositoryType>
+		<PackageIconUrl />
+
+		<RootNamespace>RzR.ResultMessage.Pagination.AspNetCore</RootNamespace>
+		<AssemblyName>RzR.ResultMessage.Pagination.AspNetCore</AssemblyName>
+
+		<PackageReleaseNotes>
+		</PackageReleaseNotes>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\assets\PackageIcon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AggregatedGenericResultMessage.Web" Version="2.0.0.7588" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PagedListResult\PagedListResult.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Abstractions\" />
+	</ItemGroup>
+
+</Project>

@@ -21,7 +21,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Models.Internal
+namespace RzR.ResultMessage.Pagination.Core.Models.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Queryable parameter property DTO.</summary>

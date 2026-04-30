@@ -16,18 +16,17 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result;
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Extensions.Filters.PropertyFilterQuery;
-using PagedListResult.Common.Extensions.Internal;
-using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.Common.Models.Internal;
-using PagedListResult.DataModels.Enums;
-using PagedListResult.DataModels.Models.Request;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Linq;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Core.Extensions.Filters.PropertyFilterQuery;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Models.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +34,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Internal.Builder
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Filtrable source query builder.</summary>
@@ -66,6 +65,12 @@ namespace PagedListResult.Common.Helpers.Internal.Builder
                 foreach (var filter in queryFilters.OrderBy(x => x.FilterApplyOrder))
                 {
                     var propParamData = QueryableParamPropBuilder.GetQueryableParamProp<TSource>(filter.FilterValue.PropertyName, typeof(TSource));
+                    if (propParamData.IsSuccess.IsFalse())
+                    {
+                        ThrowHelper.Exception(propParamData.GetFirstMessage()
+                                              ?? $"Property '{filter.FilterValue.PropertyName}' was not found on '{typeof(TSource).Name}'.");
+                    }
+
                     var parameter = propParamData.Response.ParameterExpression;
 
                     var propFilter = BuildExpressionPropFilterQuery<TSource>(

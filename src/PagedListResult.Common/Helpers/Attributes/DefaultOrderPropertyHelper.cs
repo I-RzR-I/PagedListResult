@@ -16,12 +16,10 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Attributes;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Pagination.Core.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +27,7 @@ using System.Reflection;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Attributes
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Attributes
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Default order property helper.</summary>

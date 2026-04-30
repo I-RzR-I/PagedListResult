@@ -16,7 +16,7 @@
 
 #region U S A G E S
 
-using PagedListResult.DataModels.Extensions;
+using RzR.ResultMessage.Pagination.Abstractions.Extensions;
 using System;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -24,7 +24,7 @@ using System;
 
 #endregion
 
-namespace PagedListResult.DataModels.Models.Result
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Result
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Encapsulates the result of a paged execute.</summary>

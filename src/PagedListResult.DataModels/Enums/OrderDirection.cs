@@ -14,7 +14,7 @@
 //  </summary>
 // ***********************************************************************
 
-namespace PagedListResult.DataModels.Enums
+namespace RzR.ResultMessage.Pagination.Abstractions.Enums
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Result order direction.</summary>

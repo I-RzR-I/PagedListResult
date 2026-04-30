@@ -18,9 +18,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult;
 using PagedListResultNet5Tests.Data;
 using PagedListResultNet5Tests.Models;
+using RzR.ResultMessage.Pagination;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

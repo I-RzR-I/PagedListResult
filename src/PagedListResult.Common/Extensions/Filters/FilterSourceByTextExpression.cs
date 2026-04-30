@@ -16,17 +16,18 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using DomainCommonExtensions.Utilities.Ensure;
-using PagedListResult.Common.Extensions.Internal;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Text;
+using RzR.Extensions.Domain.Validation;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Filters
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Filter source query by provider search text and/or searchProperties.</summary>

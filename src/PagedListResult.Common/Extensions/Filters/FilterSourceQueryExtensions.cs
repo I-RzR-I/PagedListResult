@@ -16,13 +16,13 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Extensions.Internal.Common;
-using PagedListResult.Common.Helpers.Internal.Builder;
-using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.DataModels.Enums;
-using PagedListResult.DataModels.Models.Request;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,7 +30,7 @@ using System.Linq;
 
 // ReSharper disable PossibleMultipleEnumeration
 
-namespace PagedListResult.Common.Extensions.Filters
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Filter query extensions.</summary>

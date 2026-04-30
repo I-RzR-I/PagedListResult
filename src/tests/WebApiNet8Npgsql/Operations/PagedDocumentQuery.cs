@@ -16,7 +16,7 @@
 
 #region U S A G E S
 
-using PagedListResult.DataModels.Models.Request.Page;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
 
 #endregion
 

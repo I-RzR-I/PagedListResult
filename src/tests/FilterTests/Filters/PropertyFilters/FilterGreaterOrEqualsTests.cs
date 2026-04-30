@@ -22,7 +22,7 @@ using FilterTests.Data;
 using FilterTests.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult.Common.Extensions.Filters.PropertyFilterQuery;
+using RzR.ResultMessage.Pagination.Core.Extensions.Filters.PropertyFilterQuery;
 
 #endregion
 

@@ -16,15 +16,15 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.CommonExtensions.Reflection;
-using DomainCommonExtensions.DataTypeExtensions;
-using DomainCommonExtensions.Utilities.Ensure;
-using PagedListResult.Common.Extensions.Internal.Common;
-using PagedListResult.Common.Helpers.Internal.Builder;
-using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.Common.Helpers.Internal.ConstNamesHelper;
-using PagedListResult.DataModels.Enums;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Reflection;
+using RzR.Extensions.Domain.Text;
+using RzR.Extensions.Domain.Validation;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.ConstNamesHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +32,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Internal
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>A queryable parameter property extensions.</summary>

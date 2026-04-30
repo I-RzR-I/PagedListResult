@@ -16,20 +16,21 @@
 
 #region U S A G E S
 
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Text;
+using RzR.Extensions.Domain.Validation;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Core.Helpers;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.ConstNamesHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DomainCommonExtensions.DataTypeExtensions;
-using DomainCommonExtensions.Utilities.Ensure;
-using PagedListResult.Common.Extensions.Internal;
-using PagedListResult.Common.Helpers;
-using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.Common.Helpers.Internal.ConstNamesHelper;
-using PagedListResult.DataModels.Enums;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Filters
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Filter query source ordering.</summary>

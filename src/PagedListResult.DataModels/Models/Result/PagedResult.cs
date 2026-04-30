@@ -16,9 +16,8 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using PagedListResult.DataModels.Abstractions;
-using PagedListResult.DataModels.Extensions;
+using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
+using RzR.ResultMessage.Pagination.Abstractions.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
@@ -29,14 +28,14 @@ using System.Xml.Serialization;
 
 #endregion
 
-namespace PagedListResult.DataModels.Models.Result
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Result
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     Encapsulates the result of a paged.
     /// </summary>
     /// <typeparam name="TSource">Type of the source.</typeparam>
-    /// <seealso cref="T:AggregatedGenericResultMessage.Result{System.Collections.Generic.IList{TSource}}"/>
+    /// <seealso cref="T:RzR.ResultMessage.Result{System.Collections.Generic.IList{TSource}}"/>
     /// <seealso cref="T:PagedListResult.Common.Abstractions.IPagedResult{TSource}"/>
     /// =================================================================================================
     public class PagedResult<TSource> : Result<IList<TSource>>, IPagedResult<TSource>
@@ -99,7 +98,7 @@ namespace PagedListResult.DataModels.Models.Result
             set => _hasNextPage = (value != CurrentPage < PageCount) ? CurrentPage < PageCount : null;
         }
 
-        /// <inheritdoc cref="AggregatedGenericResultMessage.Result"/>
+        /// <inheritdoc cref="RzR.ResultMessage.Result"/>
         [XmlArray]
         public override IList<TSource> Response { get; set; }
 

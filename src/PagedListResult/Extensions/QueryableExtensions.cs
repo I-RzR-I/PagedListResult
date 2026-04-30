@@ -16,11 +16,11 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.CommonExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using RzR.Extensions.Domain.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ using System.Reflection;
 
 #endregion
 
-namespace PagedListResult.Extensions
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions
 {
     internal static class QueryableExtensions
     {

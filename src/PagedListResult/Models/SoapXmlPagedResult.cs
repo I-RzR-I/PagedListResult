@@ -16,20 +16,19 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 #endregion
 
-namespace PagedListResult.Models
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Models
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     Encapsulates the result of a SOAP/XML paged.
     /// </summary>
-    /// <seealso cref="T:AggregatedGenericResultMessage.SoapResult"/>
+    /// <seealso cref="T:RzR.ResultMessage.SoapResult"/>
     /// =================================================================================================
     [Serializable]
     [DataContract(Name = "SoapXmlPagedResult")]

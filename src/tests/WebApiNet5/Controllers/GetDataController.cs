@@ -14,14 +14,15 @@
 //  </summary>
 // ***********************************************************************
 
-using AggregatedGenericResultMessage.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PagedListResult;
-using PagedListResult.DataModels.Enums;
-using PagedListResult.DataModels.Models.Result;
-using PagedListResult.Web;
+using RzR.ResultMessage.Models;
+using RzR.ResultMessage.Pagination;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
+using RzR.ResultMessage.Pagination.AspNetCore;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

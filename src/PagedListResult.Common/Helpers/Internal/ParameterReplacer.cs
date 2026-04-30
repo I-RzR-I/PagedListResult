@@ -20,7 +20,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Helpers.Internal
+namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>A parameter replacer.</summary>

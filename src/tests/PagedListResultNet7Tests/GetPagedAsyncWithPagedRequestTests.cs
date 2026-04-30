@@ -16,16 +16,17 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PagedListResult;
-using PagedListResult.DataModels.Enums;
-using PagedListResult.DataModels.Models.Request;
-using PagedListResult.DataModels.Models.Request.Page;
 using PagedListResultNet7Tests.Data;
 using PagedListResultNet7Tests.Models;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Text;
+using RzR.ResultMessage.Pagination;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

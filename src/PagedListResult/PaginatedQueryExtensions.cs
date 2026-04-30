@@ -16,20 +16,20 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.EntityFrameworkCore;
-using MockAsyncEnumerable;
-using PagedListResult.Common.Extensions.Filters;
-using PagedListResult.Common.Helpers;
-using PagedListResult.Common.Helpers.Internal.Common;
-using PagedListResult.DataModels.Enums;
-using PagedListResult.DataModels.Models.Request;
-using PagedListResult.DataModels.Models.Request.Page;
-using PagedListResult.DataModels.Models.Result;
-using PagedListResult.Extensions;
-using PagedListResult.Helpers;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Text;
+using RzR.Extensions.EntityMock.Extensions;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
+using RzR.ResultMessage.Pagination.Core.Extensions.Filters;
+using RzR.ResultMessage.Pagination.Core.Helpers;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions;
+using RzR.ResultMessage.Pagination.EntityFrameworkCore.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,7 +40,7 @@ using System.Threading.Tasks;
 
 #endregion
 
-namespace PagedListResult
+namespace RzR.ResultMessage.Pagination.EntityFrameworkCore
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Paginated query extensions.</summary>
@@ -357,7 +357,9 @@ namespace PagedListResult
                 var res = new List<TSource>();
                 if (prePredefinedInfo.HasIds)
                 {
-                    var topXRecords = await EnumerableInvoker.Invoke(query.GetInTopPredefinedRecords(prePredefinedInfo.PredefinedFieldIds, prePredefinedInfo.PredefinedFieldNames))
+                    var topXRecords = await query
+                        .GetInTopPredefinedRecords(prePredefinedInfo.PredefinedFieldIds, prePredefinedInfo.PredefinedFieldNames)
+                        .ToMockAsyncEnumerable()
                         .ToListAsync(cancellationToken);
                     res.AddRange(topXRecords);
 

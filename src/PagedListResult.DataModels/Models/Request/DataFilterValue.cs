@@ -16,8 +16,8 @@
 
 #region U S A G E S
 
-using PagedListResult.DataModels.Enums;
-using PagedListResult.DataModels.Extensions;
+using RzR.ResultMessage.Pagination.Abstractions.Enums;
+using RzR.ResultMessage.Pagination.Abstractions.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations;
 
 #endregion
 
-namespace PagedListResult.DataModels.Models.Request
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Request
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Data filter value.</summary>

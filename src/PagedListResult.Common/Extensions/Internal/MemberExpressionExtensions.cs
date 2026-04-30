@@ -16,14 +16,13 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.CommonExtensions.Reflection;
+using RzR.Extensions.Domain.Reflection;
 using System;
 using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Internal
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>MemberExpression extensions.</summary>

@@ -22,7 +22,7 @@ using System.ComponentModel.DataAnnotations;
 
 #endregion
 
-namespace PagedListResult.DataModels.Models.Request.Page
+namespace RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Page request settings.</summary>

@@ -16,18 +16,17 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.ArraysExtensions;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Extensions.Internal;
-using PagedListResult.Common.Helpers;
-using PagedListResult.Common.Helpers.Internal.Common;
+using RzR.Extensions.Domain.Collections;
+using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal;
+using RzR.ResultMessage.Pagination.Core.Helpers;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Filters
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Predefined record extensions.</summary>
@@ -55,10 +54,12 @@ namespace PagedListResult.Common.Extensions.Filters
             if (defaultProperty.IsSuccess.IsFalse())
                 ThrowHelper.Exception(defaultProperty.GetFirstMessage());
 
-            var propertyName = defaultProperty.Response.Name;
+            var propertyName = defaultProperty.Response?.Name;
 
             defaultPrimaryKeys = (defaultPrimaryKeys ?? new List<string>()).Where(x => x.IsNotNull()).ToList();
-            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new[] { propertyName } : defaultPrimaryKeys;
+            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() && propertyName.IsNotNull()
+                ? new string[] { propertyName }
+                : defaultPrimaryKeys;
 
             if (defaultPrimaryKeys.IsNullOrEmptyEnumerable())
                 ThrowHelper.Exception(
@@ -87,10 +88,12 @@ namespace PagedListResult.Common.Extensions.Filters
             if (defaultProperty.IsSuccess.IsFalse())
                 ThrowHelper.Exception(defaultProperty.GetFirstMessage());
 
-            var propertyName = defaultProperty.Response.Name;
+            var propertyName = defaultProperty.Response?.Name;
 
             defaultPrimaryKeys = (defaultPrimaryKeys ?? new List<string>()).Where(x => x.IsNotNull()).ToList();
-            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() ? new[] { propertyName } : defaultPrimaryKeys;
+            defaultPrimaryKeys = defaultPrimaryKeys.IsNullOrEmptyEnumerable() && propertyName.IsNotNull()
+                ? new string[] { propertyName }
+                : defaultPrimaryKeys;
 
             if (defaultPrimaryKeys.IsNullOrEmptyEnumerable())
                 ThrowHelper.Exception(

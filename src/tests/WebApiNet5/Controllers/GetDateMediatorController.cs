@@ -14,12 +14,12 @@
 //  </summary>
 // ***********************************************************************
 
-using AggregatedGenericResultMessage.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PagedListResult.DataModels.Models.Result;
-using PagedListResult.Web;
+using RzR.ResultMessage.Models;
+using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
+using RzR.ResultMessage.Pagination.AspNetCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;

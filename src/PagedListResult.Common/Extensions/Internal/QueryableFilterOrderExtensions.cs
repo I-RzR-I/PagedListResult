@@ -16,10 +16,10 @@
 
 #region U S A G E S
 
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
-using PagedListResult.Common.Helpers;
-using PagedListResult.Common.Helpers.Internal.Common;
+using RzR.Extensions.Domain.Primitives;
+using RzR.Extensions.Domain.Text;
+using RzR.ResultMessage.Pagination.Core.Helpers;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ using System.Linq.Expressions;
 
 #endregion
 
-namespace PagedListResult.Common.Extensions.Internal
+namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Query filter order extensions.</summary>
