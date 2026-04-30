@@ -1,3 +1,26 @@
+### **v4.0.0.7837** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 30-04-2026
+| Old (3.x)                      | New (4.x)         	                              |
+|----------------------------------|------------------------------------------------------|
+| `PagedListResult.DataModels`     | `RzR.ResultMessage.Pagination.Abstractions`          |
+| `PagedListResult.Common`         | `RzR.ResultMessage.Pagination.Core`                  |
+| `PagedListResult`                | `RzR.ResultMessage.Pagination.EntityFrameworkCore`   |
+|  						           | `RzR.ResultMessage.Pagination.AspNetCore`            |
+
+
+
+* [DEV] - (RzR) -> ASP.NET Core: `BaseApiPagedResultController.PagedOkResult` / `PagedXmlResult` with RFC 9457 `ProblemDetails` on failure.
+* [DEV] - (RzR) -> ASP.NET Core: `[FromPagedQuery]` MVC binder + `PagedQuery<T>` / `PagedQueryWithFilters<T>` minimal-API wrappers (shared parser, allow-list validation).
+* [DEV] - (RzR) -> ASP.NET Core: `AddPagedListResultWeb(...)` registers options, model binder, action filter, and (NET 7+) `WithPagedResult()` endpoint filter.
+* [DEV] - (RzR) -> ASP.NET Core: `ToPagedHttpResult(...)` preserves the full paged envelope (fixes upstream `ToHttpResult` dropping paging metadata).
+* [DEV] - (RzR) -> ASP.NET Core: response headers `X-Total-Count`, `X-Page-Count`, `X-Page-Size`, `X-Current-Page`, RFC 5988 `Link`, optional `Server-Timing`.
+* [DEV] - (RzR) -> OpenAPI: `AddPagedListResultApiExplorer()` auto-attaches `[ProducesResponseType]` for `IPagedResult<T>` actions.
+* [DEV] - (RzR) -> Core: `SearchInAllFields` mode and per-entity allow-list registration via `ConfigurePageable<T>(...)`.
+* [DEV] - (RzR) -> Core: extra validation when `PredefinedRecord.PredefinedFieldName` is not provided; safer property/value conversion in filters.
+* [DEV] - (RzR) -> Change root namespace from `PagedListResult` to `RzR.ResultMessage.Pagination`. Decouple web component `PagedListResult`.
+
+* [FIX] - (RzR) -> `BaseApiPagedResultController.JsonResult<T>` / `XmlResult<T>` are `[Obsolete]` (collision with `Microsoft.AspNetCore.Mvc.JsonResult`); use `PagedOkResult` / `PagedXmlResult`. Will be removed in `5.0.0`.
+* [FIX] - (RzR) -> `PagedResult<T>` overloads on `BaseApiPagedResultController` removed in favor of the `IPagedResult<T>` overloads.
+
 ### **v3.1.3.4848** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 30-03-2026
 * [5ca0ecd] (RzR) -> Auto commit uncommited files
 * [97d65c9] (RzR) -> Add new .net8 api for test
