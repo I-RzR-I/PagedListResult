@@ -32,8 +32,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="AggregatedGenericResultMessage" Version="2.0.0.4127" />
-		<PackageReference Include="CodeSource" Version="5.0.0.7373" />
+		<PackageReference Include="RzR.ResultMessage" Version="	3.0.0.6928" />
+		<PackageReference Include="RzR.Core.CodeSource" Version="6.0.0.94" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
