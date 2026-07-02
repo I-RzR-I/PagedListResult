@@ -1,3 +1,11 @@
+### **v5.0.0.8548** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 02-07-2026
+* [637655b] (RzR) -> Auto commit uncommited files
+* [0591e26] (RzR) -> Fix ExecutionTimeMs assertion in Net7 paged test
+* [79da268] (RzR) -> Adapt the using and readme documentation.
+* [3613315] (RzR) -> Rename MinimalApi folder and namespace to Query
+* [b765741] (RzR) -> Add query-string paged binding working on both MVC and Minimal API
+* [a7c1ced] (RzR) -> Update package references to packages
+
 ### **v4.0.0.7837** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 30-04-2026
 | Old (3.x)                      | New (4.x)         	                              |
 |----------------------------------|------------------------------------------------------|

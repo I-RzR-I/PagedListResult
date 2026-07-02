@@ -2,7 +2,7 @@
 using RzR.ResultMessage.Pagination;
 using RzR.ResultMessage.Pagination.AspNetCore.Configuration;
 using RzR.ResultMessage.Pagination.AspNetCore.Extensions;
-using RzR.ResultMessage.Pagination.AspNetCore.MinimalApi;
+using RzR.ResultMessage.Pagination.AspNetCore.Query;
 using RzR.ResultMessage.Pagination.EntityFrameworkCore;
 using WebApiPagedResultDemo.Data;
 
@@ -28,10 +28,10 @@ builder.Services.AddSwaggerGen(o =>
 builder.Services
     .AddPagedListResultWeb(opts =>
     {
-        opts.DefaultPageSize       = 10;
-        opts.MaxPageSize           = 100;
-        opts.EmitTotalCountHeader  = true;   // X-Total-Count / X-Page-* headers
-        opts.EmitLinkHeader        = true;   // RFC 5988 Link header
+        opts.DefaultPageSize = 10;
+        opts.MaxPageSize = 100;
+        opts.EmitTotalCountHeader = true;   // X-Total-Count / X-Page-* headers
+        opts.EmitLinkHeader = true;   // RFC 5988 Link header
         opts.EmitServerTimingHeader = true;  // Server-Timing: paged;dur=<ms>
     })
 
@@ -82,7 +82,7 @@ minimal.MapGet("/typed", async (PagedQuery<Product> query, SampleDataStore store
 
     var result = await store.All().ToMockAsyncEnumerable().GetPagedAsync(query);
 
-    return PagedResultsHttpExtensions.ToPagedHttpResult<Product>(result, ctx);
+    return result.ToPagedHttpResult<Product>(ctx);
 })
 .WithName("MinimalProducts_PagedQuery");
 
@@ -100,7 +100,7 @@ minimal.MapGet("/filtered", async (PagedQueryWithFilters<Product> query, SampleD
 
     var result = await store.All().ToMockAsyncEnumerable().GetPagedWithFiltersAsync(query);
 
-    return PagedResultsHttpExtensions.ToPagedHttpResult<Product>(result, ctx);
+    return result.ToPagedHttpResult<Product>(ctx);
 })
 .WithName("MinimalProducts_PagedQueryWithFilters");
 

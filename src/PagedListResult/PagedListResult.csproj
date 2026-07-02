@@ -86,7 +86,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="MockAsyncEnumerable" Version="3.0.0.3872" />
+		<PackageReference Include="RzR.Extensions.EntityMock" Version="4.0.0.8144" />
 	</ItemGroup>
 
 	<ItemGroup>

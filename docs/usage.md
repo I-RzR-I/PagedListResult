@@ -266,13 +266,17 @@ public IActionResult List(
 
 The binder is registered automatically by `AddPagedListResultWeb()` (see section 5).
 
+> The `PagedQuery<TEntity>` / `PagedQueryWithFilters<TEntity>` wrappers from section 4.1 also accept `[FromPagedQuery]` in MVC actions; they behave the same as above and additionally expose their validation state on `IsValid` / `Errors`.
+
 ---
 
 ## 4. Minimal-API integration (.NET 7+)
 
 ### 4.1 `PagedQuery<TEntity>` and `PagedQueryWithFilters<TEntity>`
 
-Both wrappers implement the `BindAsync(HttpContext, ParameterInfo)` pattern recognized by ASP.NET Core, so endpoint handlers can accept them directly as parameters. They use the very same parser that the MVC binder uses, including allow-list validation.
+Both wrappers live in the `RzR.ResultMessage.Pagination.AspNetCore.Query` namespace and implement the `BindAsync(HttpContext, ParameterInfo)` pattern recognized by ASP.NET Core, so **minimal-API** handlers can accept them directly as parameters. They use the very same parser that the MVC `[FromPagedQuery]` binder uses, including allow-list validation.
+
+> **Dual-host.** Despite living under "minimal-API integration", these types also bind in **MVC** controllers when decorated with `[FromPagedQuery]`. There the model binder surfaces parse errors on the instance's own `IsValid` / `Errors` (via `IPagedQueryValidation`) in addition to `ModelState`. For ordinary MVC actions the plain `PagedRequest` / `PageRequestWithFilters` types are usually preferred — under `[ApiController]` the automatic `400 ValidationProblem` handles validation before the action runs — so reach for the wrappers in MVC only when you want to inspect `IsValid` yourself (e.g. a controller without `[ApiController]`).
 
 ```csharp
 app.MapGet("/products",
@@ -378,7 +382,7 @@ If you do not register an allow-list for a type, no allow-list validation is app
 
 ## 6. The query-string syntax
 
-Both the MVC binder (`[FromPagedQuery]`) and the minimal-API wrappers share a single parser. The supported keys are exposed as constants on `PagedQueryKeys`:
+Both the MVC binder (`[FromPagedQuery]`) and the `PagedQuery<T>` / `PagedQueryWithFilters<T>` wrappers share a single parser. The supported keys are exposed as constants on `PagedQueryKeys`:
 
 | Key | Example | Notes |
 |-----|---------|-------|

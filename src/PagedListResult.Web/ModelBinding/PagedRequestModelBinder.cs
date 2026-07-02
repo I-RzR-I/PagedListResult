@@ -94,6 +94,19 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.ModelBinding
             if (parseResult.IsValid.IsFalse())
             {
                 CopyErrorsToModelState(parseResult, bindingContext.ModelState);
+
+                if (request is IPagedQueryValidation pagedQueryValidation)
+                {
+                    foreach (var kvp in parseResult.Errors)
+                    {
+                        pagedQueryValidation.Errors[kvp.Key] = kvp.Value;
+                    }
+
+                    bindingContext.Result = ModelBindingResult.Success(request);
+
+                    return Task.CompletedTask;
+                }
+
                 bindingContext.Result = ModelBindingResult.Failed();
 
                 return Task.CompletedTask;

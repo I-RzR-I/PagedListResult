@@ -47,7 +47,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore
         ///     ambient <see cref="RzR.ResultMessage.Web.Abstractions.IProblemDetailsResultFactory"/>
         ///     (defaults to 400; customize via
         ///     <c>services.AddProblemDetailsResultFactory&lt;TFactory&gt;()</c> from
-        ///     <c>AggregatedGenericResultMessage.Web</c>).
+        ///     <c>RzR.ResultMessage.Web</c>).
         /// </summary>
         /// <remarks>
         ///     RzR, 15-Nov-23.

@@ -55,7 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DomainCommonExtensions" Version="5.0.0.7637" />
+		<PackageReference Include="RzR.Extensions.Domain" Version="6.0.0.8301" />
 	</ItemGroup>
 
 	<ItemGroup>
