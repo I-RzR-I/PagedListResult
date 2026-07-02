@@ -25,9 +25,9 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Attributes
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
-    ///     Marks a controller / minimal-API parameter (a <c>PagedRequest</c> or
+    ///     Marks an MVC controller action parameter (a <c>PagedRequest</c> or
     ///     <c>PageRequestWithFilters</c>) as bound from the request query string by the
-    ///     <c>PagedRequestQueryParser</c>.
+    ///     <c>PagedRequestQueryParser</c>. This attribute is the MVC binding mechanism only.
     /// </summary>
     /// <remarks>
     ///     <para>
@@ -40,8 +40,14 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Attributes
     ///         complex-object binder (i.e. body-bound usages remain backwards compatible).
     ///     </para>
     ///     <para>
+    ///         For Minimal API endpoints, do not use this attribute — it is not recognized by
+    ///         Minimal API parameter binding. Instead, declare the handler parameter as
+    ///         <c>PagedQuery&lt;TEntity&gt;</c> or <c>PagedQueryWithFilters&lt;TEntity&gt;</c>,
+    ///         which bind themselves from the query string via their static <c>BindAsync</c> method.
+    ///     </para>
+    ///     <para>
     ///         <example>
-    ///             Plain query binding (no allow-list):
+    ///             MVC controller action, plain query binding (no allow-list):
     ///             <code>
     ///             [HttpGet]
     ///             public IActionResult List([FromPagedQuery] PagedRequest request)
@@ -50,7 +56,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Attributes
     ///             </code>
     ///         </example>
     ///         <example>
-    ///             Allow-listed binding with filters:
+    ///             MVC controller action, allow-listed binding with filters:
     ///             <code>
     ///             // Startup:
     ///             services.AddPagedListResultWeb()
