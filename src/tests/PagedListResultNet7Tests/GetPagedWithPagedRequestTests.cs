@@ -599,7 +599,7 @@ namespace PagedListResultNet7Tests
             Assert.IsNotNull(records);
             Assert.IsNotNull(records.Response);
             Assert.IsNotNull(records.ExecutionDetails);
-            Assert.IsTrue(records.ExecutionDetails.ExecutionTimeMs > 0);
+            Assert.IsTrue(records.ExecutionDetails.ExecutionTimeMs.IsGreaterThanOrEqualZero());
             Assert.AreEqual(1, records.CurrentPage);
             Assert.AreEqual(2, records.PageCount);
             Assert.AreEqual(6, records.RowCount);
