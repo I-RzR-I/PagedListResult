@@ -24,7 +24,7 @@ using PagedListResultWebTests.Stubs;
 using RzR.ResultMessage.Pagination.Abstractions.Enums;
 using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
 using RzR.ResultMessage.Pagination.AspNetCore.Builders;
-using RzR.ResultMessage.Pagination.AspNetCore.MinimalApi;
+using RzR.ResultMessage.Pagination.AspNetCore.Query;
 using RzR.ResultMessage.Pagination.AspNetCore.Registries;
 using System;
 using System.Collections.Generic;

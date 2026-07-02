@@ -22,24 +22,51 @@ using Microsoft.AspNetCore.Http;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
 using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
 using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.AspNetCore.MinimalApi
+namespace RzR.ResultMessage.Pagination.AspNetCore.Query
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
-    ///     Minimal-API bindable wrapper around <see cref="PagedRequest" />. Implements the
-    ///     <c>BindAsync(HttpContext, ParameterInfo)</c> pattern recognized by ASP.NET Core's
-    ///     parameter binding so endpoint handlers can accept it directly from the query string.
+    ///     Query-string bindable wrapper around <see cref="PagedRequest" />. Usable in <b>both</b>
+    ///     hosting models, though the binding <em>mechanism</em> differs per host:
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <b>Minimal API</b> (NET7+): binds itself via the
+    ///             <c>BindAsync(HttpContext, ParameterInfo)</c> pattern — no attribute required.
+    ///             Errors surface on <see cref="Errors" /> / <see cref="IsValid" />, which you check
+    ///             in the handler.
+    ///         </item>
+    ///         <item>
+    ///             <b>MVC controllers</b>: <c>BindAsync</c> is ignored; the parameter must be
+    ///             decorated with <c>[FromPagedQuery]</c> so
+    ///             <see cref="T:RzR.ResultMessage.Pagination.AspNetCore.ModelBinding.PagedRequestModelBinder" />
+    ///             binds it. Parse errors are written to <c>ModelState</c> (an <c>[ApiController]</c>
+    ///             auto-returns <c>400 ValidationProblem</c>) <em>and</em>, via
+    ///             <see cref="T:RzR.ResultMessage.Pagination.AspNetCore.Abstractions.IPagedQueryValidation" />,
+    ///             are also copied onto this instance's <see cref="Errors" /> so <see cref="IsValid" />
+    ///             stays trustworthy.
+    ///         </item>
+    ///     </list>
     /// </summary>
     /// <typeparam name="TEntity">
     ///     The entity type used for allow-list look-up via <see cref="IPageableMetadataRegistry" />.
     /// </typeparam>
     /// <remarks>
+    ///     <para>
+    ///         For MVC actions, the plain <c>PagedRequest</c> / <c>PageRequestWithFilters</c> types
+    ///         (with <c>[FromPagedQuery]</c>) are usually preferred — under <c>[ApiController]</c> the
+    ///         automatic 400 already handles validation before the action runs, so
+    ///         <see cref="IsValid" /> is never observed there. Reach for this wrapper type in MVC only
+    ///         on a controller <em>without</em> <c>[ApiController]</c> (or with
+    ///         <c>SuppressModelStateInvalidFilter = true</c>), where the handler runs and you inspect
+    ///         <see cref="IsValid" /> yourself — the same model as Minimal API.
+    ///     </para>
     ///     <example>
     ///         A complete minimal-API endpoint:
     ///         <code>
@@ -67,7 +94,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.MinimalApi
     ///     </example>
     /// </remarks>
     /// =================================================================================================
-    public class PagedQuery<TEntity> : PagedRequest
+    public class PagedQuery<TEntity> : PagedRequest, IPagedQueryValidation
         where TEntity : class
     {
         /// -------------------------------------------------------------------------------------------------
@@ -79,7 +106,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.MinimalApi
         /// </value>
         /// =================================================================================================
         public IDictionary<string, string> Errors { get; internal set; } =
-            new Dictionary<string, string>();
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>

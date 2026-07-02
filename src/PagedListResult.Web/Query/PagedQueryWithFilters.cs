@@ -20,21 +20,34 @@
 
 using Microsoft.AspNetCore.Http;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
+using RzR.ResultMessage.Pagination.AspNetCore.Abstractions;
 using RzR.ResultMessage.Pagination.AspNetCore.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
 #endregion
 
-namespace RzR.ResultMessage.Pagination.AspNetCore.MinimalApi
+namespace RzR.ResultMessage.Pagination.AspNetCore.Query
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>
-    ///     Minimal-API bindable wrapper around <see cref="PageRequestWithFilters" />. Adds
+    ///     Query-string bindable wrapper around <see cref="PageRequestWithFilters" />. Adds
     ///     support for the repeatable <c>?filter=</c> query parameter on top of
     ///     <see cref="PagedQuery{TEntity}" />. Multiple filters are AND-combined by repeating
     ///     the key, e.g. <c>?filter=status:Equals:active&amp;filter=price:GreaterThan:50</c>.
+    ///     <para>
+    ///         Like <see cref="PagedQuery{TEntity}" />, this type binds in <b>both</b> hosts:
+    ///         self-binding via <c>BindAsync</c> in Minimal API (NET7+, no attribute), and via
+    ///         <c>[FromPagedQuery]</c> +
+    ///         <see cref="T:RzR.ResultMessage.Pagination.AspNetCore.ModelBinding.PagedRequestModelBinder" />
+    ///         in MVC controllers (<c>BindAsync</c> is ignored there). In MVC, parse errors go to
+    ///         <c>ModelState</c> (auto-400 under <c>[ApiController]</c>) and — via
+    ///         <see cref="T:RzR.ResultMessage.Pagination.AspNetCore.Abstractions.IPagedQueryValidation" />
+    ///         — onto this instance's <see cref="Errors" /> so <see cref="IsValid" /> is reliable.
+    ///         See <see cref="PagedQuery{TEntity}" /> for the full per-host guidance.
+    ///     </para>
     /// </summary>
     /// <remarks>
     ///     <example>
@@ -51,7 +64,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.MinimalApi
     ///     </example>
     /// </remarks>
     /// =================================================================================================
-    public sealed class PagedQueryWithFilters<TEntity> : PageRequestWithFilters
+    public sealed class PagedQueryWithFilters<TEntity> : PageRequestWithFilters, IPagedQueryValidation
         where TEntity : class
     {
         /// -------------------------------------------------------------------------------------------------
@@ -63,7 +76,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.MinimalApi
         /// </value>
         /// =================================================================================================
         public IDictionary<string, string> Errors { get; internal set; } =
-            new Dictionary<string, string>();
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
