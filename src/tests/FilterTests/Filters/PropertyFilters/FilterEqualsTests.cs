@@ -16,6 +16,7 @@
 
 #region U S A G E S
 
+using System;
 using System.Linq;
 using FilterTests.Data;
 using FilterTests.Models;
@@ -72,6 +73,72 @@ namespace FilterTests.Filters.PropertyFilters
 
             //Assert
             filtered.Count().Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void Equals_Guid_Test()
+        {
+            //Act
+            var filtered = _fakeItems.PropertyEquals("uniqueId", "11111111-1111-1111-1111-111111111111");
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(0);
+        }
+
+        [TestMethod]
+        public void Equals_NullableGuid_WithValue_Test()
+        {
+            //Act
+            var filtered = _fakeItems.PropertyEquals("optionalUniqueId", "22222222-2222-2222-2222-222222222222");
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void Equals_Int_Test()
+        {
+            //Act
+            var filtered = _fakeItems.PropertyEquals("count", "100");
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void Equals_DateTimeOffset_Test()
+        {
+            //Act
+            var filtered = _fakeItems.PropertyEquals("createdAt", new DateTimeOffset(2010, 7, 1, 0, 0, 0, TimeSpan.Zero).ToString("o"));
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void Equals_TimeSpan_Test()
+        {
+            //Act
+            var filtered = _fakeItems.PropertyEquals("duration", TimeSpan.FromHours(1).ToString());
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void Equals_Enum_ByName_Test()
+        {
+            //Act
+            var filtered = _fakeItems.PropertyEquals("status", nameof(TestItemStatus.Active));
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(1);
         }
     }
 }

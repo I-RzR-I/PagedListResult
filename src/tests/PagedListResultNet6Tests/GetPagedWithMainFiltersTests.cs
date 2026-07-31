@@ -98,8 +98,10 @@ namespace PagedListResultNet6Tests
                     Title = x.Title
                 });
 
-            await Assert.ThrowsExceptionAsync<Exception>(
-                () => query.GetPagedWithMainFiltersAsync(pageRequest));
+            var records = await query.GetPagedWithMainFiltersAsync(pageRequest);
+
+            Assert.IsNotNull(records);
+            Assert.IsFalse(records.IsSuccess);
         }
 
         [TestMethod]

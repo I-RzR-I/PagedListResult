@@ -323,6 +323,28 @@ namespace FilterTests.Filters.QueryFiltrable
         }
 
         [TestMethod]
+        public void AsFilterable_Id_Equals_Guid_Should_1_Test()
+        {
+            //Act
+            var filtered = _fakeItems.AsFilterable(new List<DataFilter>
+            {
+                new DataFilter
+                {
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "uniqueId",
+                        Values = new List<string> { "22222222-2222-2222-2222-222222222222" },
+                        Condition = FilterType.Equals
+                    }
+                }
+            });
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(1);
+        }
+
+        [TestMethod]
         public void AsFilterable_Should_3x_Test()
         {
             //Act
@@ -383,6 +405,51 @@ namespace FilterTests.Filters.QueryFiltrable
 
             //Assert
             filtered.Count().Should().Be(4);
+        }
+
+        [TestMethod]
+        public void TryAsFilterable_Id_Equals_Guid_Should_Succeed_Test()
+        {
+            //Act
+            var result = _fakeItems.TryAsFilterable(new List<DataFilter>
+            {
+                new DataFilter
+                {
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "uniqueId",
+                        Values = new List<string> { "22222222-2222-2222-2222-222222222222" },
+                        Condition = FilterType.Equals
+                    }
+                }
+            });
+
+            //Assert
+            result.IsSuccess.Should().BeTrue();
+            result.Response.Count().Should().Be(1);
+            result.Response.Single().Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void TryAsFilterable_UnknownProperty_Should_Fail_Test()
+        {
+            //Act
+            var result = _fakeItems.TryAsFilterable(new List<DataFilter>
+            {
+                new DataFilter
+                {
+                    FilterValue = new DataFilterValue
+                    {
+                        PropertyName = "doesNotExist",
+                        Values = new List<string> { "1" },
+                        Condition = FilterType.Equals
+                    }
+                }
+            });
+
+            //Assert
+            result.IsSuccess.Should().BeFalse();
+            result.GetFirstMessage().Should().NotBeNullOrEmpty();
         }
     }
 }

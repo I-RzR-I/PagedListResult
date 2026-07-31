@@ -21,6 +21,9 @@ using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
 using RzR.Extensions.EntityMock.Extensions;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Models;
 using RzR.ResultMessage.Pagination.Abstractions.Enums;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Request.Page;
@@ -34,6 +37,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -431,13 +435,22 @@ namespace RzR.ResultMessage.Pagination.EntityFrameworkCore
             if (request.IsNull())
                 ThrowHelper.ArgumentNullException("Request can't be null");
 
-            InitValidationRequestFilter(request);
-
             var watch = TimeWatchHelper.Instance();
             watch.StartNew();
 
-            var resultData = await query
-                    .AsSimpleFilterable(request.Filters)
+            var validationMessage = ValidateRequestFilter(request);
+            if (validationMessage.IsPresent())
+                return FailedPagedResult<TSource>(request, validationMessage);
+
+            var filterableQuery = query.TryAsSimpleFilterable(request.Filters);
+            if (filterableQuery.IsSuccess.IsFalse())
+                return FailedPagedResult<TSource>(request, filterableQuery.GetFirstMessage());
+
+            var orderMessage = ValidateOrderProperty<TSource>(request);
+            if (orderMessage.IsPresent())
+                return FailedPagedResult<TSource>(request, orderMessage);
+
+            var resultData = await filterableQuery.Response
                     .GetPagedAsync(request, defaultPrimaryKey, cancellationToken);
 
             resultData.ExecutionDetails.SetExecutionTimeMs(watch.Stop(), DateTime.Now);
@@ -475,13 +488,22 @@ namespace RzR.ResultMessage.Pagination.EntityFrameworkCore
             if (request.IsNull())
                 ThrowHelper.ArgumentNullException("Request can't be null");
 
-            InitValidationRequestFilter(request);
-
             var watch = TimeWatchHelper.Instance();
             watch.StartNew();
 
-            var resultData = await query
-                .AsFilterable(request.Filters, filterLink)
+            var validationMessage = ValidateRequestFilter(request);
+            if (validationMessage.IsPresent())
+                return FailedPagedResult<TSource>(request, validationMessage);
+
+            var filterableQuery = query.TryAsFilterable(request.Filters, filterLink);
+            if (filterableQuery.IsSuccess.IsFalse())
+                return FailedPagedResult<TSource>(request, filterableQuery.GetFirstMessage());
+
+            var orderMessage = ValidateOrderProperty<TSource>(request);
+            if (orderMessage.IsPresent())
+                return FailedPagedResult<TSource>(request, orderMessage);
+
+            var resultData = await filterableQuery.Response
                 .GetPagedAsync(request, defaultPrimaryKey, cancellationToken);
 
             resultData.ExecutionDetails.SetExecutionTimeMs(watch.Stop(), DateTime.Now);
@@ -490,20 +512,79 @@ namespace RzR.ResultMessage.Pagination.EntityFrameworkCore
         }
 
         ///-------------------------------------------------------------------------------------------------
-        /// <summary>Initializes the validation request filter.</summary>
-        /// <remarks>RzR, 13-Nov-23.</remarks>
+        /// <summary>
+        ///     Validates the request filter without throwing.
+        /// </summary>
         /// <typeparam name="TPageRequest">Type of the page request.</typeparam>
         /// <param name="pageRequest">The page request.</param>
-        ///=================================================================================================
-        private static void InitValidationRequestFilter<TPageRequest>(TPageRequest pageRequest)
-        where TPageRequest : PageRequestWithFilters
+        /// <returns>
+        ///     The first validation error message, or <see langword="null"/> when valid.
+        /// </returns>
+        /// =================================================================================================
+        private static string ValidateRequestFilter<TPageRequest>(TPageRequest pageRequest)
+            where TPageRequest : PageRequestWithFilters
         {
             var requestValidation = pageRequest
                 .Validate(new ValidationContext(pageRequest, null, null)).ToList();
-            if (requestValidation.Any())
+
+            return requestValidation.Any() ? requestValidation.FirstOrDefault()?.ErrorMessage : null;
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Builds a failed <see cref="PagedResult{TSource}"/> carrying a single error message.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source.</typeparam>
+        /// <param name="request">The page request.</param>
+        /// <param name="message">The error message.</param>
+        /// <returns>
+        ///     A failed paged result.
+        /// </returns>
+        /// =================================================================================================
+        private static PagedResult<TSource> FailedPagedResult<TSource>(PageRequestWithFilters request, string message)
+            where TSource : class
+            => new PagedResult<TSource>
             {
-                ThrowHelper.Exception(requestValidation.FirstOrDefault()?.ErrorMessage);
-            }
+                IsSuccess = false,
+                Response = new List<TSource>(),
+                CurrentPage = request.Page,
+                PageSize = request.PageSize,
+                PageCount = 0,
+                RowCount = 0,
+                Messages = new List<IMessageModel>
+                {
+                    new MessageModel(nameof(PageRequestWithFilters.Filters), message, MessageType.Error)
+                }
+            };
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Validates the requested order/sort property without throwing. A client-supplied
+        ///     <c>OrderByProperty</c> that does not exist on <typeparamref name="TSource"/> would
+        ///     otherwise
+        ///     throw out of the ordering step and escape the paged-result pipeline as an unhandled
+        ///     exception.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source projection.</typeparam>
+        /// <param name="request">The page request.</param>
+        /// <returns>
+        ///     An error message when the order property is unknown, or <see langword="null"/> when
+        ///     valid/absent.
+        /// </returns>
+        /// =================================================================================================
+        private static string ValidateOrderProperty<TSource>(PageRequestWithFilters request)
+            where TSource : class
+        {
+            var orderProperty = request.Order?.OrderByProperty;
+            if (orderProperty.IsNullOrEmpty())
+                return null;
+
+            var exists = typeof(TSource).GetProperty(
+                orderProperty!, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase) != null;
+
+            return exists
+                ? null
+                : $"Order property '{orderProperty}' was not found on '{typeof(TSource).Name}'.";
         }
     }
 }

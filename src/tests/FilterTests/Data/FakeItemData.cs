@@ -41,7 +41,12 @@ namespace FilterTests.Data
                 IsBlocked = false,
                 Price = 1,
                 RetailPrice = (decimal?)1.2,
-                MinQuantity = null
+                MinQuantity = null,
+                UniqueId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                OptionalUniqueId = null,
+                CreatedAt = new DateTimeOffset(2010, 5, 1, 0, 0, 0, TimeSpan.Zero),
+                Duration = TimeSpan.FromMinutes(30),
+                Status = TestItemStatus.Pending
             },
             new TestItemDto
             {
@@ -53,7 +58,12 @@ namespace FilterTests.Data
                 Count = 10,
                 IsBlocked = true,
                 Price = 2,
-                MinQuantity = 0
+                MinQuantity = 0,
+                UniqueId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                OptionalUniqueId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                CreatedAt = new DateTimeOffset(2010, 7, 1, 0, 0, 0, TimeSpan.Zero),
+                Duration = TimeSpan.FromHours(1),
+                Status = TestItemStatus.Active
             },
             new TestItemDto
             {
@@ -67,7 +77,12 @@ namespace FilterTests.Data
                 IsBlocked = null,
                 Price = 3,
                 RetailPrice = (decimal?)4.2,
-                MinQuantity = 1
+                MinQuantity = 1,
+                UniqueId = Guid.Parse("33333333-3333-3333-3333-333333333333"),
+                OptionalUniqueId = null,
+                CreatedAt = new DateTimeOffset(2011, 7, 1, 0, 0, 0, TimeSpan.Zero),
+                Duration = TimeSpan.FromHours(2),
+                Status = TestItemStatus.Completed
             },
             new TestItemDto
             {
@@ -81,7 +96,12 @@ namespace FilterTests.Data
                 IsBlocked = null,
                 Price = 3,
                 RetailPrice = (decimal?)4.2,
-                MinQuantity = 10
+                MinQuantity = 10,
+                UniqueId = Guid.Parse("44444444-4444-4444-4444-444444444444"),
+                OptionalUniqueId = Guid.Parse("44444444-4444-4444-4444-444444444444"),
+                CreatedAt = new DateTimeOffset(2021, 7, 1, 0, 0, 0, TimeSpan.Zero),
+                Duration = TimeSpan.FromMinutes(90),
+                Status = TestItemStatus.Cancelled
             }
         });
     }
