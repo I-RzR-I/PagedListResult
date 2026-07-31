@@ -137,5 +137,33 @@ namespace FilterTests.Filters.QueryFiltrable
             //Assert
             filtered.Count().Should().Be(0);
         }
+
+        [TestMethod]
+        public void TryAsSimpleFilterable_UniqueId_Equals_Guid_Should_Succeed_Test()
+        {
+            //Act
+            var result = _fakeItems.TryAsSimpleFilterable(new List<DataFilter>
+            {
+                new DataFilter { FilterValue = new DataFilterValue { PropertyName = "uniqueId", Values = new List<string> { "11111111-1111-1111-1111-111111111111" }, Condition = FilterType.Equals } }
+            });
+
+            //Assert
+            result.IsSuccess.Should().BeTrue();
+            result.Response.Count().Should().Be(1);
+        }
+
+        [TestMethod]
+        public void TryAsSimpleFilterable_UnknownProperty_Should_Fail_Test()
+        {
+            //Act
+            var result = _fakeItems.TryAsSimpleFilterable(new List<DataFilter>
+            {
+                new DataFilter { FilterValue = new DataFilterValue { PropertyName = "doesNotExist", Values = new List<string> { "1" }, Condition = FilterType.Equals } }
+            });
+
+            //Assert
+            result.IsSuccess.Should().BeFalse();
+            result.GetFirstMessage().Should().NotBeNullOrEmpty();
+        }
     }
 }

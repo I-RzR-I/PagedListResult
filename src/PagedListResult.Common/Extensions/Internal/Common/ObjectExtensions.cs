@@ -17,6 +17,7 @@
 #region U S A G E S
 
 using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System;
 
 #endregion
@@ -41,13 +42,13 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common
             var t = typeof(T);
 
             if (!t.IsGenericType || t.GetGenericTypeDefinition() != typeof(Nullable<>))
-                return (T)Convert.ChangeType(value, t);
+                return (T)SafeTypeConvertHelper.ChangeType(value, t);
             if (value.IsNull())
                 return default;
 
             t = Nullable.GetUnderlyingType(t);
 
-            return (T)Convert.ChangeType(value, t!);
+            return (T)SafeTypeConvertHelper.ChangeType(value, t!);
         }
 
         ///-------------------------------------------------------------------------------------------------
@@ -62,13 +63,13 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common
             var t = conversion;
 
             if (!t.IsGenericType || t.GetGenericTypeDefinition() != typeof(Nullable<>))
-                return Convert.ChangeType(value, t);
+                return SafeTypeConvertHelper.ChangeType(value, t);
             if (value.IsNull())
                 return null;
 
             t = Nullable.GetUnderlyingType(t);
 
-            return Convert.ChangeType(value, t!);
+            return SafeTypeConvertHelper.ChangeType(value, t!);
         }
 
         ///-------------------------------------------------------------------------------------------------

@@ -102,8 +102,10 @@ namespace PagedListResultNet6Tests
                     ModifiedOn = x.ModifiedOn
                 });
 
-            await Assert.ThrowsExceptionAsync<Exception>(
-                () => query.GetPagedWithFiltersAsync(pageRequest));
+            var records = await query.GetPagedWithFiltersAsync(pageRequest);
+
+            Assert.IsNotNull(records);
+            Assert.IsFalse(records.IsSuccess);
         }
 
         [TestMethod]

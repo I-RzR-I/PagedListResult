@@ -105,8 +105,41 @@ namespace PagedListResultNet5Tests
                     ModifiedOn = x.ModifiedOn
                 });
 
-            await Assert.ThrowsExceptionAsync<Exception>(
-                () => query.GetPagedWithFiltersAsync(pageRequest));
+            var records = await query.GetPagedWithFiltersAsync(pageRequest);
+
+            Assert.IsNotNull(records);
+            Assert.IsFalse(records.IsSuccess);
+        }
+
+        [TestMethod]
+        public async Task GetPagedWithFilters_Request_UnknownOrderField_Should_Return_Failed_Result_Test()
+        {
+            var pageRequest = new PageRequestWithFilters
+            {
+                Page = 1,
+                PageSize = 5,
+                Order = new DataOrderDefinition { OrderByProperty = "BogusSortField" }
+            };
+
+            var query = _dbContext.Posts
+                .Include(x => x.Author)
+                .Select(x => new PostDetail
+                {
+                    AuthorId = x.AuthorId,
+                    AuthorName = x.Author.Name,
+                    Contents = x.Contents,
+                    CreatedOn = x.CreatedOn,
+                    Id = x.Id,
+                    Title = x.Title,
+                    ModifiedOn = x.ModifiedOn
+                });
+
+            var records = await query.GetPagedWithFiltersAsync(pageRequest);
+
+            // An unknown sort field must NOT throw (500); it returns a failed paged result (→ 400).
+            Assert.IsNotNull(records);
+            Assert.IsFalse(records.IsSuccess);
+            Assert.IsTrue(records.GetFirstMessage().Contains("BogusSortField"));
         }
 
         [TestMethod]

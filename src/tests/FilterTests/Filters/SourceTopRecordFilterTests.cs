@@ -61,5 +61,17 @@ namespace FilterTests.Filters
             //Assert
             filtered.Count().Should().Be(expected);
         }
+
+        [TestMethod]
+        public void GetPredefinedRecordsInTop_Guid_Test()
+        {
+            //Act
+            var filtered = _fakeItems.GetInTopPredefinedRecords(
+                new[] { "11111111-1111-1111-1111-111111111111" }, new[] { "UniqueId" });
+
+            //Assert
+            filtered.Count().Should().Be(1);
+            filtered.Single().Id.Should().Be(0);
+        }
     }
 }

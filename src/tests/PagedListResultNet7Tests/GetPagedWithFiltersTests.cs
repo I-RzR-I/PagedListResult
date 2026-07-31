@@ -102,8 +102,41 @@ namespace PagedListResultNet7Tests
                     ModifiedOn = x.ModifiedOn
                 });
 
-            await Assert.ThrowsExceptionAsync<Exception>(
-                () => query.GetPagedWithFiltersAsync(pageRequest));
+            var records = await query.GetPagedWithFiltersAsync(pageRequest);
+
+            Assert.IsNotNull(records);
+            Assert.IsFalse(records.IsSuccess);
+        }
+
+        [TestMethod]
+        public async Task GetPagedWithFilters_Request_UnknownField_Should_Return_Failed_Result_Test()
+        {
+            var pageRequest = new PageRequestWithFilters
+            {
+                Page = 1,
+                PageSize = 5,
+                Filters = new List<DataFilter> { new DataFilter { FilterValue = new DataFilterValue { PropertyName = "doesNotExist", Values = new List<string> { "1" }, Condition = FilterType.Equals } } }
+            };
+
+            var query = _dbContext.Posts
+                .Include(x => x.Author)
+                .Select(x => new PostDetail
+                {
+                    AuthorId = x.AuthorId,
+                    AuthorName = x.Author.Name,
+                    Contents = x.Contents,
+                    CreatedOn = x.CreatedOn,
+                    Id = x.Id,
+                    Title = x.Title,
+                    ModifiedOn = x.ModifiedOn
+                });
+
+            var records = await query.GetPagedWithFiltersAsync(pageRequest);
+
+            Assert.IsNotNull(records);
+            Assert.IsFalse(records.IsSuccess);
+            Assert.IsNotNull(records.Messages);
+            Assert.IsTrue(records.Messages.Any());
         }
 
         [TestMethod]

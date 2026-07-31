@@ -99,7 +99,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                 FilterType.EndsWith, FilterType.DoesNotEndsWith
             }.Contains(filter))
             {
-                compareObjValue = Convert.ChangeType(filterObjectValue, property.Type.IsNullablePropType()
+                compareObjValue = SafeTypeConvertHelper.ChangeType(filterObjectValue, property.Type.IsNullablePropType()
                     ? property.Type.GetNonNullableType()
                     : property.Type);
 
@@ -116,7 +116,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                     ? property.Type.GetNonNullableType()
                     : property.Type;
                 if (filterObjectValue!.GetType() != targetType)
-                    filterObjectValue = Convert.ChangeType(filterObjectValue, targetType);
+                    filterObjectValue = SafeTypeConvertHelper.ChangeType(filterObjectValue, targetType);
             }
 
             switch (filter)
@@ -219,10 +219,10 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
 
                         var leftCompareObj = property.Type.IsNullablePropType()
                             ? filterObjectValue.ChangeToNotNullType(property.Type)
-                            : Convert.ChangeType(filterObjectValue, property.Type);
+                            : SafeTypeConvertHelper.ChangeType(filterObjectValue, property.Type);
                         var rightCompareObj = property.Type.IsNullablePropType()
                             ? filterCompareObjectValue.ChangeToNotNullType(property.Type)
-                            : Convert.ChangeType(filterCompareObjectValue, property.Type);
+                            : SafeTypeConvertHelper.ChangeType(filterCompareObjectValue, property.Type);
 
                         var lBody = GetExpressionBody(property, leftCompareObj, FilterType.GreaterThanOrEquals);
                         var rBody = GetExpressionBody(property, rightCompareObj, FilterType.LessThanOrEquals);
@@ -239,8 +239,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         }
                         else
                         {
-                            var constantExp = Expression.Constant(compareObjValue);
-                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), constantExp);
+                            body = BuildTypedMethodCall(property, compareObjValue, MethodInfoNamesHelper.EqualsMethodName);
                         }
 
                         if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
@@ -258,8 +257,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         }
                         else
                         {
-                            var constantExp = Expression.Constant(compareObjValue);
-                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EqualsMethodName), constantExp);
+                            body = BuildTypedMethodCall(property, compareObjValue, MethodInfoNamesHelper.EqualsMethodName);
                         }
 
                         if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
@@ -279,8 +277,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         }
                         else
                         {
-                            var constantExp = Expression.Constant(compareObjValue);
-                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), constantExp);
+                            body = BuildTypedMethodCall(property, compareObjValue, MethodInfoNamesHelper.StartsWithMethodName);
                         }
 
                         if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
@@ -298,8 +295,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         }
                         else
                         {
-                            var constantExp = Expression.Constant(compareObjValue);
-                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.StartsWithMethodName), constantExp);
+                            body = BuildTypedMethodCall(property, compareObjValue, MethodInfoNamesHelper.StartsWithMethodName);
                         }
 
                         if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
@@ -319,8 +315,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         }
                         else
                         {
-                            var constantExp = Expression.Constant(compareObjValue);
-                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), constantExp);
+                            body = BuildTypedMethodCall(property, compareObjValue, MethodInfoNamesHelper.EndsWithMethodName);
                         }
 
                         if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
@@ -338,8 +333,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         }
                         else
                         {
-                            var constantExp = Expression.Constant(compareObjValue);
-                            body = Expression.Call(property, GetMethod(property.Type, MethodInfoNamesHelper.EndsWithMethodName), constantExp);
+                            body = BuildTypedMethodCall(property, compareObjValue, MethodInfoNamesHelper.EndsWithMethodName);
                         }
 
                         if (property.Type.IsNullablePropType() || property.Type.IsStringPropType())
@@ -436,7 +430,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         {
                             var objValue = property.Type.IsNullablePropType()
                                 ? inValue.ChangeToNotNullType(property.Type)
-                                : Convert.ChangeType(inValue, property.Type);
+                                : SafeTypeConvertHelper.ChangeType(inValue, property.Type);
 
                             var objExpr = Expression.Constant(objValue, property.Type);
                             var eqObj = Expression.Equal(property, objExpr);
@@ -456,7 +450,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                         {
                             var objValue = property.Type.IsNullablePropType()
                                 ? inValue.ChangeToNotNullType(property.Type)
-                                : Convert.ChangeType(inValue, property.Type);
+                                : SafeTypeConvertHelper.ChangeType(inValue, property.Type);
 
                             var objExpr = Expression.Constant(objValue, property.Type);
                             var eqObj = Expression.NotEqual(property, objExpr);
@@ -527,6 +521,28 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                 ThrowHelper.Exception(methodInfo.GetFirstMessage());
 
             return methodInfo.Response;
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>Builds an instance method call (Equals/StartsWith/EndsWith) against <paramref name="property"/>.</summary>
+        /// <remarks>
+        ///     Types without a strongly-typed <c>Equals(T)</c>/<c>StartsWith(T)</c> overload (e.g.
+        ///     enums, which only inherit <c>object.Equals(object)</c>) resolve to the loosely-matched
+        ///     <c>object</c> overload via reflection's default binder. The compare constant must be typed
+        ///     to match whichever overload was actually resolved, otherwise <see cref="Expression.Call(Expression,MethodInfo,Expression[])"/>
+        ///     throws because the argument's static type does not match the parameter type.
+        /// </remarks>
+        /// <param name="property">Member expression property.</param>
+        /// <param name="compareValue">Value to compare against.</param>
+        /// <param name="methodName">Name of the instance method to invoke.</param>
+        /// <returns>The method call expression.</returns>
+        ///=================================================================================================
+        private static MethodCallExpression BuildTypedMethodCall(MemberExpression property, object compareValue, string methodName)
+        {
+            var method = GetMethod(property.Type, methodName);
+            var constantExp = Expression.Constant(compareValue, method.GetParameters()[0].ParameterType);
+
+            return Expression.Call(property, method, constantExp);
         }
     }
 }

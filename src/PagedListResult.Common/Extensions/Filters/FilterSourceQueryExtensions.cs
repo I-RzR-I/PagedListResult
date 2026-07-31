@@ -18,6 +18,7 @@
 
 using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
+using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Pagination.Abstractions.Enums;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Request;
 using RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common;
@@ -92,5 +93,61 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Filters
 
             return filter.Response;
         }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     As a simple filtrable query. In the current query, it will be applied only base filter.
+        ///     Dependencies will not be included. Unlike <see cref="AsSimpleFilterable{TSource}"/>, this
+        ///     method does not throw when a filter is invalid (e.g. unknown property, unconvertible value);
+        ///     it surfaces the failure through the returned <see cref="IResult{T}"/> instead.
+        /// </summary>
+        /// <remarks>RzR.</remarks>
+        /// <typeparam name="TSource">Source query type.</typeparam>
+        /// <param name="query">Current query.</param>
+        /// <param name="filters">Query filters.</param>
+        /// <returns>A result carrying the filtered query, or the failure reason.</returns>
+        /// =================================================================================================
+        public static IResult<IQueryable<TSource>> TryAsSimpleFilterable<TSource>(this IQueryable<TSource> query,
+            IEnumerable<DataFilter> filters) where TSource : class
+        {
+            if (filters.IsNullOrEmptyEnumerable())
+                return Result<IQueryable<TSource>>.Success(query);
+
+            foreach (var filter in filters)
+            {
+                if (!filter.IsNotNullOrDefault())
+                    continue;
+
+                var simpleFilter = QuerySourceFiltrableBuilder.BuildSimplePropFilterQuery(query, filter.FilterValue.Condition,
+                    filter.FilterValue.PropertyName, filter.FilterValue.Values, new[]
+                    {
+                        filter.FilterValue.CompareValue
+                    });
+                if (simpleFilter.IsSuccess.IsFalse())
+                    return simpleFilter;
+
+                query = simpleFilter.Response;
+            }
+
+            return Result<IQueryable<TSource>>.Success(query);
+        }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     As a filtrable query. In the current query, it will be applied all filters. Dependencies
+        ///     will be included. Unlike <see cref="AsFilterable{TSource}"/>, this method does not throw
+        ///     when a filter is invalid; it surfaces the failure through the returned <see cref="IResult{T}"/>
+        ///     instead.
+        /// </summary>
+        /// <remarks>RzR.</remarks>
+        /// <typeparam name="TSource">Source query type.</typeparam>
+        /// <param name="query">Current query.</param>
+        /// <param name="filters">Query filters.</param>
+        /// <param name="filterLink">(Optional) Main filters link condition.</param>
+        /// <returns>A result carrying the filtered query, or the failure reason.</returns>
+        /// =================================================================================================
+        public static IResult<IQueryable<TSource>> TryAsFilterable<TSource>(this IQueryable<TSource> query,
+            IEnumerable<DataFilter> filters, FilterConditionType filterLink = FilterConditionType.And) where TSource : class
+            => QuerySourceFiltrableBuilder.BuildFilterableQuery(query, filters, filterLink);
     }
 }

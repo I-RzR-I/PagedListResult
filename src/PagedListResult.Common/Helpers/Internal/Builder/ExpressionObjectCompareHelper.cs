@@ -21,6 +21,7 @@ using RzR.Extensions.Domain.Reflection;
 using RzR.Extensions.Domain.Validation;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System;
 using System.Linq.Expressions;
 
@@ -47,18 +48,11 @@ namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 
             try
             {
-                object compareObj = null;
-                if (property.Type.IsNullablePropType())
-                {
-                    if (property.IsNotNull())
-                        compareObj = Convert.ChangeType(value, property.Type.GetNonNullableType());
-                }
-                else
-                {
-                    compareObj = Convert.ChangeType(value, property.Type);
-                }
+                var targetType = property.Type.IsNullablePropType()
+                    ? property.Type.GetNonNullableType()
+                    : property.Type;
 
-                return Result<object>.Success(compareObj);
+                return Result<object>.Success(SafeTypeConvertHelper.ChangeType(value, targetType));
             }
             catch (Exception e)
             {

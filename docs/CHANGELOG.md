@@ -1,3 +1,6 @@
+### **v5.1.0.5630** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 31-07-2026
+* [6772287] (RzR) -> Fix filter on Guid/non-IConvertible types; return failed result (not 500) on invalid filter/sort
+
 ### **v5.0.0.8548** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 02-07-2026
 * [637655b] (RzR) -> Auto commit uncommited files
 * [0591e26] (RzR) -> Fix ExecutionTimeMs assertion in Net7 paged test

@@ -23,6 +23,15 @@ using System;
 
 namespace FilterTests.Models
 {
+    /// <summary>Status used to cover enum-by-name filtering.</summary>
+    internal enum TestItemStatus
+    {
+        Pending,
+        Active,
+        Completed,
+        Cancelled
+    }
+
     internal class TestItemDto
     {
         [PaginationDefaultOrderProperty]
@@ -38,5 +47,10 @@ namespace FilterTests.Models
         public decimal Price { get; set; }
         public decimal? RetailPrice { get; set; }
         public int? MinQuantity { get; set; }
+        public Guid UniqueId { get; set; }
+        public Guid? OptionalUniqueId { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
+        public TimeSpan Duration { get; set; }
+        public TestItemStatus Status { get; set; }
     }
 }
