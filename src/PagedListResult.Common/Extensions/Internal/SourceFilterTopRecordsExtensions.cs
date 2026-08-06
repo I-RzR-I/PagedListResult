@@ -19,6 +19,7 @@
 using RzR.Extensions.Domain.Collections;
 using RzR.Extensions.Domain.Primitives;
 using RzR.Extensions.Domain.Text;
+using RzR.ResultMessage.Pagination.Core.Extensions.Internal.Common;
 using RzR.ResultMessage.Pagination.Core.Helpers.Internal;
 using RzR.ResultMessage.Pagination.Core.Helpers.Internal.Common;
 using System;
@@ -90,15 +91,25 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                 foreach (var text in searchValues)
                 {
                     var property = Expression.Property(parameter, prop);
-                    var toStringToLower = ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property);
-                    if(toStringToLower.IsSuccess.IsFalse())
-                        ThrowHelper.Exception(toStringToLower.GetFirstMessage());
+                    Expression toStringToLower;
+                    if (property.Type.IsStringPropType())
+                    {
+                        toStringToLower = Expression.Call(property, toLowerMethod.Response);
+                    }
+                    else
+                    {
+                        var toStringToLowerResult = ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property);
+                        if (toStringToLowerResult.IsSuccess.IsFalse())
+                            ThrowHelper.Exception(toStringToLowerResult.GetFirstMessage());
+
+                        toStringToLower = toStringToLowerResult.Response;
+                    }
 
                     var right = Expression.Call(Expression.Constant(text), toLowerMethod.Response);
 
                     if (isEqualsMethod)
                     {
-                        var body = Expression.Call(toStringToLower.Response, equalsMethod.Response, right);
+                        var body = Expression.Call(toStringToLower, equalsMethod.Response, right);
 
                         var predicateExpression = Expression.Lambda<Func<TSource, bool>>(body, parameter);
                         predicate = predicate == null
@@ -109,7 +120,7 @@ namespace RzR.ResultMessage.Pagination.Core.Extensions.Internal
                     }
                     else
                     {
-                        var notEqual = Expression.NotEqual(toStringToLower.Response, right);
+                        var notEqual = Expression.NotEqual(toStringToLower, right);
                         var predicateExpression = Expression.Lambda<Func<TSource, bool>>(notEqual, parameter);
                         predicate = predicate == null
                             ? predicateExpression
