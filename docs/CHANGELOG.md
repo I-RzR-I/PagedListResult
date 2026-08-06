@@ -1,3 +1,7 @@
+### **v5.1.1.7490** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 06-08-2026
+* [7931f66] (RzR) -> Auto commit uncommited files
+* [b9624c6] (RzR) -> FIx wrap string properties in ToString() when building predicate.
+
 ### **v5.1.0.5630** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 31-07-2026
 * [6772287] (RzR) -> Fix filter on Guid/non-IConvertible types; return failed result (not 500) on invalid filter/sort
 

@@ -282,7 +282,9 @@ namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
 
                     var canBeNull = !property.Type.IsValueType || Nullable.GetUnderlyingType(property.Type).IsNotNull();
 
-                    var leftContains = ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
+                    var leftContains = property.Type.IsStringPropType()
+                        ? Expression.Call(property, toLowerMethod.Response)
+                        : ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property).Response;
                     var rightContains = Expression.Call(
                         Expression.Call(Expression.Constant(text), toStringMethod.Response), toLowerMethod.Response);
                     var body = Expression.Call(leftContains, containsMethod.Response, rightContains);
@@ -348,15 +350,25 @@ namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
                     {
                         var property = Expression.Property(parameter, prop);
 
-                        var toStringToLower = ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property);
-                        if (toStringToLower.IsSuccess.IsFalse())
-                            ThrowHelper.Exception(toStringToLower.GetFirstMessage());
+                        Expression toStringToLower;
+                        if (property.Type.IsStringPropType())
+                        {
+                            toStringToLower = Expression.Call(property, toLowerMethod.Response);
+                        }
+                        else
+                        {
+                            var toStringToLowerResult = ExpressionMethodHelper.GetStringLowerCasePropertyAccess(property);
+                            if (toStringToLowerResult.IsSuccess.IsFalse())
+                                ThrowHelper.Exception(toStringToLowerResult.GetFirstMessage());
+
+                            toStringToLower = toStringToLowerResult.Response;
+                        }
 
                         var right = Expression.Call(Expression.Constant(text), toLowerMethod.Response);
 
                         if (isEqualsMethod)
                         {
-                            var body = Expression.Call(toStringToLower.Response, equalsMethod.Response, right);
+                            var body = Expression.Call(toStringToLower, equalsMethod.Response, right);
 
                             var predicateExpression = Expression.Lambda<Func<TSource, bool>>(body, parameter);
                             predicate = predicate.IsNull()
@@ -367,7 +379,7 @@ namespace RzR.ResultMessage.Pagination.Core.Helpers.Internal.Builder
                         }
                         else
                         {
-                            var notEqual = Expression.NotEqual(toStringToLower.Response, right);
+                            var notEqual = Expression.NotEqual(toStringToLower, right);
                             var predicateExpression = Expression.Lambda<Func<TSource, bool>>(notEqual, parameter);
                             predicate = predicate.IsNull()
                                 ? predicateExpression
