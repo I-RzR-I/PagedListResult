@@ -1,3 +1,8 @@
+### **v6.0.0.7820** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 24-09-2026
+* [803bf32] (RzR) -> Auto commit uncommited files
+* [c3913cb] (RzR) -> Remove obsolete `JsonResult<T>`/`XmlResult<T>` helpers.
+* [2c21b72] (RzR) -> Upgrade `RzR.ResultMessage.Web` version and adapt the execution code.
+
 ### **v5.1.1.7490** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 06-08-2026
 * [7931f66] (RzR) -> Auto commit uncommited files
 * [b9624c6] (RzR) -> FIx wrap string properties in ToString() when building predicate.

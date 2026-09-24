@@ -19,7 +19,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RzR.Extensions.Domain.Primitives;
 using RzR.ResultMessage.Models;
-using RzR.ResultMessage.Pagination;
 using RzR.ResultMessage.Pagination.Abstractions.Enums;
 using RzR.ResultMessage.Pagination.AspNetCore;
 using RzR.ResultMessage.Pagination.EntityFrameworkCore;
@@ -95,7 +94,7 @@ namespace WebApiNet5.Controllers
 
             var dataList = await data.GetPagedWithFiltersAsync(query, null, FilterConditionType.And, cancellationToken);
 
-            return XmlResult(dataList);
+            return PagedXmlResult(dataList);
         }
     }
 }

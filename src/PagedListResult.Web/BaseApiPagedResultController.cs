@@ -33,9 +33,6 @@ namespace RzR.ResultMessage.Pagination.AspNetCore
     /// <summary>
     ///     A controller for handling base API paged results.
     /// </summary>
-    /// <remarks>
-    ///     RzR, 15-Nov-23.
-    /// </remarks>
     /// <seealso cref="ResultBaseApiController" />
     /// =================================================================================================
     public abstract class BaseApiPagedResultController : ResultBaseApiController
@@ -49,42 +46,27 @@ namespace RzR.ResultMessage.Pagination.AspNetCore
         ///     <c>services.AddProblemDetailsResultFactory&lt;TFactory&gt;()</c> from
         ///     <c>RzR.ResultMessage.Web</c>).
         /// </summary>
-        /// <remarks>
-        ///     RzR, 15-Nov-23.
-        /// </remarks>
         /// <typeparam name="TType">.</typeparam>
         /// <param name="response">.</param>
         /// <returns>
-        ///     A response to return to the caller.
+        ///     A response to return to the caller. On <c>netstandard2.1</c> this is an <c>OkObjectResult</c>
+        ///     with <c>ContentTypes</c> pinned to <c>application/json</c>; on net5.0+
+        ///     it is a <c>JsonResult</c>. Both carry the whole paged envelope.
         /// </returns>
         /// =================================================================================================
         protected virtual IActionResult PagedOkResult<TType>(IPagedResult<TType> response)
             where TType : class
         {
             if (response.IsSuccess.IsTrue())
-                return Json(response);
+            {
+#if NETSTANDARD2_1
+                return JsonWholeResult(response);
+#else
+                return new Microsoft.AspNetCore.Mvc.JsonResult(response);
+#endif
+            }
 
             return response.AsProblemDetails(HttpStatusCode.BadRequest);
-        }
-
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>
-        ///     Obsolete. Use <see cref="PagedOkResult{TType}(IPagedResult{TType})"/> instead. Kept to
-        ///     preserve binary/source compatibility for one release; collides with
-        ///     <see cref="Microsoft.AspNetCore.Mvc.JsonResult"/>.
-        /// </summary>
-        /// <typeparam name="TType">.</typeparam>
-        /// <param name="response">.</param>
-        /// <returns>A response to return to the caller.</returns>
-        /// =================================================================================================
-        [Obsolete("Use PagedOk<TType> instead. JsonResult will be removed in the next major version because may cause collides with Microsoft.AspNetCore.Mvc.JsonResult.")]
-        protected virtual IActionResult JsonResult<TType>(IPagedResult<TType> response)
-            where TType : class
-        {
-            if (response.IsSuccess.IsTrue())
-                return Json(response);
-
-            return BadRequest(response.Messages);
         }
 
         /// -------------------------------------------------------------------------------------------------
@@ -106,42 +88,13 @@ namespace RzR.ResultMessage.Pagination.AspNetCore
 
                 return new ContentResult
                 {
-                    Content = ObjectExtensions.SerializeToString(xml), 
+                    Content = xml.SerializeToString(), 
                     ContentType = "text/xml", 
                     StatusCode = (int)HttpStatusCode.OK
                 };
             }
 
             return response.AsProblemDetails(HttpStatusCode.BadRequest);
-        }
-
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>
-        ///     Obsolete. Use <see cref="PagedXmlResult{TType}(IPagedResult{TType})"/> instead. Kept for one
-        ///     release; will be removed in the next major version.
-        /// </summary>
-        /// <typeparam name="TType">Type of the type.</typeparam>
-        /// <param name="response">.</param>
-        /// <returns>A response to return to the caller.</returns>
-        /// =================================================================================================
-        [Obsolete("Use PagedXmlResult<TType> instead. XmlResult will be removed in the next major version.")]
-        protected virtual IActionResult XmlResult<TType>(IPagedResult<TType> response)
-            where TType : class
-        {
-
-            if (response.IsSuccess.IsTrue())
-            {
-                var xml = response.ToSoapXmlPagedResult();
-
-                return new ContentResult
-                {
-                    Content = ObjectExtensions.SerializeToString(xml),
-                    ContentType = "text/xml",
-                    StatusCode = (int)HttpStatusCode.OK
-                };
-            }
-
-            return BadRequest(response.Messages);
         }
     }
 }
