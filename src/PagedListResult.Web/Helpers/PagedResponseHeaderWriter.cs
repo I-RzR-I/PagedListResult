@@ -92,9 +92,12 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
-        ///     Extracts the inner paged value from common minimal-API typed results (e.g.
-        ///     <c>Ok&lt;TPaged&gt;</c>, <c>JsonHttpResult&lt;TPaged&gt;</c>) by reading the
-        ///     <c>Value</c> property; otherwise returns the input.
+        ///     Extracts the inner paged payload from any result object exposing a public instance
+        ///     <c>Value</c> property (minimal-API <c>Ok&lt;TPaged&gt;</c> / <c>JsonHttpResult&lt;TPaged&gt;</c>,
+        ///     MVC <c>ObjectResult</c> / <c>JsonResult</c>, and any custom result); otherwise returns the input
+        ///     unchanged. Consumed by BOTH <see cref="PagedResultActionFilter" /> (MVC) and
+        ///     <c>PagedResultEndpointFilter</c> (minimal-API), so it is deliberately type-agnostic: adding a
+        ///     namespace, assembly or <c>ObjectResult</c> predicate here breaks the MVC path.
         /// </summary>
         /// <param name="payload">The payload.</param>
         /// <returns>

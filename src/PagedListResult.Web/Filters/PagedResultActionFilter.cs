@@ -66,12 +66,22 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Filters
             if (next.IsNull())
                 throw new ArgumentNullException(nameof(next));
 
-            var payload = context.Result switch
+            object payload = null;
+            if (context.Result is ObjectResult objectResult)
             {
-                ObjectResult or => or.Value,
-                JsonResult jr => jr.Value,
-                _ => null
-            };
+                payload = objectResult.Value;
+            }
+            else
+            {
+                try
+                {
+                    payload = PagedResponseHeaderWriter.UnwrapResultValue(context.Result);
+                }
+                catch (Exception)
+                {
+                    /* ignored */
+                }
+            }
 
             PagedResponseHeaderWriter.TryApply(context.HttpContext, payload, _options.Value);
 
