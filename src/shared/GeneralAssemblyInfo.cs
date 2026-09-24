@@ -39,6 +39,6 @@ using System.Resources;
 [assembly: AssemblyMetadata("ContactEmail", "ddpRzR@hotmail.com")]
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 
-[assembly: AssemblyVersion("5.1.1.7490")]
-[assembly: AssemblyFileVersion("5.1.1.7490")]
-[assembly: AssemblyInformationalVersion("5.1.1.7490")]
+[assembly: AssemblyVersion("6.0.0.7820")]
+[assembly: AssemblyFileVersion("6.0.0.7820")]
+[assembly: AssemblyInformationalVersion("6.0.0.7820")]
