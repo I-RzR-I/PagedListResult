@@ -17,10 +17,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RzR.ResultMessage.Models;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 using RzR.ResultMessage.Pagination.AspNetCore;
-using System.Collections.Generic;
+using RzR.ResultMessage.Web.Models;
 using System.Threading.Tasks;
 using System.Threading;
 using WebApiNet5.Application.GetRecords;
@@ -38,14 +37,14 @@ namespace WebApiNet5.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(PagedResult<PostDetail>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<MessageModel>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResultMessageProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetRecords(
             [FromBody] GetRecordsQuery query,
             CancellationToken cancellationToken)
         {
             var queryResponse = await _mediator.Send(query, cancellationToken);
 
-            return JsonResult(queryResponse);
+            return PagedOkResult(queryResponse);
         }
     }
 }

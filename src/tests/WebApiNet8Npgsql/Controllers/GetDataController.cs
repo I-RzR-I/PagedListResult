@@ -15,12 +15,12 @@
 // ***********************************************************************
 
 using Microsoft.AspNetCore.Mvc;
-using RzR.ResultMessage.Models;
 using RzR.ResultMessage.Pagination;
 using RzR.ResultMessage.Pagination.Abstractions.Enums;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 using RzR.ResultMessage.Pagination.AspNetCore;
 using RzR.ResultMessage.Pagination.EntityFrameworkCore;
+using RzR.ResultMessage.Web.Models;
 using WebApiNet8Npgsql.Data;
 using WebApiNet8Npgsql.Data.Models;
 using WebApiNet8Npgsql.Models;
@@ -38,7 +38,7 @@ namespace WebApiNet8Npgsql.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(PagedResult<PagedDocumentResult>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<MessageModel>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResultMessageProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllRecords(
             [FromBody] PagedDocumentQuery query, CancellationToken cancellationToken)
         {
@@ -59,7 +59,7 @@ namespace WebApiNet8Npgsql.Controllers
 
                 var dataList = await result.GetPagedWithFiltersAsync(query, null, FilterConditionType.And, cancellationToken);
 
-                return JsonResult(dataList);
+                return PagedOkResult(dataList);
             }
             catch (OperationCanceledException)
             {

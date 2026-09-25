@@ -286,13 +286,6 @@ namespace PagedListResultWebTests
         {
             public IActionResult InvokePagedOk<T>(IPagedResult<T> response) where T : class
                 => PagedOkResult(response);
-
-            public IActionResult InvokeObsoleteJsonResult<T>(IPagedResult<T> response) where T : class
-            {
-#pragma warning disable CS0618
-                return JsonResult(response);
-#pragma warning restore CS0618
-            }
         }
 
         private sealed class ValueCarryingResult : IActionResult

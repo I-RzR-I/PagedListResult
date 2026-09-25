@@ -17,14 +17,13 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RzR.ResultMessage.Models;
 using RzR.ResultMessage.Pagination;
 using RzR.ResultMessage.Pagination.Abstractions.Enums;
 using RzR.ResultMessage.Pagination.Abstractions.Models.Result;
 using RzR.ResultMessage.Pagination.AspNetCore;
 using RzR.ResultMessage.Pagination.EntityFrameworkCore;
+using RzR.ResultMessage.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,7 +43,7 @@ namespace WebApiNet5.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(PagedResult<PostDetail>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<MessageModel>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResultMessageProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllRecords(
             [FromBody] GetAllRecordsRequest query, CancellationToken cancellationToken)
         {
@@ -65,7 +64,7 @@ namespace WebApiNet5.Controllers
 
                 var dataList = await data.GetPagedWithFiltersAsync(query, null, FilterConditionType.And, cancellationToken);
 
-                return JsonResult(dataList);
+                return PagedOkResult(dataList);
             }
             catch (OperationCanceledException)
             {

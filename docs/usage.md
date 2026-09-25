@@ -224,7 +224,20 @@ When you use `PredefinedRecord` in `GetPaged*` methods, also pass a `DefaultPrim
 | `PagedOkResult<T>(IPagedResult<T> response)` | On success: `200 OK` with the full paged envelope (paging metadata + `Response`). On failure: an RFC 9457 `application/problem+json` payload built by the ambient `IProblemDetailsResultFactory` (defaults to `400`; override with `services.AddProblemDetailsResultFactory<TFactory>()`). |
 | `PagedXmlResult<T>(IPagedResult<T> response)` | Same flow, but successful responses are serialized as SOAP-friendly XML (`text/xml`). Failure uses ProblemDetails as well. |
 
-The previous `JsonResult<T>` and `XmlResult<T>` helpers are kept as `[Obsolete]` for one more release. They will be removed in the next major version because `JsonResult` collides with `Microsoft.AspNetCore.Mvc.JsonResult`.
+**Removed in `6.0.0.7820`.** The previous `JsonResult<T>` and `XmlResult<T>` helpers no longer exist (`JsonResult` collided with `Microsoft.AspNetCore.Mvc.JsonResult`). Use `PagedOkResult<T>` and `PagedXmlResult<T>` instead.
+
+Upgrading does not break the build, which is what makes this one dangerous. `IPagedResult<T>` is an `IResult<IList<T>>`, so a `JsonResult(pagedResult)` call site still compiles and silently rebinds to the inherited `RzR.ResultMessage.Web.ResultBaseApiController.JsonResult<T>(IResult<T>)`. Only the response body changes: on success the client receives the bare item array instead of the paged envelope (no `RowCount`, `PageCount`, `PageSize`, `CurrentPage`), and on failure it receives the raw message collection instead of the RFC 9457 problem-details payload. A `[ProducesResponseType(typeof(PagedResult<T>), 200)]` left on such an action now advertises a shape the action no longer returns. `XmlResult(...)` has no inherited counterpart, so it fails to compile and is caught at build time.
+
+```csharp
+// Before (5.x): full paged envelope, ProblemDetails on failure.
+return JsonResult(pagedResult);
+
+// Unchanged on 6.0.0.7820: still compiles, now serializes only
+// pagedResult.Response => [ { "id": 1, ... }, { "id": 2, ... } ]
+
+// Fix:
+return PagedOkResult(pagedResult);   // XML: PagedXmlResult(pagedResult)
+```
 
 ### 3.2 Body-bound usage with MediatR
 
@@ -374,9 +387,11 @@ If you do not register an allow-list for a type, no allow-list validation is app
 | `EmitLinkHeader` | `true` | Adds the RFC 5988 `Link` header (`first`, `prev`, `next`, `last`) on `GET` responses. |
 | `EmitTotalCountHeader` | `true` | Adds `X-Total-Count`, `X-Page-Count`, `X-Page-Size`, `X-Current-Page`. |
 | `EmitServerTimingHeader` | `false` | Adds `Server-Timing: paged;dur={ExecutionTimeMs}` from `PagedResult<T>.ExecutionDetails`. |
-| `StatusCodeMapper` | `null` | Optional `Func<IResult, int, int>` that maps a failed result to a status code. The fallback (typically `400`) is always provided as the second argument. |
-| `ProblemTypeBaseUri` | `null` | Base URI used to build RFC 9457 `type` values. Falls back to the factory default. |
-| `JsonSerializerOptions` | `null` | Optional `JsonSerializerOptions` override for paged payloads. |
+| `StatusCodeMapper` | `null` | `Func<IResult, int, int>` intended to map a failed result to a status code. **Not honoured:** nothing in the library reads it, and `BaseApiPagedResultController` hardcodes `400` on the failure path. Setting it has no effect. |
+| `ProblemTypeBaseUri` | `null` | `Uri` intended as the base for RFC 9457 `type` values. **Not honoured:** nothing in the library reads it, `type` comes from the configured `IProblemDetailsResultFactory`. |
+| `JsonSerializerOptions` | `null` | `JsonSerializerOptions` intended as an override for paged payloads. **Not honoured:** nothing in the library reads it, paged payloads use the ambient MVC / minimal-API serializer configuration. |
+
+The three properties marked as not honoured are accepted and stored by `AddPagedListResultWeb(...)`, so configuring them is silent. Do not rely on them until they are wired.
 
 ---
 
@@ -387,7 +402,7 @@ Both the MVC binder (`[FromPagedQuery]`) and the `PagedQuery<T>` / `PagedQueryWi
 | Key | Example | Notes |
 |-----|---------|-------|
 | `page` | `?page=2` | 1-based page index. Must be `>= 1`. |
-| `pageSize` | `?pageSize=20` | Capped by `MaxPageSize`. Falls back to `DefaultPageSize`. |
+| `pageSize` | `?pageSize=20` | Must be `>= 1`. A value above `MaxPageSize` is rejected with `400` (`pageSize: Exceeds MaxPageSize (N).`), it is not capped. Falls back to `DefaultPageSize` when absent. |
 | `search` | `?search=usb` | Free-text search term written into `DataSearchDefinition.Search`. |
 | `searchAll` | `?searchAll=true` | Search-mode flag. Accepted values: `true`/`text`, `fields`/`all`, `false`/`none`. |
 | `searchFields` | `?searchFields=name,description` | Restricts free-text search to listed properties. Validated against `AllowSearch`. |
@@ -437,7 +452,9 @@ When the action result body (or the awaited minimal-API result) implements `IPag
 
 The minimal-API endpoint filter unwraps common typed results (`Ok<T>`, `JsonHttpResult<T>`, ...) by reading their `Value` property, so you can return whichever shape feels natural at the call site.
 
-On the failure side, both `BaseApiPagedResultController.PagedOkResult` and the minimal-API `ToPagedHttpResult` produce an RFC 9457 `application/problem+json` body via the configured `IProblemDetailsResultFactory` from `AggregatedGenericResultMessage.Web`. The default status code is `400`, customizable through `PagedListResultWebOptions.StatusCodeMapper`.
+On the failure side, both `BaseApiPagedResultController.PagedOkResult` and the minimal-API `ToPagedHttpResult` produce an RFC 9457 problem-details body via the configured `IProblemDetailsResultFactory` from `AggregatedGenericResultMessage.Web`. The status code is `400`, hardcoded in the controller helpers; `PagedListResultWebOptions.StatusCodeMapper` does not change it (see section 5.2). To change the payload, register your own factory with `services.AddProblemDetailsResultFactory<TFactory>()`.
+
+The content type differs between the two pipelines. Minimal API returns `application/problem+json`. MVC serves the same body as `application/json` whenever a `[Produces("application/json")]` applies to the action, which is the common case: `AddPagedListResultApiExplorer` attaches that attribute to every paged action that does not already declare one (see section 8), and `[Produces]` rewrites the content type of every result of that action, the failure one included. Only the header is affected, the problem-details payload itself is unchanged. The convention skips actions whose action or controller already declares a `[Produces]`, so an explicit declaration is what decides the MVC content type.
 
 ---
 

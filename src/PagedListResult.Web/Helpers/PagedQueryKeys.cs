@@ -32,7 +32,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
-        ///     (Immutable) <c>?pageSize=N</c> -> page size (capped by <c>MaxPageSize</c>).
+        ///     (Immutable) <c>?pageSize=N</c> -> page size (rejected when above <c>MaxPageSize</c>).
         /// </summary>
         /// =================================================================================================
         public const string PageSize = "pageSize";
