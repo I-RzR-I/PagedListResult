@@ -55,7 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="RzR.ResultMessage.Web" Version="5.0.0.7894" />
+		<PackageReference Include="RzR.ResultMessage.Web" Version="6.0.0.4426" />
 	</ItemGroup>
 
 	<ItemGroup>

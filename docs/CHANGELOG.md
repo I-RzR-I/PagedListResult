@@ -1,3 +1,12 @@
+### **v6.1.0.4896** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 25-09-2026
+* [5e5bfdd] (RzR) -> Upgrade `RzR.ResultMessage.Web` to `6.0.0.4426` and pin the `netstandard2.1` paged envelope overload explicitly.
+* [5e5bfdd] (RzR) -> Accept the value-less filter syntax `?filter=name:IsNull`, which was rejected with `400` despite being documented.
+* [5e5bfdd] (RzR) -> Guard `PagedRequest.Fields` against null before adding parsed `?fields=` values.
+* [5e5bfdd] (RzR) -> Return `204 No Content` instead of throwing when a null paged result reaches `PagedOkResult` or `PagedXmlResult`.
+* [5e5bfdd] (RzR) -> Point the sample controllers at `PagedOkResult` and declare `ResultMessageProblemDetails` as the `400` body.
+* [5e5bfdd] (RzR) -> Document the `JsonResult<T>` removal, the `pageSize` rejection, and the options that are not honoured.
+* [5e5bfdd] (RzR) -> Add regression tests for the paged failure path, the filter arity and the null guards.
+
 ### **v6.0.0.7820** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 24-09-2026
 * [803bf32] (RzR) -> Auto commit uncommited files
 * [c3913cb] (RzR) -> Remove obsolete `JsonResult<T>`/`XmlResult<T>` helpers.

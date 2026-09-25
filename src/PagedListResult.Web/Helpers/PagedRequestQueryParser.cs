@@ -375,7 +375,7 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
             if (!query.TryGetValue(PagedQueryKeys.Fields, out var fieldsVals) || fieldsVals.Count == 0)
                 return;
 
-            target.Fields.NotNull();
+            target.Fields ??= new HashSet<string>();
             foreach (var f in fieldsVals.SelectMany(v => SplitTokenComma(v)))
             {
                 target.Fields.Add(f);
@@ -469,18 +469,18 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
             PageableMetadata allowList, PagedParseResult result)
         {
             var errKey = $"{PagedQueryKeys.Filter}[{rowIndex}]";
+            const string shapeHint = "Expected '<property>:<condition>:<value[,value2,...]>'.";
 
             var parts = raw.Split(new[] { ':' }, 3);
-            if (parts.Length < 3)
+            if (parts.Length < 2)
             {
-                result.Errors[errKey] = $"Bad filter '{raw}'. Expected '<property>:<condition>:<value[,value2,...]>'.";
+                result.Errors[errKey] = $"Bad filter '{raw}'. {shapeHint}";
 
                 return null;
             }
 
             var prop = parts[0].Trim();
             var condRaw = parts[1].Trim();
-            var valRaw = parts[2];
 
             if (prop.IsMissing())
             {
@@ -503,7 +503,14 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
                 return null;
             }
 
-            var values = SplitTokenComma(valRaw);
+            if (parts.Length < 3 && TakesNoValue(cond).IsFalse())
+            {
+                result.Errors[errKey] = $"Bad filter '{raw}'. {shapeHint}";
+
+                return null;
+            }
+
+            var values = SplitTokenComma(parts.Length > 2 ? parts[2] : null);
             var filterValues = new HashSet<string>();
             string compareValue = null;
 
@@ -550,6 +557,18 @@ namespace RzR.ResultMessage.Pagination.AspNetCore.Helpers
                 }
             };
         }
+
+        /// -------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Query if <paramref name="condition" /> is a filter condition that expects no value.
+        /// </summary>
+        /// <param name="condition">The parsed filter condition.</param>
+        /// <returns>
+        ///     True if the condition takes no value, false if it requires one.
+        /// </returns>
+        /// =================================================================================================
+        private static bool TakesNoValue(FilterType condition)
+            => condition == FilterType.IsNull || condition == FilterType.IsNotNull;
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>

@@ -22,7 +22,6 @@ using RzR.ResultMessage.Pagination.Abstractions.Abstractions;
 using RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions;
 using RzR.ResultMessage.Web;
 using RzR.ResultMessage.Web.Extensions.ProblemDetail;
-using System;
 using System.Net;
 
 #endregion
@@ -52,15 +51,19 @@ namespace RzR.ResultMessage.Pagination.AspNetCore
         ///     A response to return to the caller. On <c>netstandard2.1</c> this is an <c>OkObjectResult</c>
         ///     with <c>ContentTypes</c> pinned to <c>application/json</c>; on net5.0+
         ///     it is a <c>JsonResult</c>. Both carry the whole paged envelope.
+        ///     A <see langword="null" /> <paramref name="response" /> returns <c>204 No Content</c>.
         /// </returns>
         /// =================================================================================================
         protected virtual IActionResult PagedOkResult<TType>(IPagedResult<TType> response)
             where TType : class
         {
+            if (response.IsNull())
+                return NoContent();
+
             if (response.IsSuccess.IsTrue())
             {
 #if NETSTANDARD2_1
-                return JsonWholeResult(response);
+                return JsonWholeResult<System.Collections.Generic.IList<TType>>(response);
 #else
                 return new Microsoft.AspNetCore.Mvc.JsonResult(response);
 #endif
@@ -77,11 +80,15 @@ namespace RzR.ResultMessage.Pagination.AspNetCore
         /// <param name="response">.</param>
         /// <returns>
         ///     A response to return to the caller.
+        ///     A <see langword="null" /> <paramref name="response" /> returns <c>204 No Content</c>.
         /// </returns>
         /// =================================================================================================
         protected virtual IActionResult PagedXmlResult<TType>(IPagedResult<TType> response)
             where TType : class
         {
+            if (response.IsNull())
+                return NoContent();
+
             if (response.IsSuccess.IsTrue())
             {
                 var xml = response.ToSoapXmlPagedResult();
