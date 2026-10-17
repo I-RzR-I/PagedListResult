@@ -30,10 +30,20 @@
 
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<EmitCodeSource Condition="'$(EmitCodeSource)' == ''">false</EmitCodeSource>
+		<DefineConstants Condition="'$(EmitCodeSource)' == 'true'">$(DefineConstants);CODESOURCE</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="RzR.Core.CodeSource" Version="7.0.0.8329">
+			<PrivateAssets Condition="'$(EmitCodeSource)' != 'true'">all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="RzR.ResultMessage" Version="	3.0.0.6928" />
-		<PackageReference Include="RzR.Core.CodeSource" Version="6.0.0.94" />
+		<PackageReference Include="RzR.ResultMessage" Version="4.0.0.0" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

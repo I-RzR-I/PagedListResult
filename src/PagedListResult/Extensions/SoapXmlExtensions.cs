@@ -57,7 +57,7 @@ namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions
                 
                 Messages = source.Messages.Select(x => new MessageModel
                 {
-                    Key = x.Key,
+                    Code = x.Code,
                     Message = x.Message,
                     MessageType = x.MessageType
                 }).ToList(),
@@ -92,7 +92,7 @@ namespace RzR.ResultMessage.Pagination.EntityFrameworkCore.Extensions
                 
                 Messages = source.Messages.Select(x => new MessageModel
                 {
-                    Key = x.Key,
+                    Code = x.Code,
                     Message = x.Message,
                     MessageType = x.MessageType
                 }).ToList(),
