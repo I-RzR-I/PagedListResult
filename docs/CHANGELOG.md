@@ -1,3 +1,8 @@
+### **v6.2.0.386** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 18-10-2026
+* [0277407] (RzR) -> Auto commit uncommited files
+* [04a7cfb] (RzR) -> Update the SOAP XML response to use `Code`.
+* [8deefc2] (RzR) -> Upgrade reference packages versions.
+
 ### **v6.1.0.4896** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 25-09-2026
 * [5e5bfdd] (RzR) -> Upgrade `RzR.ResultMessage.Web` to `6.0.0.4426` and pin the `netstandard2.1` paged envelope overload explicitly.
 * [5e5bfdd] (RzR) -> Accept the value-less filter syntax `?filter=name:IsNull`, which was rejected with `400` despite being documented.
